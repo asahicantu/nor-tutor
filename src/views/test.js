@@ -22,7 +22,10 @@ export function render(root, ctx) {
     const show = () => {
       if (i >= items.length) return finish(responses);
       const item = items[i];
+      const idx = i;
+      const shownAt = performance.now();
       const answer = (known) => {
+        if (i !== idx || performance.now() - shownAt < 250) return;
         responses.push({ kind: item.kind, band: item.band, known });
         i++;
         show();
@@ -57,9 +60,15 @@ export function render(root, ctx) {
       );
       return;
     }
-    await add(db, 'tests', { timestamp: Date.now(), ...result });
+    let saveError = null;
+    try {
+      await add(db, 'tests', { timestamp: Date.now(), ...result });
+    } catch (e) {
+      saveError = e;
+    }
     root.replaceChildren(
       h('h1', {}, 'Your result'),
+      ...(saveError ? [h('p', { class: 'error' }, `This result could not be saved (${saveError.message}) and will not appear in your progress.`)] : []),
       h('div', { class: 'card' },
         h('div', { class: 'big' }, `≈ ${result.estimate.toLocaleString('en')} words`),
         h('p', { class: 'muted' }, `95% interval: ${result.ciLow.toLocaleString('en')} – ${result.ciHigh.toLocaleString('en')} of ${result.listSize.toLocaleString('en')} words in the list. You marked ${Math.round(result.falseAlarmRate * 100)}% of ${result.pseudoTotal} nonsense words as known.`),
