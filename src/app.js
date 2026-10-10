@@ -2,8 +2,8 @@ import { openDb } from './db.js';
 import { h } from './dom.js';
 import { validateWords } from './wordsSchema.js';
 
-// Later tasks add: import * as test from './views/test.js'; and a routes entry.
-const routes = {};
+import * as test from './views/test.js';
+const routes = { '/test': test };
 
 function home(root) {
   root.replaceChildren(
