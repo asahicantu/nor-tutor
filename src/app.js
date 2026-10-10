@@ -4,7 +4,8 @@ import { validateWords } from './wordsSchema.js';
 
 import * as test from './views/test.js';
 import * as review from './views/review.js';
-const routes = { '/test': test, '/review': review };
+import * as explore from './views/explore.js';
+const routes = { '/test': test, '/review': review, '/explore': explore };
 
 function home(root) {
   root.replaceChildren(
