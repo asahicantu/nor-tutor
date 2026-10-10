@@ -6,7 +6,8 @@ import * as test from './views/test.js';
 import * as review from './views/review.js';
 import * as explore from './views/explore.js';
 import * as dashboard from './views/dashboard.js';
-const routes = { '/dashboard': dashboard, '/test': test, '/review': review, '/explore': explore };
+import * as data from './views/data.js';
+const routes = { '/dashboard': dashboard, '/test': test, '/review': review, '/explore': explore, '/data': data };
 
 function home(root) {
   root.replaceChildren(
