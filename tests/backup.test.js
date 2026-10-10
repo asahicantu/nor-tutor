@@ -30,7 +30,45 @@ test('rejects missing arrays', () => {
 
 test('rejects malformed rows', () => {
   const bad = (patch) => JSON.stringify({ version: 1, ...state, ...patch });
-  assert.throws(() => parseBackup(bad({ cards: [{ wordId: 1 }] })), /card/);
-  assert.throws(() => parseBackup(bad({ reviews: [{ wordId: 1, timestamp: 1, grade: 'wow' }] })), /review/);
-  assert.throws(() => parseBackup(bad({ tests: [{ timestamp: 'x', estimate: 1 }] })), /test/);
+  assert.throws(() => parseBackup(bad({ cards: [{ wordId: 1 }] })), /Invalid card at index 0/);
+  assert.throws(() => parseBackup(bad({ reviews: [{ wordId: 1, timestamp: 1, grade: 'wow' }] })), /Invalid review at index 0/);
+  assert.throws(() => parseBackup(bad({ tests: [{ timestamp: 'x', estimate: 1 }] })), /Invalid test at index 0/);
+});
+
+const good = (patch) => JSON.stringify({ version: 1, ...state, ...patch });
+const goodCard = { wordId: 2, ease: 2.5, interval: 1, reps: 1, lapses: 0, due: 5 };
+const goodReview = { wordId: 1, timestamp: 900, grade: 'good' };
+
+test('rejects prototype-inherited grade names', () => {
+  for (const grade of ['constructor', 'toString', '__proto__', ['good']]) {
+    assert.throws(() => parseBackup(good({ reviews: [{ ...goodReview, grade }] })), /Invalid review/, String(grade));
+  }
+});
+
+test('rejects bad wordId values', () => {
+  for (const wordId of [null, {}, true, undefined]) {
+    assert.throws(() => parseBackup(good({ cards: [{ ...goodCard, wordId }] })), /Invalid card at index 0/, String(wordId));
+  }
+});
+
+test('rejects non-object rows', () => {
+  assert.throws(() => parseBackup(good({ cards: [5] })), /Invalid card at index 0/);
+  assert.throws(() => parseBackup(good({ reviews: [null] })), /Invalid review at index 0/);
+  assert.throws(() => parseBackup(good({ tests: [[]] })), /Invalid test at index 0/);
+});
+
+test('rejects cards missing reps or with non-numeric lapses', () => {
+  const { reps, ...noReps } = goodCard;
+  assert.throws(() => parseBackup(good({ cards: [noReps] })), /Invalid card at index 0/);
+  assert.throws(() => parseBackup(good({ cards: [{ ...goodCard, lapses: 'x' }] })), /Invalid card at index 0/);
+});
+
+test('review ms and prevInterval are optional but must be numbers when present', () => {
+  assert.throws(() => parseBackup(good({ reviews: [{ ...goodReview, ms: 'fast' }] })), /Invalid review at index 0/);
+  assert.throws(() => parseBackup(good({ reviews: [{ ...goodReview, prevInterval: null }] })), /Invalid review at index 0/);
+  assert.equal(parseBackup(good({ reviews: [goodReview] })).reviews.length, 1);
+});
+
+test('rejects duplicate card wordIds', () => {
+  assert.throws(() => parseBackup(good({ cards: [goodCard, { ...goodCard }] })), /Duplicate card/);
 });
