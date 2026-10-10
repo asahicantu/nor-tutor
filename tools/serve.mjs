@@ -15,6 +15,10 @@ createServer(async (req, res) => {
   let file;
   try {
     const path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if (path.split('/').some((s) => s.startsWith('.'))) {
+      res.writeHead(404).end('Not found');
+      return;
+    }
     file = resolve(join(root, normalize(path === '/' ? '/index.html' : path)));
   } catch {
     res.writeHead(400).end('Bad request');
