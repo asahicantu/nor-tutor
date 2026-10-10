@@ -1,6 +1,6 @@
 import { h } from '../dom.js';
 import { searchWords } from '../search.js';
-import { getAll, put } from '../db.js';
+import { getAll, add } from '../db.js';
 import { newCard } from '../srs.js';
 
 export async function render(root, { words, db }) {
@@ -24,16 +24,17 @@ export async function render(root, { words, db }) {
       class: 'primary',
       disabled: inDeck.has(w.id),
       onclick: async () => {
-        // inDeck is updated synchronously before the await: blocks double activation
-        // and never overwrites an existing card (put would reset its schedule).
+        // inDeck is updated synchronously before the await: blocks double activation.
+        // add() (not put) so a card created elsewhere is never overwritten.
         if (inDeck.has(w.id)) return;
         inDeck.add(w.id);
         addBtn.disabled = true;
         addBtn.textContent = 'In your deck';
         errorBox.replaceChildren();
         try {
-          await put(db, 'cards', newCard(w.id, Date.now()));
+          await add(db, 'cards', newCard(w.id, Date.now()));
         } catch (e) {
+          if (e?.name === 'ConstraintError') return; // already in the deck (added elsewhere)
           inDeck.delete(w.id);
           addBtn.disabled = false;
           addBtn.textContent = 'Add to review deck';

@@ -26,7 +26,7 @@ function transact(db, stores, fn) {
   return new Promise((resolve, reject) => {
     const t = db.transaction(stores, 'readwrite');
     t.oncomplete = () => resolve();
-    t.onerror = () => reject(t.error);
+    t.onerror = (ev) => reject(ev.target?.error ?? t.error ?? new Error('transaction error'));
     t.onabort = () => reject(t.error ?? new Error('transaction aborted'));
     fn(t);
   });
