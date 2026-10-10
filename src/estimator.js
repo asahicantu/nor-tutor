@@ -36,7 +36,7 @@ export function sampleTest(words, rng, { perBand = 20, pseudoRatio = 0.2 } = {})
       items.push({ kind: 'word', band: band.id, wordId: w.id, text: w.lemma });
     }
   }
-  const nPseudo = Math.round(items.length * pseudoRatio);
+  const nPseudo = Math.ceil(items.length * pseudoRatio - 1e-9);
   const pseudo = generatePseudoWords(nPseudo, rng, words.map((w) => w.lemma));
   for (const text of pseudo) items.push({ kind: 'pseudo', band: null, text });
   return shuffle(items, rng);
@@ -63,7 +63,10 @@ export function scoreTest(responses, sizes) {
     const pCorrected = clamp((p - f) / (1 - f), 0, 1);
     estimate += size * pCorrected;
     const fpc = Math.max(0, 1 - n / size);
-    variance += (size * size * ((p * (1 - p)) / n) * fpc) / (1 - f) ** 2;
+    // Agresti-Coull variance: stays positive at k=0 and k=n. The interval is conditional on f
+    // (false-alarm rate treated as known); variance is kept even when this band's estimate is clamped to 0.
+    const pt = (k + 2) / (n + 4);
+    variance += (size * size * ((pt * (1 - pt)) / (n + 4)) * fpc) / (1 - f) ** 2;
     bands.push({ band: band.id, size, sampled: n, known: k, pCorrected });
   }
   const sd = Math.sqrt(variance);

@@ -18,6 +18,7 @@ test('is deterministic for a seed', () => {
 
 test('never returns a word from the real list', () => {
   const first = generatePseudoWords(20, mulberry32(1), []);
-  const second = generatePseudoWords(20, mulberry32(2), first);
+  const second = generatePseudoWords(20, mulberry32(1), first);
+  assert.equal(second.length, 20);
   for (const w of second) assert.ok(!first.includes(w));
 });

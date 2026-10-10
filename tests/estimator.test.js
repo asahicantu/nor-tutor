@@ -51,10 +51,16 @@ test('sampleTest: a small band yields all its words; empty list throws', () => {
   assert.throws(() => sampleTest([], mulberry32(1)), /no words to sample/);
 });
 
-test('scoreTest: everything known, no nonsense words -> full list, zero-width CI', () => {
+test('sampleTest: a one-word list still gets one pseudo-word', () => {
+  const items = sampleTest([{ id: 'w1', lemma: 'ord1', rank: 1 }], mulberry32(1));
+  assert.equal(items.filter((i) => i.kind === 'word').length, 1);
+  assert.equal(items.filter((i) => i.kind === 'pseudo').length, 1);
+});
+
+test('scoreTest: everything known, no nonsense words -> full list, non-degenerate lower bound', () => {
   const r = scoreTest([...resp('b1', 20, 20), ...resp('b2', 20, 20)], { b1: 100, b2: 100 });
   assert.equal(r.estimate, 200);
-  assert.equal(r.ciLow, 200);
+  assert.ok(r.ciLow < 200); // hand: var = 2 * 100^2 * (0.91667*0.08333/24) * 0.8 = 50.9, sd 7.14, low = 186
   assert.equal(r.ciHigh, 200);
   assert.equal(r.listSize, 200);
 });
@@ -62,8 +68,15 @@ test('scoreTest: everything known, no nonsense words -> full list, zero-width CI
 test('scoreTest: half known gives half the band with a symmetric 95% CI', () => {
   const r = scoreTest(resp('b1', 20, 10), { b1: 1000 });
   assert.equal(r.estimate, 500);
-  near(r.ciLow, 283);
-  near(r.ciHigh, 717);
+  // hand: pt = 12/24 = 0.5; var = 1000^2 * (0.25/24) * 0.98 = 10208; sd = 101.0; 1.96*sd = 198.0
+  near(r.ciLow, 302);
+  near(r.ciHigh, 698);
+});
+
+test('scoreTest: zero known still has an upper bound above zero', () => {
+  const r = scoreTest(resp('b1', 20, 0), { b1: 1000 });
+  assert.equal(r.estimate, 0);
+  assert.ok(r.ciHigh > 0); // hand: pt = 2/24, var = 1e6*(0.0764/24)*0.98 = 3119, sd 55.9, high = 109
 });
 
 test('scoreTest: guessing correction uses the false-alarm rate', () => {
