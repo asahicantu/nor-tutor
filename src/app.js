@@ -12,8 +12,8 @@ function home(root) {
   );
 }
 
-function showError(e) {
-  document.getElementById('app').replaceChildren(h('p', { class: 'error' }, `Something went wrong: ${e.message}`));
+function showError(e, target = document.getElementById('app')) {
+  target.replaceChildren(h('p', { class: 'error' }, `Something went wrong: ${e.message}`));
 }
 
 async function main() {
@@ -29,13 +29,18 @@ async function main() {
     if (errors.length) throw new Error(`Invalid word list: ${errors.slice(0, 3).join('; ')}`);
     const ctx = { words, db };
     const root = document.getElementById('app');
-    const go = () => {
+    const go = async () => {
       const path = location.hash.slice(1) || '/dashboard';
       for (const a of document.querySelectorAll('#nav a')) {
         a.classList.toggle('active', a.getAttribute('href') === `#${path}`);
       }
-      const view = routes[path];
-      Promise.resolve(view ? view.render(root, ctx) : home(root)).catch(showError);
+      const stage = h('div');
+      root.replaceChildren(stage);
+      try {
+        await (routes[path] ? routes[path].render(stage, ctx) : home(stage));
+      } catch (e) {
+        if (stage.isConnected) showError(e, stage);
+      }
     };
     window.addEventListener('hashchange', go);
     go();

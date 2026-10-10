@@ -10,6 +10,7 @@ export function openDb() {
       db.createObjectStore('reviews', { autoIncrement: true });
       db.createObjectStore('tests', { autoIncrement: true });
     };
+    req.onblocked = () => reject(new Error('Database upgrade is blocked: close other tabs of this app and reload'));
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
@@ -42,10 +43,15 @@ export async function loadState(db) {
 
 export function replaceState(db, { cards, reviews, tests }) {
   return transact(db, ['cards', 'reviews', 'tests'], (t) => {
-    for (const [name, rows] of [['cards', cards], ['reviews', reviews], ['tests', tests]]) {
-      const store = t.objectStore(name);
-      store.clear();
-      rows.forEach((r) => store.add(r));
+    try {
+      for (const [name, rows] of [['cards', cards], ['reviews', reviews], ['tests', tests]]) {
+        const store = t.objectStore(name);
+        store.clear();
+        rows.forEach((r) => store.add(r));
+      }
+    } catch (e) {
+      t.abort();
+      throw e;
     }
   });
 }
