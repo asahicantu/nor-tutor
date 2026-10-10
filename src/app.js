@@ -1,0 +1,47 @@
+import { openDb } from './db.js';
+import { h } from './dom.js';
+import { validateWords } from './wordsSchema.js';
+
+// Later tasks add: import * as test from './views/test.js'; and a routes entry.
+const routes = {};
+
+function home(root) {
+  root.replaceChildren(
+    h('h1', {}, 'Norsk Tutor'),
+    h('p', {}, 'Use the menu above to take the vocabulary test, review words, or explore the word list.'),
+  );
+}
+
+function showError(e) {
+  document.getElementById('app').replaceChildren(h('p', { class: 'error' }, `Something went wrong: ${e.message}`));
+}
+
+async function main() {
+  try {
+    const [words, db] = await Promise.all([
+      fetch('data/words.json').then((r) => {
+        if (!r.ok) throw new Error(`data/words.json: HTTP ${r.status}`);
+        return r.json();
+      }),
+      openDb(),
+    ]);
+    const errors = validateWords(words);
+    if (errors.length) throw new Error(`Invalid word list: ${errors.slice(0, 3).join('; ')}`);
+    const ctx = { words, db };
+    const root = document.getElementById('app');
+    const go = () => {
+      const path = location.hash.slice(1) || '/dashboard';
+      for (const a of document.querySelectorAll('#nav a')) {
+        a.classList.toggle('active', a.getAttribute('href') === `#${path}`);
+      }
+      const view = routes[path];
+      Promise.resolve(view ? view.render(root, ctx) : home(root)).catch(showError);
+    };
+    window.addEventListener('hashchange', go);
+    go();
+  } catch (e) {
+    showError(e);
+  }
+}
+
+main();
