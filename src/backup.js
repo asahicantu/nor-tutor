@@ -45,7 +45,15 @@ export function parseBackup(text) {
     if (!ok) throw new Error(`Invalid review at index ${i}`);
   });
   data.tests.forEach((t, i) => {
-    if (!(isObj(t) && num(t.timestamp) && num(t.estimate))) throw new Error(`Invalid test at index ${i}`);
+    const ok =
+      isObj(t) &&
+      num(t.timestamp) &&
+      num(t.estimate) &&
+      num(t.ciLow) &&
+      num(t.ciHigh) &&
+      Array.isArray(t.bands) &&
+      t.bands.every((b) => isObj(b) && typeof b.band === 'string' && num(b.pCorrected));
+    if (!ok) throw new Error(`Invalid test at index ${i}`);
   });
   return { cards: data.cards, reviews: data.reviews, tests: data.tests };
 }

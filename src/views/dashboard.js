@@ -38,23 +38,23 @@ export async function render(root, { db }) {
   ].map(([title, empty], i) =>
     empty ? h('div', { class: 'card' }, h('h3', {}, title), h('p', { class: 'muted' }, 'No data yet.')) : chartCard(title, canvases[i]));
   root.append(...sections);
-  if (!canvases[0].isConnected) return; // navigated away while loading
+  if (!root.isConnected) return; // navigated away while loading
 
   const main = accent();
-  if (series.length) {
+  if (series.length && canvases[0].isConnected) {
     lineChart(canvases[0], series.map((s) => labelOf(s.t)), [
       { label: 'Estimate', data: series.map((s) => s.estimate), borderColor: main, backgroundColor: main, pointRadius: 4 },
       { label: 'Upper 95%', data: series.map((s) => s.ciHigh), borderColor: softAccent(), borderDash: [5, 4], pointRadius: series.length === 1 ? 3 : 0 },
       { label: 'Lower 95%', data: series.map((s) => s.ciLow), borderColor: softAccent(), borderDash: [5, 4], pointRadius: series.length === 1 ? 3 : 0 },
     ]);
   }
-  if (reviews.length) {
+  if (reviews.length && canvases[1].isConnected) {
     const days = dailyAccuracy(reviews, offset);
     barChart(canvases[1], days.map((d) => d.day), [
       { label: 'Recall accuracy (%)', data: days.map((d) => Math.round(d.accuracy * 100)), backgroundColor: main },
     ], { max: 100 });
   }
-  if (latest) {
+  if (latest && canvases[2].isConnected) {
     const prof = bandProfile(latest);
     barChart(canvases[2], prof.map((p) => p.band), [
       { label: 'Words known (%)', data: prof.map((p) => Math.round(p.known * 100)), backgroundColor: main },

@@ -1,14 +1,14 @@
 const DAY = 86400000;
 
-export const GRADES = { again: 1, hard: 3, good: 4, easy: 5 };
+export const GRADES = Object.freeze({ again: 1, hard: 3, good: 4, easy: 5 });
 
 export function newCard(wordId, now) {
   return { wordId, ease: 2.5, interval: 0, reps: 0, lapses: 0, due: now };
 }
 
 export function review(card, grade, now) {
+  if (!Object.hasOwn(GRADES, grade)) throw new RangeError(`unknown grade: ${grade}`);
   const q = GRADES[grade];
-  if (q === undefined) throw new RangeError(`unknown grade: ${grade}`);
   let { ease, interval, reps, lapses } = card;
   if (q < 3) {
     reps = 0;

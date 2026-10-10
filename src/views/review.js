@@ -2,6 +2,8 @@ import { h } from '../dom.js';
 import { getAll, put, add } from '../db.js';
 import { dueCards, review, GRADES } from '../srs.js';
 
+const MAX_CARD_MS = 5 * 60 * 1000; // a card left open longer than this counts as 5 minutes
+
 export async function render(root, { words, db }) {
   const byId = new Map(words.map((w) => [w.id, w]));
   const cards = await getAll(db, 'cards');
@@ -51,7 +53,7 @@ export async function render(root, { words, db }) {
       const now = Date.now();
       try {
         if (!recorded) {
-          await add(db, 'reviews', { wordId: card.wordId, timestamp: now, grade: g, ms: now - startedAt, prevInterval: card.interval });
+          await add(db, 'reviews', { wordId: card.wordId, timestamp: now, grade: g, ms: Math.min(now - startedAt, MAX_CARD_MS), prevInterval: card.interval });
           recorded = true;
         }
         await put(db, 'cards', review(card, g, now));

@@ -59,5 +59,6 @@ test('studyMinutes sums milliseconds; tolerates missing ms', () => {
 
 test('bandProfile maps the latest test, empty for none', () => {
   assert.deepEqual(bandProfile(undefined), []);
+  assert.deepEqual(bandProfile({}), []);
   assert.deepEqual(bandProfile({ bands: [{ band: 'b1', pCorrected: 0.9, size: 10, sampled: 5, known: 4 }] }), [{ band: 'b1', known: 0.9 }]);
 });

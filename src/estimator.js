@@ -8,7 +8,7 @@ export const BANDS = [
   { id: 'b4', from: 4001, to: 8000 },
   { id: 'b5', from: 8001, to: 16000 },
   { id: 'b6', from: 16001, to: 32000 },
-  { id: 'b7', from: 32001, to: 64000 },
+  { id: 'b7', from: 32001, to: Infinity },
 ];
 
 const Z95 = 1.96;

@@ -5,7 +5,7 @@ import { serialize, parseBackup, BACKUP_VERSION } from '../src/backup.js';
 const state = {
   cards: [{ wordId: 1, ease: 2.5, interval: 6, reps: 2, lapses: 0, due: 1000 }],
   reviews: [{ wordId: 1, timestamp: 900, grade: 'good', ms: 2500, prevInterval: 1 }],
-  tests: [{ timestamp: 800, estimate: 4200, ciLow: 3900, ciHigh: 4500, bands: [] }],
+  tests: [{ timestamp: 800, estimate: 4200, ciLow: 3900, ciHigh: 4500, bands: [{ band: 'b1', pCorrected: 0.9 }] }],
 };
 
 test('round trip preserves data', () => {
@@ -33,6 +33,13 @@ test('rejects malformed rows', () => {
   assert.throws(() => parseBackup(bad({ cards: [{ wordId: 1 }] })), /Invalid card at index 0/);
   assert.throws(() => parseBackup(bad({ reviews: [{ wordId: 1, timestamp: 1, grade: 'wow' }] })), /Invalid review at index 0/);
   assert.throws(() => parseBackup(bad({ tests: [{ timestamp: 'x', estimate: 1 }] })), /Invalid test at index 0/);
+  const t = state.tests[0];
+  for (const row of [{ ...t, bands: undefined }, { ...t, bands: [5] }, { ...t, bands: [{ band: 'b1' }] }, { ...t, ciLow: undefined }]) {
+    assert.throws(() => parseBackup(bad({ tests: [row] })), /Invalid test at index 0/);
+  }
+  const real = { timestamp: 800, estimate: 4200, ciLow: 3900, ciHigh: 4500, falseAlarmRate: 0.1, pseudoTotal: 10, listSize: 60,
+    bands: [{ band: 'b1', size: 100, sampled: 10, known: 9, pCorrected: 0.9 }] };
+  assert.deepEqual(parseBackup(bad({ tests: [real] })).tests, [real]);
 });
 
 const good = (patch) => JSON.stringify({ version: 1, ...state, ...patch });

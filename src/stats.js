@@ -50,5 +50,5 @@ export function studyMinutes(reviews) {
 }
 
 export function bandProfile(test) {
-  return test ? test.bands.map((b) => ({ band: b.band, known: b.pCorrected })) : [];
+  return test ? (test.bands ?? []).map((b) => ({ band: b.band, known: b.pCorrected })) : [];
 }

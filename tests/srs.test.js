@@ -48,6 +48,8 @@ test('review does not mutate its input; unknown grade throws', () => {
   review(c, 'good', T0);
   assert.deepEqual(c, snapshot);
   assert.throws(() => review(c, 'perfect', T0), RangeError);
+  for (const g of ['constructor', 'toString', '__proto__']) assert.throws(() => review(c, g, T0), RangeError, g);
+  assert.ok(Object.isFrozen(GRADES));
   assert.deepEqual(Object.keys(GRADES), ['again', 'hard', 'good', 'easy']);
 });
 

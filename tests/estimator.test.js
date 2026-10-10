@@ -25,7 +25,8 @@ test('bandOf maps ranks to bands and rejects out-of-range', () => {
   assert.equal(bandOf(1000).id, 'b1');
   assert.equal(bandOf(1001).id, 'b2');
   assert.equal(bandOf(64000).id, 'b7');
-  assert.equal(bandOf(64001), null);
+  assert.equal(bandOf(64001).id, 'b7');
+  assert.equal(bandOf(1e9).id, 'b7');
 });
 
 test('bandSizes counts words per band', () => {
