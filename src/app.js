@@ -3,7 +3,8 @@ import { h } from './dom.js';
 import { validateWords } from './wordsSchema.js';
 
 import * as test from './views/test.js';
-const routes = { '/test': test };
+import * as review from './views/review.js';
+const routes = { '/test': test, '/review': review };
 
 function home(root) {
   root.replaceChildren(
