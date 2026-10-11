@@ -225,3 +225,36 @@ thead th { background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
 @keyframes pop { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes fall { to { transform: translateY(260px) rotate(300deg); opacity: 0; } }
 @media (max-width: 640px) { .navchip { margin-left: var(--s2); } .ringwrap { width: 96px; height: 96px; } }
+
+/* Words page: progress panel, level badge, complexity dots */
+.wstats { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 0 var(--s4); margin: var(--s3) 0; }
+.wstats-body { padding-bottom: var(--s3); }
+.wstrip { margin: 0 0 var(--s2); font-size: 1.1rem; font-weight: 600; }
+.wbar { display: flex; align-items: center; gap: var(--s3); }
+.wtrack { flex: 1; display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: var(--line); }
+.wseg { display: block; height: 100%; box-shadow: inset -1px 0 var(--card); }
+.wseg.known, .wkey.known { background: var(--known); }
+.wseg.review, .wkey.review { background: var(--review); }
+.wseg.new, .wkey.new { background: var(--muted); }
+.wpct { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wlegend { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin: var(--s2) 0; font-size: .9rem; }
+.wkey { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--muted); margin-right: var(--s1); vertical-align: -1px; }
+.wcharts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s4); }
+.wcharts h3 { font-size: 1rem; margin: var(--s2) 0; }
+.wdonut { height: 220px; }
+.wtiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s2); margin-top: var(--s3); }
+.wtile { display: flex; flex-direction: column; gap: var(--s1); padding: var(--s3); border: 1px solid var(--line); border-radius: var(--radius); }
+.wtile-l { font-size: .85rem; color: var(--muted); }
+.wtile-v { font-size: 1.5rem; }
+.wtile-c { font-size: .85rem; }
+.wnums table { margin-bottom: var(--s3); }
+.wnums caption { text-align: left; font-weight: 600; padding: var(--s1) 0; }
+.lvl { font-weight: 700; font-size: .85rem; padding: 2px var(--s2); border: 1px solid var(--accent); border-radius: 6px; color: var(--accent); }
+.dots { letter-spacing: 2px; color: var(--muted); font-size: .85rem; }
+@media (max-width: 720px) { .wcharts { grid-template-columns: minmax(0, 1fr); } }
+
+/* Review page statistics */
+.rstats .card h3 { font-size: 1rem; margin: var(--s3) 0 var(--s2); }
+.recs li { margin: var(--s2) 0; }
+.tscroll { max-height: 320px; overflow: auto; }
+.rstats .wtiles { grid-template-columns: minmax(0, 1fr); }

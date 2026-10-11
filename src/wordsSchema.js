@@ -1,3 +1,5 @@
+import { LEVELS } from './levels.js';
+
 const nonEmpty = (s) => typeof s === 'string' && s.trim() !== '';
 
 export function validateWords(words) {
@@ -17,6 +19,7 @@ export function validateWords(words) {
     for (const key of ['lemma', 'pos', 'gloss_en', 'def_no']) {
       if (!nonEmpty(w?.[key])) errors.push(`${tag}: ${key} must be a non-empty string`);
     }
+    if (w?.cefr !== undefined && !LEVELS.includes(w.cefr)) errors.push(`${tag}: cefr must be one of ${LEVELS.join(', ')}`);
     if (!Array.isArray(w?.forms)) errors.push(`${tag}: forms must be an array`);
     if (!Array.isArray(w?.collocations)) errors.push(`${tag}: collocations must be an array`);
     const ex = w?.examples;

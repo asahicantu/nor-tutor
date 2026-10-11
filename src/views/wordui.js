@@ -1,4 +1,5 @@
 import { h, no } from '../dom.js';
+import { levelOf, complexityOf } from '../levels.js';
 import { markKnown, unmarkKnown, addToDeck } from '../actions.js';
 
 // Translation in green, definition in blue (see .trans / .def in styles.css).
@@ -37,12 +38,16 @@ export function wordCard(w, { db, status, onChange }) {
   const draw = () => {
     const known = status.known.has(w.id);
     const inDeck = status.deck.has(w.id);
+    const lv = levelOf(w);
+    const cx = complexityOf(w);
     const missed = status.missed.get(w.id)?.count ?? 0;
     card.classList.toggle('is-known', known);
     card.replaceChildren(...[
       h('header', {},
         h('h2', {}, no(w.lemma)),
         h('span', { class: 'chip' }, w.pos),
+        h('span', { class: 'lvl', title: lv.derived ? 'Estimated from word frequency' : 'Level' }, (lv.derived ? '≈' : '') + lv.level),
+        h('span', { class: 'dots', role: 'img', 'aria-label': `Complexity ${cx} of 5` }, '●'.repeat(cx) + '○'.repeat(5 - cx)),
         known ? h('span', { class: 'badge known' }, '✓ Known') : null,
         inDeck ? h('span', { class: 'badge review' }, 'In review deck') : null,
         missed ? h('span', { class: 'badge' }, `Missed ${missed}×`) : null),

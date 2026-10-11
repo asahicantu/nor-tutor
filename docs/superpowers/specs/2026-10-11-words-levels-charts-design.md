@@ -1,6 +1,6 @@
 # Word levels, complexity and live progress charts on the Words page
 
-Date: 2026-10-11 · Status: DRAFT (awaiting review)
+Date: 2026-10-11 · Status: IMPLEMENTED
 
 ## Goal
 On the Words page the learner sees, live, how many words they know versus still have to learn, how hard each word is, and how their vocabulary is spread across language levels (CEFR A1 to C2).
@@ -56,7 +56,7 @@ On the Words page the learner sees, live, how many words they know versus still 
 
 ## Verification
 - `npm test` green.
-- Browser at http://127.0.0.1:5173 on a fresh database: strip reads "0 known · 314 still to learn", doughnut and level bars render, estimated level "—". Tap "I know this word": the strip, both charts and tiles change at once with no reload; under the "Not rated yet" filter the card also leaves the list. Un-know reverses it. A word with `"cefr": "C2"` added to `words.json` shows "C2" (no ≈) and moves to the C2 bar. Check 375px, dark mode, reduced motion, keyboard, and with Chart.js blocked (strip and tiles still work).
+- Browser at http://127.0.0.1:5173 on a fresh database: strip reads "0 known · 2,014 still to learn", doughnut and level bars render, estimated level "—". Tap "I know this word": the strip, both charts and tiles change at once with no reload; under the "Not rated yet" filter the card also leaves the list. Un-know reverses it. A word with `"cefr": "C2"` added to `words.json` shows "C2" (no ≈) and moves to the C2 bar. Check 375px, dark mode, reduced motion, keyboard, and with Chart.js blocked (strip and tiles still work).
 
 ## Out of scope
-Filtering the list by level, per-word level editing in the UI, tagging all 314 words with real CEFR data (only the override mechanism is built), level-based gamification or badges, and changing the vocabulary test bands.
+Filtering the list by level, per-word level editing in the UI, tagging all 2,014 words with real CEFR data (only the override mechanism is built), level-based gamification or badges, and changing the vocabulary test bands.

@@ -3,6 +3,7 @@ import { searchWords } from '../search.js';
 import { getAll } from '../db.js';
 import { buildStatus } from '../wordstatus.js';
 import { wordCard } from './wordui.js';
+import { renderStats } from './wordstats.js';
 
 const PAGE = 30;
 const FILTERS = [
@@ -62,11 +63,13 @@ export async function render(root, { words, db }) {
     count.textContent = `${showing} of ${current.length} words`;
     more.hidden = showing >= current.length;
   };
+  const stats = renderStats(words, status);
   const make = (w) => wordCard(w, { db, status, onChange: (card) => settle(w, card) });
 
   // A tapped action can move a word out of the active filter: drop just that card and top the page back up
   // (other open cards keep their state).
   function settle(w, card) {
+    stats.update();
     updateChips(); // every saved tap changes some category, even when the card stays in this filter
     if (matches[filter](w)) return;
     const next = card.nextElementSibling ?? card.previousElementSibling;
@@ -96,8 +99,10 @@ export async function render(root, { words, db }) {
       toggle('Translations', 'showTrans', 'hide-trans'),
       toggle('Definitions', 'showDef', 'hide-def'),
       h('span', { class: 'legend' }, h('span', { class: 'trans' }, '■ English'), ' ', h('span', { class: 'def' }, '■ Norwegian definition'))),
+    stats.el,
     h('div', { class: 'chips', role: 'group', 'aria-label': 'Filter' }, chips),
     count, list, h('div', { class: 'row center' }, more),
   );
   draw();
+  stats.update();
 }

@@ -31,6 +31,12 @@ test('rejects duplicate ids, duplicate ranks, bad ranks', () => {
   assert.ok(validateWords([{ ...good(), rank: 1.5 }]).some((e) => /rank/.test(e)));
 });
 
+test('cefr is optional but must be a CEFR level when present', () => {
+  assert.deepEqual(validateWords([{ ...good(), cefr: 'B2' }]), []);
+  assert.ok(validateWords([{ ...good(), cefr: 'D1' }]).some((e) => /cefr must be one of A1, A2, B1, B2, C1, C2/.test(e)));
+  assert.ok(validateWords([{ ...good(), cefr: '' }]).some((e) => /cefr/.test(e)));
+});
+
 test('rejects missing glosses, definitions and examples', () => {
   assert.ok(validateWords([{ ...good(), gloss_en: '' }]).some((e) => /gloss_en/.test(e)));
   assert.ok(validateWords([{ ...good(), def_no: ' ' }]).some((e) => /def_no/.test(e)));

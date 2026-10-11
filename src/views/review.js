@@ -6,6 +6,7 @@ import { mixedChart, accent } from '../charts.js';
 import { meaning } from './wordui.js';
 import { reviewXp } from '../gamify.js';
 import { confetti, reward } from '../gamui.js';
+import { renderReviewStats } from './reviewstats.js';
 
 const MAX_CARD_MS = 5 * 60 * 1000; // a card left open longer than this counts as 5 minutes
 const COUNTS = [[5, '5'], [10, '10'], [20, '20'], [0, 'All due']];
@@ -14,7 +15,7 @@ const pct = (x) => `${Math.round(x * 100)}%`;
 
 export async function render(root, { words, db }) {
   const byId = new Map(words.map((w) => [w.id, w]));
-  const [cards, reviews] = await Promise.all([getAll(db, 'cards'), getAll(db, 'reviews')]);
+  const [cards, reviews, known, unknown] = await Promise.all([getAll(db, 'cards'), getAll(db, 'reviews'), getAll(db, 'known'), getAll(db, 'unknown')]);
   const deck = cards.filter((c) => byId.has(c.wordId));
   let count = pref('reviewCount', 10);
   let keys = {};
@@ -48,7 +49,7 @@ export async function render(root, { words, db }) {
           startBtn('Start review', due, true),
           due.length === 0 ? startBtn('Practise anyway', byDue, false) : null));
     }
-    page(body, improvement());
+    page(body, improvement(), renderReviewStats({ words, cards, reviews, known, unknown, now: Date.now() }));
   }
 
   function improvement() {
@@ -151,7 +152,7 @@ export async function render(root, { words, db }) {
           h('p', { class: 'center' }, h('span', { class: 'chip' }, word.pos)),
           h('div', { class: 'row center' }, showBtn), revealed),
         errorBox,
-        h('p', { class: 'muted' }, h('button', { class: 'quiet', onclick: setup }, '← Stop and go back')),
+        h('p', { class: 'muted' }, h('button', { class: 'quiet', onclick: () => render(root, { words, db }) }, '← Stop and go back')),
       );
     }
     show();
