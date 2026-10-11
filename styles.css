@@ -477,3 +477,39 @@ h1 .ic, h2 .ic, h3 .ic { margin-right: var(--s1); }
 
 /* keep the page width stable so fixed-position controls never shift when a scrollbar appears */
 html { scrollbar-gutter: stable; }
+
+/* phrases: modes, typing panel, feedback */
+.pover h2 { margin-bottom: var(--s2); }
+.pover .progress { margin-bottom: var(--s2); }
+.pmodes { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--s3); margin: var(--s3) 0; }
+.pmode { display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: var(--s1); min-height: 132px; padding: var(--s3) var(--s4); text-align: left; border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+.pmode:hover:not(:disabled) { border-color: var(--accent); }
+.pmode strong { font-size: 1.05rem; }
+.pmode .muted { font-size: .9rem; font-weight: 400; }
+.pmode-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; font-size: 1.5rem; background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+input.tinput, textarea.tinput { font: inherit; font-size: 1.15rem; min-height: 48px; padding: var(--s2) var(--s3); border: 2px solid var(--muted); border-radius: 10px; background: var(--card); color: var(--fg); }
+input.tinput:focus-visible, textarea.tinput:focus-visible { border-color: var(--accent); }
+[aria-label="Topic"] .chipbtn { min-height: 44px; }
+.tarea { display: block; width: 100%; resize: vertical; line-height: 1.5; }
+.typing { display: grid; gap: var(--s2); margin-top: var(--s2); }
+.fillrow .tinput { display: inline-block; width: auto; min-height: 44px; margin: 0 .2em; padding: 2px var(--s2); text-align: center; font-size: inherit; }
+.lkeys { align-items: center; gap: var(--s2); }
+.lkey { min-width: 44px; min-height: 44px; padding: 0; font-size: 1.25rem; }
+.pfeedback { display: grid; gap: var(--s2); margin-top: var(--s3); }
+.pfeedback:empty { display: none; }
+.pfeedback p { margin: 0; }
+.pbanner { display: inline-block; justify-self: start; padding: var(--s2) var(--s3); border: 2px solid currentColor; border-radius: 10px; font-size: 1.15rem; font-weight: 700; }
+.pbanner.correct { color: var(--known); background: color-mix(in srgb, var(--known) 12%, var(--card)); }
+.pbanner.almost { color: var(--review); background: color-mix(in srgb, var(--review) 12%, var(--card)); }
+.pbanner.wrong { color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--card)); }
+.pbanner.gaveUp { color: var(--context); background: color-mix(in srgb, var(--context) 10%, var(--card)); }
+.pdiff { line-height: 2.3; }
+.pw { display: inline-block; margin: 2px 3px; padding: 0 var(--s2); border: 1px solid currentColor; border-radius: 8px; font-weight: 600; }
+.pw small { font-weight: 400; }
+.pw.ok { color: var(--known); } .pw.near { color: var(--review); } .pw.bad { color: var(--bad); }
+.pw.extra { color: var(--bad); text-decoration: line-through; }
+.pw.extra small { text-decoration: none; display: inline-block; }
+.phint { margin: 0; padding: var(--s2) var(--s3); border-left: 4px solid var(--review); border-radius: 0 8px 8px 0; background: color-mix(in srgb, var(--review) 8%, var(--card)); }
+.sfree { white-space: pre-wrap; overflow-wrap: anywhere; }
+.fw-out { min-height: 3em; margin-top: var(--s3); padding: var(--s3); border-radius: var(--radius); border: 1px dashed var(--line); }
+.pw small { margin-left: .25em; }

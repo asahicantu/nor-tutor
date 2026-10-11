@@ -15,7 +15,7 @@ const tile = (label, value, caption) =>
 const STEPS = [
   ['#/test', '1', 'Find your level', 'Take a 2-minute vocabulary test. Words you miss are saved so you can learn them.'],
   ['#/explore', '2', 'Browse words', 'Mark words you know, or send new ones to your review deck.'],
-  ['#/phrases', '3', 'Read sentences', 'Practise whole sentences. Tap a word to see what it means.'],
+  ['#/phrases', '3', 'Practise sentences', 'Read, understand, write and fill in whole sentences. Tap a word to see what it means.'],
   ['#/grammar', '4', 'Check the grammar', 'Tables and examples for nouns, verbs, word order and more.'],
 ];
 
