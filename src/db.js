@@ -30,7 +30,7 @@ export async function openDb() {
   try {
     const old = await readOldDb();
     if (old.cards.length + old.reviews.length + old.tests.length === 0) return db;
-    await replaceState(db, { ...old, known: [], unknown: [], phrases: [] });
+    await replaceState(db, { ...old, known: [], unknown: [], phrases: [], awards: [] });
     db.notice = `Moved your progress (${old.cards.length} cards, ${old.reviews.length} reviews, ${old.tests.length} tests) from the browser into data/nor-tutor.db.`;
   } catch (e) {
     db.notice = `Could not move your old browser data yet (${e.message}). It is still in the browser; the move will be retried next time.`;

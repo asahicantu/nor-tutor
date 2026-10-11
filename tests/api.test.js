@@ -35,7 +35,7 @@ function call(method, path, { body, headers = {} } = {}) {
   });
 }
 
-const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [] };
+const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [] };
 const reset = () => call('PUT', '/api/state', { body: { version: 2, ...empty } });
 const card = (wordId, reps = 0) => ({ wordId, ease: 2.5, interval: 0, reps, lapses: 0, due: 1 });
 const keyPath = (store, id) => `/api/${store}/${encodeURIComponent(JSON.stringify(id))}`;
@@ -94,4 +94,12 @@ test('PUT /api/state validates the whole backup and changes nothing on error', a
 test('oversized bodies are refused', async () => {
   const big = JSON.stringify({ wordId: 1, timestamp: 1, pad: 'x'.repeat(5 * 1024 * 1024) });
   assert.equal((await call('POST', '/api/known', { body: big })).status, 413);
+});
+
+test('awards: POST once, second POST is 409, bad row is 400', async () => {
+  await reset();
+  assert.equal((await call('POST', '/api/awards', { body: { awardId: 'first-test', timestamp: 1 } })).status, 204);
+  assert.equal((await call('POST', '/api/awards', { body: { awardId: 'first-test', timestamp: 2 } })).status, 409);
+  assert.equal((await call('POST', '/api/awards', { body: { awardId: 7, timestamp: 2 } })).status, 400);
+  assert.deepEqual((await call('GET', '/api/awards')).body, [{ awardId: 'first-test', timestamp: 1 }]);
 });

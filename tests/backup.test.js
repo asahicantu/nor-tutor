@@ -9,11 +9,23 @@ const state = {
   known: [{ wordId: 1, timestamp: 950 }],
   unknown: [{ wordId: 2, count: 3, firstAt: 900, lastAt: 960 }],
   phrases: [{ phraseId: 'p1', seen: 4, got: 3, lastAt: 970 }],
+  awards: [{ awardId: 'first-test', timestamp: 990 }],
 };
 
 test('v1 backups still import, with the newer stores empty', () => {
-  const { known, unknown, phrases, ...v1 } = state;
-  assert.deepEqual(parseBackup(JSON.stringify({ version: 1, ...v1 })), { ...v1, known: [], unknown: [], phrases: [] });
+  const { known, unknown, phrases, awards, ...v1 } = state;
+  assert.deepEqual(parseBackup(JSON.stringify({ version: 1, ...v1 })), { ...v1, known: [], unknown: [], phrases: [], awards: [] });
+});
+
+test('v3 backups import with awards empty; v4 validates awards', () => {
+  const { awards, ...v3 } = state;
+  assert.deepEqual(parseBackup(JSON.stringify({ version: 3, ...v3 })).awards, []);
+  const v4 = (a) => JSON.stringify({ version: 4, ...state, awards: a });
+  assert.deepEqual(parseBackup(v4(state.awards)).awards, state.awards);
+  assert.throws(() => parseBackup(v4(undefined)), /"awards" must be an array/);
+  assert.throws(() => parseBackup(v4([{ awardId: 5, timestamp: 1 }])), /Invalid award at index 0/);
+  assert.throws(() => parseBackup(v4([{ awardId: 'a' }])), /Invalid award at index 0/);
+  assert.throws(() => parseBackup(v4([{ awardId: 'a', timestamp: 1 }, { awardId: 'a', timestamp: 2 }])), /Duplicate award a/);
 });
 
 test('v2 rejects missing, malformed or duplicate known rows', () => {
@@ -26,7 +38,7 @@ test('v2 rejects missing, malformed or duplicate known rows', () => {
 });
 
 test('validRow checks one row of a named store', () => {
-  assert.deepEqual(STORES, ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases']);
+  assert.deepEqual(STORES, ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards']);
   assert.equal(validRow('unknown', state.unknown[0]), true);
   assert.equal(validRow('unknown', { ...state.unknown[0], count: 0 }), false);
   assert.equal(validRow('phrases', state.phrases[0]), true);
@@ -34,6 +46,7 @@ test('validRow checks one row of a named store', () => {
   assert.equal(validRow('known', { wordId: 'x', timestamp: 1 }), true);
   assert.equal(validRow('known', { wordId: 'x' }), false);
   assert.equal(validRow('cards', state.cards[0]), true);
+  assert.equal(validRow('awards', { awardId: 'x', timestamp: 1 }), true);
   assert.equal(validRow('toString', {}), false);
 });
 

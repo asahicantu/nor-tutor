@@ -4,6 +4,8 @@ import { dueCards, review, GRADES } from '../srs.js';
 import { dailyAccuracy, trend } from '../stats.js';
 import { mixedChart, accent } from '../charts.js';
 import { meaning } from './wordui.js';
+import { reviewXp } from '../gamify.js';
+import { confetti, reward } from '../gamui.js';
 
 const MAX_CARD_MS = 5 * 60 * 1000; // a card left open longer than this counts as 5 minutes
 const COUNTS = [[5, '5'], [10, '10'], [20, '20'], [0, 'All due']];
@@ -88,12 +90,17 @@ export async function render(root, { words, db }) {
 
     function done() {
       keys = {};
-      page(h('div', { class: 'card hero' },
+      const gain = reviewXp(tally);
+      const extra = h('div', { role: 'status' });
+      page(h('div', { class: 'card hero celebrate' },
+        confetti(),
         h('h2', {}, `Done: ${total} ${total === 1 ? 'card' : 'cards'} reviewed`),
-        h('p', {}, `${tally.good + tally.easy + tally.hard} remembered, ${tally.again} to see again soon.`),
+        h('p', {}, `${tally.good + tally.easy + tally.hard} remembered, ${tally.again} to see again soon. `, h('strong', {}, `+${gain} XP`)),
+        extra,
         h('div', { class: 'row' },
           h('button', { class: 'primary', onclick: () => render(root, { words, db }) }, 'Back to Review'),
           h('a', { class: 'btn', href: '#/dashboard' }, 'Dashboard'))));
+      reward(db, gain, extra).catch(() => {}); // the summary above is already complete; the extras are a bonus
     }
 
     function show() {

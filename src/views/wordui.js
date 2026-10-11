@@ -16,19 +16,23 @@ export const contextPanel = (w) =>
     w.forms.length ? h('div', { class: 'chips' }, h('span', { class: 'muted' }, 'Forms'), w.forms.map((c) => no(c, 'span', 'chip'))) : null);
 
 // One word in the Words list, with its three actions. Redraws itself when its status changes.
-export function wordCard(w, { db, status }) {
+// onChange(card) fires after an action saved, so the list can drop the card if it left the active filter.
+export function wordCard(w, { db, status, onChange }) {
   const card = h('article', { class: 'wcard' });
   const msg = h('p', { class: 'error', role: 'alert', hidden: true });
   let open = false;
   const run = (fn) => async () => {
     msg.hidden = true;
+    let saved = true;
     try {
       await fn();
     } catch (e) {
+      saved = false;
       msg.textContent = `Could not save (${e.message}). Please try again.`;
       msg.hidden = false;
     }
     draw();
+    if (saved) onChange?.(card);
   };
   const draw = () => {
     const known = status.known.has(w.id);

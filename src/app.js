@@ -1,6 +1,7 @@
 import { openDb } from './db.js';
 import { h } from './dom.js';
 import { validateWords } from './wordsSchema.js';
+import { renderChip } from './gamui.js';
 
 import * as test from './views/test.js';
 import * as review from './views/review.js';
@@ -45,6 +46,7 @@ async function main() {
       const stage = h('div');
       root.replaceChildren(stage);
       window.scrollTo(0, 0);
+      renderChip(db).catch(() => {}); // cosmetic: a failure must not block the view
       try {
         await (routes[path] ? routes[path].render(stage, ctx) : home(stage));
       } catch (e) {

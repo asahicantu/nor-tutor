@@ -24,3 +24,6 @@ Your data lives in `data/nor-tutor.db` (SQLite, written by `npm start`, Node 22+
 - Data is stored per browser origin. Always use the same address (http://127.0.0.1:5173); http://localhost:5173 or another port shows an empty app. Your data is not lost, it sits in that origin's storage.
 - Charts load Chart.js from the internet (jsDelivr). Offline, the tiles still work and the charts are replaced by a notice.
 - When replacing `data/words.json` with the full list, keep the existing ids for the 14 sample lemmas (cards and reviews join on word id). Vocabulary-test results taken so far were computed against the 14-word sample list, so their estimates are not comparable with tests on the full list.
+
+## Progress and rewards
+XP, levels, streaks and the daily quest are calculated from your review, test, deck and known-word history, so they never go out of sync. Only earned badges are stored (table `awards` in `data/nor-tutor.db`, included in Data export/import, backup version 4). Rewards come from real study only.

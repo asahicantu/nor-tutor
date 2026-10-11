@@ -50,12 +50,33 @@ export async function render(root, { words, db }) {
       onclick: () => { filter = key; shown = PAGE; chips.forEach((b, i) => b.setAttribute('aria-pressed', String(FILTERS[i][0] === key))); draw(); },
     }, label));
 
+  let current = []; // words matching the current filter and search, in list order
+  const tally = () => {
+    const showing = list.querySelectorAll('.wcard').length;
+    count.textContent = `${showing} of ${current.length} words`;
+    more.hidden = showing >= current.length;
+  };
+  const make = (w) => wordCard(w, { db, status, onChange: (card) => settle(w, card) });
+
+  // A tapped action can move a word out of the active filter: drop just that card and top the page back up
+  // (other open cards keep their state).
+  function settle(w, card) {
+    if (matches[filter](w)) return;
+    const next = card.nextElementSibling ?? card.previousElementSibling;
+    card.remove();
+    current = current.filter((x) => x !== w);
+    if (!current.length) return draw(); // nothing left: show the empty message
+    const refill = current[list.querySelectorAll('.wcard').length]; // first match not on the page yet
+    if (refill) list.append(make(refill));
+    tally();
+    next?.querySelector('.actions button:not([disabled])')?.focus(); // keep keyboard focus in the list
+  }
+
   function draw() {
-    const all = searchWords(words, input.value, words.length).filter((w) => matches[filter](w) && (!pos || posOf(w) === pos));
-    const page = all.slice(0, shown);
-    list.replaceChildren(...(page.length ? page.map((w) => wordCard(w, { db, status })) : [h('p', { class: 'empty' }, 'No words match. Try another filter or search.')]));
-    count.textContent = `${Math.min(shown, all.length)} of ${all.length} words`;
-    more.hidden = shown >= all.length;
+    current = searchWords(words, input.value, words.length).filter((w) => matches[filter](w) && (!pos || posOf(w) === pos));
+    const page = current.slice(0, shown);
+    list.replaceChildren(...(page.length ? page.map(make) : [h('p', { class: 'empty' }, 'No words match. Try another filter or search.')]));
+    tally();
   }
 
   input.addEventListener('input', () => { shown = PAGE; draw(); });
