@@ -554,3 +554,10 @@ input.tinput:focus-visible, textarea.tinput:focus-visible { border-color: var(--
 
 /* review: gap under the improvement card */
 details.gcard:has(+ .rstats) { margin-bottom: var(--s3); }
+
+/* word cloud: animated canvas */
+.wc-controls { margin: 0 0 var(--s2); align-items: center; }
+.wc-controls label { display: inline-flex; align-items: center; gap: var(--s2); }
+.wc-stage { width: 100%; }
+.wc-canvas { display: block; width: 100%; height: auto; border-radius: 12px; background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%); }
+.wc-info { min-height: 1.5em; margin: var(--s2) 0; }
