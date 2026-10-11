@@ -5,6 +5,7 @@ import { dueCards } from '../srs.js';
 import { buildStatus, mostMissed } from '../wordstatus.js';
 import { lineChart, barChart, accent, softAccent } from '../charts.js';
 import { xpTotal, levelInfo, streak, dailyQuest, badges } from '../gamify.js';
+import { collapsible, expandControls } from './collapse.js';
 import { ring, xpBar, badgeTile, claimBadges, toast, tzOffset } from '../gamui.js';
 
 const fmt = (n) => Math.round(n).toLocaleString('en');
@@ -65,10 +66,19 @@ export async function render(root, { words, phrases, db }) {
   const series = vocabSeries(tests);
   const days = dailyAccuracy(reviews, offset);
   const canvases = [h('canvas', { role: 'img', 'aria-label': 'Estimated vocabulary after each test' }), h('canvas', { role: 'img', 'aria-label': 'Share remembered per day' })];
-  const chartCard = (title, explain, empty, cta, ready, canvas) =>
-    h('section', { class: 'card' }, h('h3', {}, title), h('p', { class: 'muted' }, explain),
+  const wtile = (label, value, cap) => h('div', { class: 'wtile' }, h('span', { class: 'wtile-l' }, label), h('strong', { class: 'wtile-v' }, value), cap ? h('span', { class: 'muted wtile-c' }, cap) : null);
+  // Chart.js sizes badly inside a hidden panel or a closed card: draw each chart once its card is open and the Progress tab is shown.
+  const drawn = [false, false];
+  const tryDraw = (i) => {
+    if (drawn[i] || progress.hidden || !charts[i].open) return;
+    drawn[i] = true;
+    drawChart(i);
+  };
+  const chartCard = (i, emoji, title, color, explain, empty, cta, ready) =>
+    collapsible({ emoji, title, color, open: true, hint: ready ? '' : 'Nothing yet', onFirstOpen: () => tryDraw(i) },
+      h('p', { class: 'muted' }, explain),
       typeof Chart === 'undefined' ? h('p', { class: 'muted' }, 'Charts need Chart.js from the internet, which could not be loaded.')
-        : ready ? h('div', { class: 'chart' }, canvas) : h('div', { class: 'empty' }, h('p', {}, empty), link(cta[0], cta[1], 'btn primary')));
+        : ready ? h('div', { class: 'chart' }, canvases[i]) : h('div', { class: 'empty' }, h('p', {}, empty), link(cta[0], cta[1], 'btn primary')));
 
   const today = h('div', { role: 'tabpanel', id: 'panel-0', 'aria-labelledby': 'tab-0' },
     h('section', { class: 'card hero' },
@@ -94,35 +104,42 @@ export async function render(root, { words, phrases, db }) {
           link('#/explore', 'Work on these words', 'btn'))
       : null);
 
-  const progress = h('div', { role: 'tabpanel', id: 'panel-1', 'aria-labelledby': 'tab-1', hidden: true },
-    h('section', { class: 'card' },
-      h('h3', {}, 'Vocabulary coverage'),
-      h('div', { class: 'progress', role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': String(pct) }, h('span', { style: `width:${pct}%` })),
-      h('p', { class: 'muted' }, `${pct}% of the word list marked as known.` + (latest ? ` Your last test estimated about ${fmt(latest.estimate)} of ${fmt(latest.listSize ?? words.length)}.` : ''))),
-    chartCard('How many words you know', 'Your test estimate after each test. Dashed lines show the likely range. Based on your own answers, so it can run high if you over-claim.', 'Take the test more than once to see how you improve.', ['#/test', 'Take the test'], series.length > 0, canvases[0]),
-    chartCard('Answers you remembered each day', 'The share of review answers that were not "Again". Higher means the words are sticking.', 'Do a review session and your results will appear here.', ['#/review', 'Start a review'], days.length > 0, canvases[1]),
-    h('details', {}, h('summary', {}, 'What do these numbers mean?'),
+  const charts = [
+    chartCard(0, '📈', 'How many words you know', 'verbs', 'Your test estimate after each test. Dashed lines show the likely range. Based on your own answers, so it can run high if you over-claim.', 'Take the test more than once to see how you improve.', ['#/test', 'Take the test'], series.length > 0),
+    chartCard(1, '🧠', 'Answers you remembered each day', 'sentences', 'The share of review answers that were not "Again". Higher means the words are sticking.', 'Do a review session and your results will appear here.', ['#/review', 'Start a review'], days.length > 0),
+  ];
+  const last7 = days.slice(-7);
+  const recent = last7.reduce((n, d) => n + d.reviews, 0);
+  const recentPct = recent ? Math.round((last7.reduce((n, d) => n + d.accuracy * d.reviews, 0) / recent) * 100) : null;
+  const progress = h('div', { role: 'tabpanel', id: 'panel-1', 'aria-labelledby': 'tab-1', hidden: true, class: 'pprogress' },
+    expandControls(() => progress),
+    collapsible({ emoji: '📚', title: 'Vocabulary coverage', color: 'words', open: true, hint: `${pct}% known` },
+      h('div', { class: 'progress', role: 'progressbar', 'aria-label': 'Share of the word list marked as known', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-valuenow': String(pct) }, h('span', { style: `width:${pct}%` })),
+      h('p', { class: 'muted' }, `${pct}% of the word list marked as known.` + (latest ? ` Your last test estimated about ${fmt(latest.estimate)} of ${fmt(latest.listSize ?? words.length)}.` : '')),
+      h('div', { class: 'wtiles' },
+        wtile('✅ Known words', fmt(known.length), `of ${fmt(words.length)} in the list`),
+        wtile('🎯 Last test estimate', latest ? fmt(latest.estimate) : '–', latest ? 'words, about' : 'take the test'),
+        wtile('🔁 Reviews, last 7 days', fmt(recent), 'cards answered'),
+        wtile('💪 Remembered', recentPct === null ? '–' : `${recentPct}%`, 'last 7 days'))),
+    ...charts,
+    collapsible({ emoji: '💡', title: 'What do these numbers mean?', color: 'usage', open: false },
       h('p', {}, 'The estimate is how many words of the list you likely know, with a range because a test samples only some words. "Remembered" is the share of review answers that were not "Again". XP and levels only count real study: reviews, tests, words marked known, cards added and sentences you got right.')));
 
   const panels = [today, progress];
-  let drawn = false;
-  const tabs = ['Today', 'Progress'].map((label, i) =>
+  const tabs = ['🏠 Today', '📊 Progress'].map((label, i) =>
     h('button', { class: 'tab', role: 'tab', id: `tab-${i}`, 'aria-selected': String(i === 0), 'aria-controls': `panel-${i}`, onclick: () => select(i) }, label));
   function select(i) {
     tabs.forEach((t, n) => t.setAttribute('aria-selected', String(n === i)));
     panels.forEach((p, n) => (p.hidden = n !== i));
-    if (i === 1 && !drawn) {
-      drawn = true; // Chart.js sizes badly inside a hidden panel, so draw on first show
-      drawCharts();
-    }
+    if (i === 1) drawn.forEach((_, n) => tryDraw(n));
   }
 
   root.replaceChildren(h('h1', {}, 'Your dashboard'), h('div', { class: 'tabs', role: 'tablist', 'aria-label': 'Dashboard sections' }, tabs), today, progress);
 
-  function drawCharts() {
+  function drawChart(i) {
     if (typeof Chart === 'undefined') return;
     const main = accent();
-    if (series.length) {
+    if (i === 0 && series.length) {
       const faint = { borderColor: softAccent(), borderDash: [5, 4], pointRadius: series.length === 1 ? 3 : 0 };
       lineChart(canvases[0], series.map((s) => new Date(s.t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })), [
         { label: 'Estimate', data: series.map((s) => s.estimate), borderColor: main, backgroundColor: main, pointRadius: 4 },
@@ -130,7 +147,7 @@ export async function render(root, { words, phrases, db }) {
         { label: 'Lower range', data: series.map((s) => s.ciLow), ...faint },
       ]);
     }
-    if (days.length) {
+    if (i === 1 && days.length) {
       barChart(canvases[1], days.map((d) => d.day), [{ label: 'Remembered (%)', data: days.map((d) => Math.round(d.accuracy * 100)), backgroundColor: main }], { max: 100 });
     }
   }
