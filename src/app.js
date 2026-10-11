@@ -2,6 +2,7 @@ import { openDb } from './db.js';
 import { h } from './dom.js';
 import { validateWords } from './wordsSchema.js';
 import { renderChip } from './gamui.js';
+import { initProfilePanel } from './profilepanel.js';
 
 import * as test from './views/test.js';
 import * as review from './views/review.js';
@@ -10,7 +11,8 @@ import * as dashboard from './views/dashboard.js';
 import * as data from './views/data.js';
 import * as phrasesView from './views/phrases.js';
 import * as grammar from './views/grammar.js';
-const routes = { '/dashboard': dashboard, '/test': test, '/review': review, '/explore': explore, '/phrases': phrasesView, '/grammar': grammar, '/data': data };
+import * as sources from './views/sources.js';
+const routes = { '/dashboard': dashboard, '/test': test, '/review': review, '/explore': explore, '/phrases': phrasesView, '/grammar': grammar, '/sources': sources, '/data': data };
 
 const loadJson = (path) => fetch(path).then((r) => {
   if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`);
@@ -53,6 +55,7 @@ async function main() {
         if (stage.isConnected) showError(e, stage);
       }
     };
+    initProfilePanel({ db, words });
     window.addEventListener('hashchange', go);
     go();
   } catch (e) {

@@ -9,7 +9,7 @@ import { openStore, ConflictError } from '../tools/store.mjs';
 const card = (wordId, reps = 0) => ({ wordId, ease: 2.5, interval: 0, reps, lapses: 0, due: 1 });
 
 test('starts empty', () => {
-  assert.deepEqual(openStore(':memory:').loadState(), { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [] });
+  assert.deepEqual(openStore(':memory:').loadState(), { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] });
 });
 
 test('unkeyed stores keep insertion order', () => {
@@ -54,7 +54,7 @@ test('put/del need a keyed store; unknown store names are refused', () => {
 test('replaceState swaps all stores', () => {
   const s = openStore(':memory:');
   s.add('known', { wordId: 9, timestamp: 1 });
-  const next = { cards: [card(1)], reviews: [], tests: [], known: [{ wordId: 2, timestamp: 5 }], unknown: [], phrases: [], awards: [] };
+  const next = { cards: [card(1)], reviews: [], tests: [], known: [{ wordId: 2, timestamp: 5 }], unknown: [], phrases: [], awards: [], settings: [] };
   s.replaceState(next);
   assert.deepEqual(s.loadState(), next);
 });
@@ -62,8 +62,8 @@ test('replaceState swaps all stores', () => {
 test('replaceState rolls back on failure, keeping old data', () => {
   const s = openStore(':memory:');
   s.add('known', { wordId: 9, timestamp: 1 });
-  assert.throws(() => s.replaceState({ cards: [card(1), card(1)], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [] }), ConflictError);
-  assert.deepEqual(s.loadState(), { cards: [], reviews: [], tests: [], known: [{ wordId: 9, timestamp: 1 }], unknown: [], phrases: [], awards: [] });
+  assert.throws(() => s.replaceState({ cards: [card(1), card(1)], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] }), ConflictError);
+  assert.deepEqual(s.loadState(), { cards: [], reviews: [], tests: [], known: [{ wordId: 9, timestamp: 1 }], unknown: [], phrases: [], awards: [], settings: [] });
 });
 
 test('data survives closing and reopening the file', () => {
@@ -79,6 +79,14 @@ test('data survives closing and reopening the file', () => {
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('settings: put upserts by key and round-trips through loadState', () => {
+  const s = openStore(':memory:');
+  s.put('settings', { key: 'profileName', value: 'Asahi' });
+  s.put('settings', { key: 'profileName', value: 'Åse' });
+  assert.deepEqual(s.getAll('settings'), [{ key: 'profileName', value: 'Åse' }]);
+  assert.deepEqual(s.loadState().settings, [{ key: 'profileName', value: 'Åse' }]);
 });
 
 test('awards: add refuses a duplicate id', () => {

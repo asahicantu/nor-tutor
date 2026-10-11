@@ -37,6 +37,7 @@ export function onKeys(root, map) {
   const handler = (e) => {
     if (!root.isConnected) return document.removeEventListener('keydown', handler);
     if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (e.target.closest?.('#nav, #profile-panel')) return;
     const fn = map[e.key.toLowerCase()];
     if (fn) {
       e.preventDefault();

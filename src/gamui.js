@@ -86,8 +86,10 @@ export async function renderChip(db) {
   if (!el) return;
   const state = await loadState(db);
   const days = streak(state, Date.now(), tzOffset());
+  const level = levelInfo(xpTotal(state)).level;
+  el.setAttribute('aria-label', `Open your profile: level ${level}, ${days}-day streak`);
   el.replaceChildren(
-    h('span', {}, `Level ${levelInfo(xpTotal(state)).level}`),
-    h('span', { class: 'flame', role: 'img', 'aria-label': `${days}-day streak` }, `\u{1F525} ${days}`));
+    h('span', { 'aria-hidden': 'true' }, `Level ${level}`),
+    h('span', { class: 'flame', 'aria-hidden': 'true' }, `\u{1F525} ${days}`));
   el.hidden = false;
 }

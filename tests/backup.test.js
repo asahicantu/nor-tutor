@@ -10,11 +10,12 @@ const state = {
   unknown: [{ wordId: 2, count: 3, firstAt: 900, lastAt: 960 }],
   phrases: [{ phraseId: 'p1', seen: 4, got: 3, lastAt: 970 }],
   awards: [{ awardId: 'first-test', timestamp: 990 }],
+  settings: [{ key: 'profileName', value: 'Asahi' }],
 };
 
 test('v1 backups still import, with the newer stores empty', () => {
-  const { known, unknown, phrases, awards, ...v1 } = state;
-  assert.deepEqual(parseBackup(JSON.stringify({ version: 1, ...v1 })), { ...v1, known: [], unknown: [], phrases: [], awards: [] });
+  const { known, unknown, phrases, awards, settings, ...v1 } = state;
+  assert.deepEqual(parseBackup(JSON.stringify({ version: 1, ...v1 })), { ...v1, known: [], unknown: [], phrases: [], awards: [], settings: [] });
 });
 
 test('v3 backups import with awards empty; v4 validates awards', () => {
@@ -37,8 +38,22 @@ test('v2 rejects missing, malformed or duplicate known rows', () => {
   assert.throws(() => parseBackup(v2([{ wordId: 1, timestamp: 1 }, { wordId: 1, timestamp: 2 }])), /Duplicate known word 1/);
 });
 
+test('v4 backups import with settings empty; v5 validates settings', () => {
+  const { settings, ...v4 } = state;
+  assert.deepEqual(parseBackup(JSON.stringify({ version: 4, ...v4 })).settings, []);
+  const v5 = (s) => JSON.stringify({ version: 5, ...state, settings: s });
+  assert.deepEqual(parseBackup(v5(state.settings)).settings, state.settings);
+  assert.throws(() => parseBackup(v5(undefined)), /"settings" must be an array/);
+  assert.throws(() => parseBackup(v5([{ key: 'k'.repeat(41), value: 'x' }])), /Invalid setting/);
+  assert.equal(parseBackup(v5([{ key: 'k'.repeat(40), value: 'x' }])).settings.length, 1);
+  assert.throws(() => parseBackup(v5([{ key: '', value: 'x' }])), /Invalid setting at index 0/);
+  assert.throws(() => parseBackup(v5([{ key: 'a', value: 5 }])), /Invalid setting at index 0/);
+  assert.throws(() => parseBackup(v5([{ key: 'a', value: 'x'.repeat(201) }])), /Invalid setting at index 0/);
+  assert.throws(() => parseBackup(v5([{ key: 'a', value: 'x' }, { key: 'a', value: 'y' }])), /Duplicate setting a/);
+});
+
 test('validRow checks one row of a named store', () => {
-  assert.deepEqual(STORES, ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards']);
+  assert.deepEqual(STORES, ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards', 'settings']);
   assert.equal(validRow('unknown', state.unknown[0]), true);
   assert.equal(validRow('unknown', { ...state.unknown[0], count: 0 }), false);
   assert.equal(validRow('phrases', state.phrases[0]), true);

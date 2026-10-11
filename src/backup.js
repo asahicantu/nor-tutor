@@ -1,11 +1,11 @@
 import { GRADES } from './srs.js';
 
-export const BACKUP_VERSION = 4;
-export const STORES = ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards'];
+export const BACKUP_VERSION = 5;
+export const STORES = ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards', 'settings'];
 // Stores that older backups predate: the version that introduced each one.
-const ADDED_IN = { known: 2, unknown: 3, phrases: 3, awards: 4 };
+const ADDED_IN = { known: 2, unknown: 3, phrases: 3, awards: 4, settings: 5 };
 // Field that identifies a row in the stores that hold one row per word/phrase.
-export const KEY_FIELD = { cards: 'wordId', known: 'wordId', unknown: 'wordId', phrases: 'phraseId', awards: 'awardId' };
+export const KEY_FIELD = { cards: 'wordId', known: 'wordId', unknown: 'wordId', phrases: 'phraseId', awards: 'awardId', settings: 'key' };
 
 const num = (x) => typeof x === 'number' && Number.isFinite(x);
 const isObj = (x) => x !== null && typeof x === 'object' && !Array.isArray(x);
@@ -33,14 +33,16 @@ const ROW_CHECKS = {
   unknown: (u) => isObj(u) && isId(u.wordId) && num(u.count) && u.count >= 1 && num(u.firstAt) && num(u.lastAt),
   phrases: (p) => isObj(p) && isId(p.phraseId) && num(p.seen) && num(p.got) && num(p.lastAt),
   awards: (a) => isObj(a) && typeof a.awardId === 'string' && a.awardId !== '' && num(a.timestamp),
+  settings: (s) => isObj(s) && typeof s.key === 'string' && s.key !== '' && s.key.length <= 40 && typeof s.value === 'string' && s.value.length <= 200,
 };
-const LABELS = { cards: 'card', reviews: 'review', tests: 'test', known: 'known word', unknown: 'unknown word', phrases: 'phrase', awards: 'award' };
+const LABELS = { cards: 'card', reviews: 'review', tests: 'test', known: 'known word', unknown: 'unknown word', phrases: 'phrase', awards: 'award', settings: 'setting' };
 const DUPLICATE = {
   cards: (id) => `Duplicate card for word ${id}`,
   known: (id) => `Duplicate known word ${id}`,
   unknown: (id) => `Duplicate unknown word ${id}`,
   phrases: (id) => `Duplicate phrase ${id}`,
   awards: (id) => `Duplicate award ${id}`,
+  settings: (id) => `Duplicate setting ${id}`,
 };
 
 export const validRow = (store, row) => Object.hasOwn(ROW_CHECKS, store) && ROW_CHECKS[store](row);

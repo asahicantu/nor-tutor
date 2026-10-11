@@ -5,7 +5,7 @@ import { MATURE_DAYS } from './stats.js';
 import { LEVELS, LEVEL_PASS, levelOf, estimateLevel, summarize } from './levels.js';
 
 const DAY = 86400000;
-const MAX_DAYS = 365; // the over-time series shows at most the last year
+export const MAX_DAYS = 365; // the over-time series shows at most the last year
 const dayKey = (t, offset) => Math.floor((t + offset) / DAY);
 const dayLabel = (k) => new Date(k * DAY).toISOString().slice(0, 10);
 

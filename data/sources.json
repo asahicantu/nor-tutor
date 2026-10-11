@@ -1,0 +1,282 @@
+[
+  {
+    "id": "nrk-nyheter",
+    "name": "NRK Nyheter",
+    "url": "https://www.nrk.no/nyheter/",
+    "group": "News",
+    "description": "Norway's public broadcaster: current news at natural speed, free to read.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "nrk-urix",
+    "name": "NRK Urix",
+    "url": "https://www.nrk.no/urix/",
+    "group": "News",
+    "description": "NRK's foreign news and explainers, a good place for world vocabulary.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "nrk-ytring",
+    "name": "NRK Ytring",
+    "url": "https://www.nrk.no/ytring/",
+    "group": "News",
+    "description": "Opinion pieces and columns in varied, demanding Norwegian.",
+    "levels": [
+      "C1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "klar-tale",
+    "name": "Klar Tale",
+    "url": "https://www.klartale.no/",
+    "group": "News",
+    "description": "Norway's easy-to-read newspaper, with news written in simple language; some articles need a subscription.",
+    "levels": [
+      "A2",
+      "B1"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Partly free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "vg",
+    "name": "VG",
+    "url": "https://www.vg.no/",
+    "group": "News",
+    "description": "A large tabloid news site with news, sport and entertainment; premium articles need a subscription.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Partly free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "dagbladet",
+    "name": "Dagbladet",
+    "url": "https://www.dagbladet.no/",
+    "group": "News",
+    "description": "News, sport and culture; articles marked Pluss need a subscription.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Partly free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "aftenposten",
+    "name": "Aftenposten",
+    "url": "https://www.aftenposten.no/",
+    "group": "News",
+    "description": "A major newspaper with news, debate and culture; most reading needs a subscription.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Paywall",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "laer-norsk-naa",
+    "name": "Lær norsk nå",
+    "url": "https://laernorsknaa.com",
+    "group": "Listening",
+    "description": "A podcast for intermediate learners on culture, politics and history, spoken clearly and slowly with dialect variety; a book and Patreon are optional extras.",
+    "levels": [
+      "B1",
+      "B2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "klar-tale-audio",
+    "name": "Klar Tale audio edition",
+    "url": "https://lydavis.klartale.no/ukens/_nettleserbok.html",
+    "group": "Listening",
+    "description": "The weekly Klar Tale news read aloud in simple Norwegian, playable in the browser.",
+    "levels": [
+      "A2",
+      "B1"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "nrk-radio",
+    "name": "NRK Radio",
+    "url": "https://radio.nrk.no/",
+    "group": "Listening",
+    "description": "Live radio, podcasts and audiobooks from NRK for listening to real Norwegian.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "ordbokene",
+    "name": "Ordbøkene",
+    "url": "https://ordbokene.no/",
+    "group": "Dictionaries and grammar",
+    "description": "The official Bokmål and Nynorsk dictionaries from Språkrådet and the University of Bergen, with spelling, forms and examples.",
+    "levels": [
+      "A1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "sprakradet",
+    "name": "Språkrådet",
+    "url": "https://www.sprakradet.no/",
+    "group": "Dictionaries and grammar",
+    "description": "The Language Council's site on writing rules, usage questions, clear language and Norwegian language news.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "no-wiktionary",
+    "name": "Wiktionary (Bokmål)",
+    "url": "https://no.wiktionary.org/",
+    "group": "Dictionaries and grammar",
+    "description": "A free community dictionary with Norwegian definitions and word forms.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "snl",
+    "name": "Store norske leksikon",
+    "url": "https://snl.no/",
+    "group": "Watch and read",
+    "description": "Norway's free expert-written encyclopedia, good for clear reference reading on any topic.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "learnnow",
+    "name": "LearnNoW (Norwegian on the Web)",
+    "url": "https://www.ntnu.edu/learnnow",
+    "group": "Courses",
+    "description": "A free beginner course from NTNU with 12 chapters of stories, audio, grammar, pronunciation and exercises.",
+    "levels": [
+      "A1",
+      "B1"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "ndla",
+    "name": "NDLA",
+    "url": "https://ndla.no/",
+    "group": "Courses",
+    "description": "Free school learning resources for upper secondary subjects, with texts, films and podcasts in Norwegian.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "nrk-super",
+    "name": "NRK Super",
+    "url": "https://tv.nrk.no/nrksuper",
+    "group": "Watch and read",
+    "description": "Children's programmes with clear speech; NRK says it needs a child profile on NRK TV.",
+    "levels": [
+      "A2",
+      "B1"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "nrk-skole",
+    "name": "NRK Skole",
+    "url": "https://tv.nrk.no/programmer/nrk-skole",
+    "group": "Watch and read",
+    "description": "NRK's school programmes and documentaries on many subjects, in clear Norwegian.",
+    "levels": [
+      "B1",
+      "B2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "no-wikipedia",
+    "name": "Wikipedia (Bokmål)",
+    "url": "https://no.wikipedia.org/",
+    "group": "Watch and read",
+    "description": "The Norwegian-language Wikipedia, with over 690,000 articles to read on topics you already like.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "nasjonalbiblioteket",
+    "name": "Nasjonalbiblioteket",
+    "url": "https://www.nb.no/",
+    "group": "Watch and read",
+    "description": "The National Library's online collection of Norwegian books, newspapers and magazines; some items have access limits.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Partly free",
+    "checked": "2026-10-11"
+  }
+]

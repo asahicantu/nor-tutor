@@ -35,7 +35,7 @@ function call(method, path, { body, headers = {} } = {}) {
   });
 }
 
-const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [] };
+const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] };
 const reset = () => call('PUT', '/api/state', { body: { version: 2, ...empty } });
 const card = (wordId, reps = 0) => ({ wordId, ease: 2.5, interval: 0, reps, lapses: 0, due: 1 });
 const keyPath = (store, id) => `/api/${store}/${encodeURIComponent(JSON.stringify(id))}`;
@@ -102,4 +102,14 @@ test('awards: POST once, second POST is 409, bad row is 400', async () => {
   assert.equal((await call('POST', '/api/awards', { body: { awardId: 'first-test', timestamp: 2 } })).status, 409);
   assert.equal((await call('POST', '/api/awards', { body: { awardId: 7, timestamp: 2 } })).status, 400);
   assert.deepEqual((await call('GET', '/api/awards')).body, [{ awardId: 'first-test', timestamp: 1 }]);
+});
+
+test('settings: PUT upserts by key, GET returns it, bad rows are 400', async () => {
+  await reset();
+  assert.equal((await call('PUT', '/api/settings', { body: { key: 'profileName', value: 'Asahi' } })).status, 204);
+  assert.equal((await call('PUT', '/api/settings', { body: { key: 'profileName', value: 'Åse' } })).status, 204);
+  assert.deepEqual((await call('GET', '/api/settings')).body, [{ key: 'profileName', value: 'Åse' }]);
+  assert.equal((await call('PUT', '/api/settings', { body: { key: 'profileName', value: 7 } })).status, 400);
+  assert.equal((await call('PUT', '/api/settings', { body: { key: '', value: 'x' } })).status, 400);
+  assert.equal((await call('PUT', '/api/settings', { body: { key: 'k'.repeat(41), value: 'x' } })).status, 400);
 });
