@@ -36,9 +36,13 @@ export const setPref = (key, value) => {
 export function onKeys(root, map) {
   const handler = (e) => {
     if (!root.isConnected) return document.removeEventListener('keydown', handler);
-    if (e.repeat || e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; // holding a key must not answer the next card too
+    if (e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
     if (e.target.closest?.('#nav, #profile-panel')) return;
-    const fn = map[e.key.toLowerCase()];
+    const key = e.key.toLowerCase();
+    if (e.repeat) { if (map[key]) e.preventDefault(); return; } // holding a key must not answer the next card too, nor click a focused button again
+    // Space and Enter belong to a focused button, link or summary (it is pressed, not the shortcut)
+    if ((key === ' ' || key === 'enter') && /^(BUTTON|A|SUMMARY)$/.test(e.target.tagName)) return;
+    const fn = map[key];
     if (fn) {
       e.preventDefault();
       fn();

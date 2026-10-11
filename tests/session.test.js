@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { sessionStats } from '../src/session.js';
+import { sessionStats, reviewSessionStats } from '../src/session.js';
 
 const before = (rows) => new Map(rows.map(([id, count]) => [id, { wordId: id, count }]));
 
@@ -33,4 +33,20 @@ test('sessionStats counts the same unknown word once even if it was answered twi
   const s = sessionStats([{ wordId: 7, known: false }, { wordId: 7, known: false }], before([]));
   assert.equal(s.unknown, 1);
   assert.equal(s.total, 1);
+});
+
+test('reviewSessionStats summarises grades and time for a review session', () => {
+  const s = reviewSessionStats([
+    { grade: 'good', ms: 4000 }, { grade: 'again', ms: 10000 }, { grade: 'easy', ms: 1000 }, { grade: 'hard', ms: 5000 }, { grade: 'good', ms: 0 },
+  ]);
+  assert.deepEqual([s.total, s.again, s.hard, s.good, s.easy], [5, 1, 1, 2, 1]);
+  assert.equal(s.remembered, 4); // everything except "again"
+  assert.equal(s.pctRemembered, 80);
+  assert.equal(s.totalSeconds, 20);
+  assert.equal(s.avgSeconds, 4);
+});
+
+test('reviewSessionStats on an empty session has zeros and no NaN', () => {
+  const s = reviewSessionStats([]);
+  assert.deepEqual([s.total, s.remembered, s.pctRemembered, s.totalSeconds, s.avgSeconds], [0, 0, 0, 0, 0]);
 });

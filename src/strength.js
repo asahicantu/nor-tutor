@@ -57,3 +57,12 @@ export function fontSize(count, max) {
   if (max <= 0) return MIN_REM;
   return Math.round((MIN_REM + (MAX_REM - MIN_REM) * Math.sqrt(Math.min(count, max) / max)) * 100) / 100;
 }
+
+// How many of the words you have met are weak, learning, solid or strong (words never met are not counted).
+export function strengthCounts(words, state) {
+  const counts = { weak: 0, learning: 0, solid: 0, strong: 0, total: 0 };
+  for (const item of cloudItems(words, state, { ids: new Set(words.map((w) => w.id)) })) {
+    if (item.strength) { counts[item.strength]++; counts.total++; }
+  }
+  return counts;
+}

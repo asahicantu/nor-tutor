@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { STRENGTHS, wordStrength, cloudItems, fontSize } from '../src/strength.js';
+import { STRENGTHS, wordStrength, cloudItems, fontSize, strengthCounts } from '../src/strength.js';
 
 const w = (id, lemma = `ord${id}`) => ({ id, lemma, gloss_en: `gloss${id}`, rank: id * 10, pos: 'noun (en)' });
 const card = (wordId, interval, reps = 1) => ({ wordId, ease: 2.5, interval, reps, lapses: 0, due: 1 });
@@ -72,4 +72,16 @@ test('fontSize grows with the count, stays in range and is safe for empty input'
   assert.ok(fontSize(25, 100) < fontSize(100, 100));
   assert.equal(fontSize(1, 1), 2.6); // everything the same count: all at the top size
   assert.equal(fontSize(0, 0), 0.95);
+});
+
+test('strengthCounts tallies every word you have met by how strongly you know it', () => {
+  const words = [w(1), w(2), w(3), w(4), w(5)];
+  const state = {
+    ...none,
+    known: [{ wordId: 1, timestamp: 1 }],
+    cards: [card(2, 30), card(3, 7), card(4, 2)],
+    unknown: [{ wordId: 5, count: 1, firstAt: 1, lastAt: 1 }],
+  };
+  assert.deepEqual(strengthCounts(words, state), { weak: 1, learning: 1, solid: 1, strong: 2, total: 5 });
+  assert.deepEqual(strengthCounts(words, none), { weak: 0, learning: 0, solid: 0, strong: 0, total: 0 }); // never-met words are not counted
 });

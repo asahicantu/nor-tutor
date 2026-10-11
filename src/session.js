@@ -23,3 +23,16 @@ export function sessionStats(answers, before) {
   }
   return { total: seen.size, known, unknown, newWords, seenBefore, buckets, mostMissed };
 }
+
+// A review session in numbers. `grades`: [{ grade, ms }] for every card answered.
+export function reviewSessionStats(grades) {
+  const n = (g) => grades.filter((x) => x.grade === g).length;
+  const total = grades.length;
+  const remembered = total - n('again');
+  const totalSeconds = Math.round(grades.reduce((s, x) => s + (x.ms ?? 0), 0) / 1000);
+  return {
+    total, again: n('again'), hard: n('hard'), good: n('good'), easy: n('easy'), remembered,
+    pctRemembered: total ? Math.round((remembered / total) * 100) : 0,
+    totalSeconds, avgSeconds: total ? Math.round(totalSeconds / total) : 0,
+  };
+}
