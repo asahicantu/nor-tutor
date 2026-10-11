@@ -4,6 +4,7 @@ import { getAll } from '../db.js';
 import { buildStatus } from '../wordstatus.js';
 import { wordCard } from './wordui.js';
 import { renderStats } from './wordstats.js';
+import { slowSwitch, audioNotice } from './speakui.js';
 
 const PAGE = 30;
 const FILTERS = [
@@ -100,6 +101,7 @@ export async function render(root, { words, db }) {
       toggle('Translations', 'showTrans', 'hide-trans'),
       toggle('Definitions', 'showDef', 'hide-def'),
       h('span', { class: 'legend' }, h('span', { class: 'trans' }, '■ English'), ' ', h('span', { class: 'def' }, '■ Norwegian definition'))),
+    h('div', { class: 'toolbar audio-row' }, slowSwitch(), audioNotice()),
     stats.el,
     h('div', { class: 'chips', role: 'group', 'aria-label': 'Filter' }, chips),
     count, list, h('div', { class: 'row center' }, more),

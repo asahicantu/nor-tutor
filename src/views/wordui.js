@@ -1,19 +1,24 @@
 import { h, no } from '../dom.js';
 import { levelOf, complexityOf } from '../levels.js';
 import { markKnown, unmarkKnown, addToDeck } from '../actions.js';
+import { speakButton, speakAllButton } from './speakui.js';
+
+// Emoji icon before a label: decoration only, screen readers read the words.
+const icon = (emoji) => h('span', { class: 'ico', 'aria-hidden': 'true' }, emoji);
 
 // Translation in green, definition in blue (see .trans / .def in styles.css).
-export const meaning = (w, { example = true } = {}) =>
+export const meaning = (w, { example = true, listen = false } = {}) =>
   h('div', { class: 'meaning' },
     h('p', { class: 'trans' }, h('strong', {}, w.gloss_en)),
     h('p', { class: 'def' }, no(w.def_no)),
-    example && w.examples[0] ? h('p', { class: 'ex' }, no(w.examples[0].no), h('span', { class: 'muted' }, w.examples[0].en)) : null);
+    example && w.examples[0] ? h('p', { class: 'ex' }, no(w.examples[0].no), listen ? speakButton(w.examples[0].no) : null, h('span', { class: 'muted' }, w.examples[0].en)) : null);
 
 export const contextPanel = (w) =>
   h('div', { class: 'context' },
+    h('div', { class: 'ctx-top' }, speakAllButton(() => [...w.examples.map((e) => e.no), ...w.collocations], { label: 'Read all examples' })),
     w.notes ? h('p', { class: 'note' }, no(w.notes)) : null,
-    h('ul', { class: 'plain examples' }, w.examples.map((e) => h('li', {}, no(e.no, 'div', 'def'), h('div', { class: 'trans' }, e.en)))),
-    w.collocations.length ? h('div', { class: 'chips' }, h('span', { class: 'muted' }, 'Common phrases'), w.collocations.map((c) => no(c, 'span', 'chip'))) : null,
+    h('ul', { class: 'plain examples' }, w.examples.map((e) => h('li', {}, h('div', { class: 'exrow' }, no(e.no, 'div', 'def'), speakButton(e.no)), h('div', { class: 'trans' }, e.en)))),
+    w.collocations.length ? h('div', { class: 'chips' }, h('span', { class: 'muted' }, 'Common phrases'), w.collocations.map((c) => h('span', { class: 'chip phrase' }, no(c), speakButton(c, { label: c })))) : null,
     w.forms.length ? h('div', { class: 'chips' }, h('span', { class: 'muted' }, 'Forms'), w.forms.map((c) => no(c, 'span', 'chip'))) : null);
 
 // One word in the Words list, with its three actions. Redraws itself when its status changes.
@@ -44,7 +49,7 @@ export function wordCard(w, { db, status, onChange }) {
     card.classList.toggle('is-known', known);
     card.replaceChildren(...[
       h('header', {},
-        h('h2', {}, no(w.lemma)),
+        h('div', { class: 'lemmarow' }, h('h2', {}, no(w.lemma)), speakButton(w.lemma, { label: w.lemma })),
         h('span', { class: 'chip' }, w.pos),
         h('span', { class: 'lvl', title: lv.derived ? 'Estimated from word frequency' : 'Level' }, (lv.derived ? '≈' : '') + lv.level),
         h('span', { class: 'dots', role: 'img', 'aria-label': `Complexity ${cx} of 5` }, '●'.repeat(cx) + '○'.repeat(5 - cx)),
@@ -53,16 +58,16 @@ export function wordCard(w, { db, status, onChange }) {
         missed ? h('span', { class: 'badge' }, `Missed ${missed}×`) : null),
       h('div', { class: 'wbody' },
         h('p', { class: 'trans wtrans' }, h('strong', {}, w.gloss_en)),
-        h('button', { class: 'peek quiet', onclick: () => card.classList.add('rev') }, 'Show translation'),
+        h('button', { class: 'peek quiet', onclick: () => card.classList.add('rev') }, icon('👁️'), 'Show translation'),
         h('p', { class: 'def wdef' }, no(w.def_no))),
       open ? contextPanel(w) : null,
       h('div', { class: 'actions' },
         h('button', { class: known ? 'on known' : 'known', 'aria-pressed': String(known), onclick: run(() => (known ? unmarkKnown(db, status, w.id) : markKnown(db, status, w.id))) },
-          known ? '✓ I know this word' : 'I know this word'),
+          icon('✅'), known ? 'Known' : 'I know this word'),
         h('button', { class: inDeck ? 'on review' : 'review', disabled: inDeck, onclick: run(() => addToDeck(db, status, w.id)) },
-          inDeck ? '✓ In review deck' : 'Review it'),
+          icon(inDeck ? '📚' : '🔁'), inDeck ? 'In review deck' : 'Review it'),
         h('button', { class: 'context-btn', 'aria-expanded': String(open), onclick: () => { open = !open; draw(); } },
-          open ? 'Hide context' : 'Explain context')),
+          icon(open ? '🙈' : '💬'), open ? 'Hide context' : 'Explain context')),
       msg].filter(Boolean));
   };
   draw();

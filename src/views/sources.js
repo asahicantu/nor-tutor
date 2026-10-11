@@ -47,6 +47,12 @@ export async function render(root, { words, db }) {
   let group = 'all';
   let goodFor = false;
   let freeOnly = false;
+  // Each category is a collapsible section, closed by default. Searching or filtering opens the matches; the learner's own
+  // clicks (and Expand all / Collapse all) win until the next filter change.
+  const chosen = new Map();
+  const filtering = () => query.trim() !== '' || group !== 'all' || goodFor || freeOnly;
+  const isOpen = (g) => (chosen.has(g) ? chosen.get(g) : filtering());
+  const change = () => { chosen.clear(); draw(); };
 
   const card = (s) => {
     const good = matchesLevel(s, level);
@@ -69,15 +75,16 @@ export async function render(root, { words, db }) {
   const input = h('input', { type: 'search', placeholder: 'Search sites, e.g. grammar, podcast, corpus…', 'aria-label': 'Search sources' });
   const toggle = (label, onChange, disabled = false, hint = null) => {
     const box = h('input', { type: 'checkbox', disabled });
-    box.addEventListener('change', () => { onChange(box.checked); draw(); });
+    box.addEventListener('change', () => { onChange(box.checked); change(); });
     return h('label', { class: `switch${disabled ? ' disabled' : ''}`, title: hint }, box, h('span', { class: 'track', 'aria-hidden': 'true' }), label);
   };
   const goodSwitch = toggle(level ? `Good for my level (≈${level})` : 'Good for my level', (v) => { goodFor = v; }, !level, level ? null : 'Mark some words as known to see your estimated level');
   const freeSwitch = toggle('Free only', (v) => { freeOnly = v; });
   const chipDefs = [['all', '🌐 All', null], ...GROUPS.map((g) => [g, `${GROUP_META[g].emoji} ${g}`, g])];
-  const chips = chipDefs.map(([key, , g]) => h('button', { type: 'button', class: `chipbtn gchip${g ? ` ${gcls(g)}` : ''}`, 'aria-pressed': String(key === group), onclick: () => { group = key; draw(); } }));
+  const chips = chipDefs.map(([key, , g]) => h('button', { type: 'button', class: `chipbtn gchip${g ? ` ${gcls(g)}` : ''}`, 'aria-pressed': String(key === group), onclick: () => { group = key; change(); } }));
   const count = h('p', { class: 'muted', role: 'status' });
   const results = h('div', { class: 'src-results' });
+  const setAll = (open) => { groupSources(filterSources(list, { query, goodFor, level, freeOnly, group })).forEach(({ group: g }) => chosen.set(g, open)); draw(); };
 
   function draw() {
     const base = { query, goodFor, level, freeOnly };
@@ -90,14 +97,15 @@ export async function render(root, { words, db }) {
     count.textContent = `${shown.length} of ${list.length} sources`;
     results.replaceChildren(...(shown.length
       ? groupSources(shown).map(({ group: g, items }) =>
-        h('section', { class: `src-section ${gcls(g)}` },
-          h('div', { class: 'src-head' },
+        h('details', { class: `src-section ${gcls(g)}`, open: isOpen(g), ontoggle: (e) => chosen.set(g, e.currentTarget.open) },
+          h('summary', { class: 'src-head' },
             h('span', { class: 'gemoji', 'aria-hidden': 'true' }, GROUP_META[g].emoji),
-            h('div', {}, h('h2', {}, `${g} `, h('span', { class: 'muted src-n' }, `(${items.length})`)), h('p', { class: 'muted' }, GROUP_META[g].blurb))),
+            h('h2', { class: 'src-title' }, `${g} `, h('span', { class: 'muted src-n' }, `(${items.length})`)),
+            h('span', { class: 'muted src-blurb' }, GROUP_META[g].blurb)),
           h('ul', { class: 'plain src-grid' }, sort(items).map(card))))
       : [h('p', { class: 'empty' }, 'No sources match. Try another search or turn a filter off.')]));
   }
-  input.addEventListener('input', () => { query = input.value; draw(); });
+  input.addEventListener('input', () => { query = input.value; change(); });
 
   root.replaceChildren(
     h('h1', {}, emo('🌐 Sources')),
@@ -106,7 +114,10 @@ export async function render(root, { words, db }) {
     h('section', { class: 'card src-tools' },
       input,
       h('div', { class: 'chips', role: 'group', 'aria-label': 'Filter by category' }, chips),
-      h('div', { class: 'row between' }, h('div', { class: 'row' }, goodSwitch, freeSwitch), count)),
+      h('div', { class: 'row between' }, h('div', { class: 'row' }, goodSwitch, freeSwitch), count),
+      h('div', { class: 'row' },
+        h('button', { type: 'button', onclick: () => setAll(true) }, emo('⤵️ Expand all')),
+        h('button', { type: 'button', onclick: () => setAll(false) }, emo('⤴️ Collapse all')))),
     results,
     h('p', { class: 'muted src-legal' }, 'Logos are trademarks of their owners and are shown only to identify each site.'),
   );

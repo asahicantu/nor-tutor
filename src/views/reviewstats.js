@@ -2,6 +2,8 @@ import { h, no } from '../dom.js';
 import { LEVELS, levelOf } from '../levels.js';
 import { learnedNow, progressSeries, forgotten, breakdown, categoryOf, recommend } from '../progress.js';
 import { barChart, lineChart, token, accent } from '../charts.js';
+import { cloudItems } from '../strength.js';
+import { wordCloud } from './wordcloud.js';
 
 const n = (x) => x.toLocaleString('en');
 const LABELS = ['Learned', 'Learning', 'Not started'];
@@ -113,5 +115,11 @@ export function renderReviewStats(input) {
   if (!anyLapse && reviews.length) forg.insertBefore(h('p', { class: 'muted', role: 'status' }, 'No lapses in the last 8 weeks.'), forg.querySelector('.wtiles').nextSibling);
   if (topList) forg.append(topList);
 
-  return h('div', { class: 'rstats' }, recCard, byCat, byLevel, over, forg);
+  // (f) word strength cloud: size = how often a word was studied or reappeared, colour = how strong your knowledge is
+  const cloud = h('div', { class: 'card' },
+    h('h2', {}, '☁️ Word strength cloud'),
+    h('p', { class: 'muted' }, 'Bigger words are the ones you studied or met most often (reviews plus times a word reappeared as unknown). The colour shows how strong your knowledge of each word is.'),
+    wordCloud(cloudItems(words, { cards, reviews, known, unknown }), { empty: 'Review some cards or take the vocabulary test and your cloud grows here.' }));
+
+  return h('div', { class: 'rstats' }, recCard, byCat, byLevel, cloud, over, forg);
 }

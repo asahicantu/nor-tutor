@@ -1,17 +1,11 @@
 import { h, no, pref, setPref, onKeys, segmented } from '../dom.js';
 import { getAll, put } from '../db.js';
 import { shuffle } from '../rng.js';
+import { speak, speechSupported } from '../speech.js';
+import { isSlow } from './speakui.js';
 
 const COUNTS = [[5, '5'], [10, '10'], [20, '20'], [0, 'All']];
-const canSpeak = typeof speechSynthesis !== 'undefined';
-
-function speak(text) {
-  if (!canSpeak) return;
-  speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'nb-NO';
-  speechSynthesis.speak(u);
-}
+const canSpeak = speechSupported(); // the shared speech module picks a Norwegian voice and honours the slow-speech setting
 
 export async function render(root, { words, phrases, db }) {
   const stats = new Map((await getAll(db, 'phrases')).map((r) => [r.phraseId, r]));
@@ -47,7 +41,7 @@ export async function render(root, { words, phrases, db }) {
     return h('div', {}, h('p', { class: cls, lang: 'nb' }, tokens), lookup);
   }
 
-  const listenBtn = (p) => (canSpeak ? h('button', { class: 'quiet', onclick: () => speak(p.no), 'aria-label': 'Listen to the sentence' }, '🔊 Listen') : null);
+  const listenBtn = (p) => (canSpeak ? h('button', { class: 'quiet', onclick: () => speak(p.no, { slow: isSlow() }), 'aria-label': 'Listen to the sentence' }, '🔊 Listen') : null);
   const record = async (p, got) => {
     const prev = stats.get(p.id);
     const row = { phraseId: p.id, seen: (prev?.seen ?? 0) + 1, got: (prev?.got ?? 0) + (got ? 1 : 0), lastAt: Date.now() };
