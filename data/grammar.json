@@ -1,0 +1,659 @@
+[
+  {
+    "id": "alphabet-pronunciation",
+    "title": "Alphabet and pronunciation",
+    "summary": "Norwegian has 29 letters and a fairly regular spelling, but a few sounds (æ, ø, å, kj, sj) and silent letters trip up English speakers.",
+    "blocks": [
+      {"type": "p", "text": "The alphabet is the English one plus **æ, ø, å** at the end (a-z, æ, ø, å). C, q, w, x and z only appear in loanwords. Stress usually falls on the first syllable, and Norwegian has two word tones (pitch accents) that distinguish a few word pairs."},
+      {"type": "table", "caption": "Tricky letters and letter combinations", "head": ["Spelling", "Sound (approximate)", "Example"], "rows": [
+        ["æ", "like a in 'cat' (short) or a stretched 'bad' (long)", "bær (berry), nær (near)"],
+        ["ø", "like 'u' in British 'fur'; say 'e' with rounded lips", "øl (beer), møte (meeting)"],
+        ["å", "like 'aw' in 'law' (long), like 'o' in 'not' (short)", "går (goes), håp (hope)"],
+        ["y", "like German ü or French u; say 'ee' with rounded lips", "by (city), ny (new)"],
+        ["u", "a rounded vowel between English 'oo' and y", "hus (house), full (full)"],
+        ["kj, tj", "like 'h' in 'huge' (a soft ch as in German ich)", "kjøre (drive), tjue (twenty)"],
+        ["sj, skj, sk before i/y/øy", "like English 'sh'", "sjø (sea), skje (spoon), ski (ski)"],
+        ["gj, hj, lj", "like English 'y' in 'yes' (the first letter is silent)", "gjerne (gladly), hjem (home)"],
+        ["g before i, y, ei, øy", "like 'y' in 'yes'", "gi (give), geit (goat)"],
+        ["hv-", "the h is silent", "hva (what) sounds like 'va'"],
+        ["-ig (word-final)", "the g is silent", "riktig sounds like 'rik-ti'"],
+        ["rs (East Norwegian)", "like 'sh'", "norsk, første"],
+        ["silent d / t", "d after a vowel or l/n at word end, t in 'det'", "god, land, kald, det ('de')"]
+      ]},
+      {"type": "list", "items": [
+        "**Tone**: accent 1 (a simple fall) vs accent 2 (a fall-rise) separates words like bønder (farmers, accent 1) and bønner (beans or prayers, accent 2). You can be understood without it; learn it gradually by listening.",
+        "**Double consonants** mean the vowel before is short: tak (roof) vs takk (thanks); hel vs hell.",
+        "**Pronunciation varies** a lot by dialect (the r can be rolled or uvular); follow the Oslo (East Norwegian) standard when in doubt."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Jeg kjøper en kjole i Kjeller.", "en": "I am buying a dress in Kjeller."},
+        {"no": "Hva sa hun om sjokoladen?", "en": "What did she say about the chocolate? (practice: hv-, sj)"},
+        {"no": "Gjør du hjemmeleksene dine?", "en": "Are you doing your homework?"},
+        {"no": "Det er en pen jente på bildet.", "en": "There is a pretty girl in the picture."}
+      ]},
+      {"type": "tip", "text": "Don't read **å** as English 'a' or **ø** as 'o'. Mixing up the three extra vowels is the most common spelling mistake: bær (berry), bør (should), bor (lives) and bar are all different words."}
+    ]
+  },
+  {
+    "id": "nouns-gender-plural",
+    "title": "Nouns: gender and plural",
+    "summary": "Every noun is masculine (en), feminine (ei) or neuter (et), and the gender decides articles, adjective endings and the plural.",
+    "blocks": [
+      {"type": "p", "text": "Bokmål has three genders, but feminine nouns can also be treated as masculine, so many speakers only use **en** and **et**. Learn each noun with its article: en bil, ei jente, et hus. Neuter nouns are the group that behaves differently in the plural."},
+      {"type": "table", "caption": "Gender with indefinite, definite and plural forms", "head": ["Indefinite", "Definite", "Plural", "Definite plural", "Pattern"], "rows": [
+        ["en bil (car)", "bilen", "biler", "bilene", "en: add -er"],
+        ["en gutt (boy)", "gutten", "gutter", "guttene", "en: add -er (double consonant stays)"],
+        ["ei jente (girl)", "jenta / jenten", "jenter", "jentene", "ei: add -er"],
+        ["ei uke (week)", "uka / uken", "uker", "ukene", "word in -e: add -r"],
+        ["et hus (house)", "huset", "hus", "husene", "et: no ending in plural"],
+        ["et barn (child)", "barnet", "barn", "barna / barnene", "et: no ending in plural"],
+        ["et eple (apple)", "eplet", "epler", "eplene", "word in -e: add -r"],
+        ["en lærer (teacher)", "læreren", "lærere", "lærerne", "words in -er: add -e"],
+        ["en sykkel (bicycle)", "sykkelen", "sykler", "syklene", "-el/-en/-er: drop e, add -er"],
+        ["en sofa (sofa)", "sofaen", "sofaer", "sofaene", "stressed vowel ending: add -er"],
+        ["ei bok (book)", "boka / boken", "bøker", "bøkene", "irregular (umlaut)"],
+        ["en mann (man)", "mannen", "menn", "mennene", "irregular (vowel change)"],
+        ["en fot (foot)", "foten", "føtter", "føttene", "irregular"],
+        ["en bror / ei søster", "broren / søstera", "brødre / søstre", "brødrene / søstrene", "irregular"],
+        ["en hånd (hand)", "hånda / hånden", "hender", "hendene", "irregular"]
+      ]},
+      {"type": "list", "items": [
+        "**en**: nouns in -ing, -else, -dom, -sjon and agents in -er (en lærer).",
+        "**et**: nouns in -skap, -ment, -(i)um (et vennskap, et dokument, et museum) and most nouns for small or abstract things.",
+        "**ei/en**: nouns in -het (ei/en frihet); a few common ones are almost always feminine: ei bok, ei jente, ei klokke.",
+        "Foreign nouns often take -er: en student, studenter; en bank, banker. Some are the same in plural: et tema, temaer."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Jeg har to søsken og tre katter.", "en": "I have two siblings and three cats."},
+        {"no": "Barna leker i hagen.", "en": "The children are playing in the garden."},
+        {"no": "Vi kjøpte fem bøker og et eple.", "en": "We bought five books and an apple."},
+        {"no": "Hendene mine er kalde.", "en": "My hands are cold."}
+      ]},
+      {"type": "tip", "text": "Neuter plurals look the same as the singular: et hus, to **hus** (not to huser). When learning, always memorise en/ei/et together with the noun."}
+    ]
+  },
+  {
+    "id": "articles-definiteness",
+    "title": "Articles and double definiteness",
+    "summary": "The definite article is a suffix on the noun (bilen, huset), and it is repeated with adjectives and demonstratives.",
+    "blocks": [
+      {"type": "p", "text": "The indefinite article (a/an) is a separate word before the noun: **en, ei, et**. The definite article (the) is attached to the end of the noun. When an adjective or demonstrative comes before the noun, you also add a separate word (den/det/de), which is called **double definiteness**."},
+      {"type": "table", "caption": "Indefinite, definite and double definite forms", "head": ["Gender", "Indefinite", "Definite", "With adjective (definite)", "Plural definite with adjective"], "rows": [
+        ["masculine", "en stor bil", "bilen", "den store bilen", "de store bilene"],
+        ["feminine", "ei stor jente", "jenta / jenten", "den store jenta", "de store jentene"],
+        ["neuter", "et stort hus", "huset", "det store huset", "de store husene"],
+        ["masculine + this", "denne bilen", "-", "denne store bilen", "disse store bilene"],
+        ["neuter + this", "dette huset", "-", "dette store huset", "disse store husene"]
+      ]},
+      {"type": "list", "items": [
+        "Nouns ending in -e only add -n (en) or -t (et): gutten, eplet; feminine nouns often take -a (jenta, boka).",
+        "**Demonstratives**: denne/dette/disse (this, these); den/det/de (that, those, with stress); the noun is always in the definite form after them.",
+        "**No article** for professions and nationalities (Jeg er lærer), for languages (Jeg snakker norsk), and for general mass nouns (Jeg liker kaffe).",
+        "**Possessives**: either before the noun with an indefinite noun (min bil) or after the noun with a definite noun (bilen min). The second is more common."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Den røde bilen er min.", "en": "The red car is mine."},
+        {"no": "Jeg liker det gamle huset.", "en": "I like the old house."},
+        {"no": "Er du student eller lærer?", "en": "Are you a student or a teacher?"},
+        {"no": "Denne boka er veldig god.", "en": "This book is very good."}
+      ]},
+      {"type": "tip", "text": "Don't say 'store bilen'. With an adjective you need **den** + adjective + noun-with-suffix: **den store bilen**. Exceptions: with a possessive you only use the adjective: min store bil / den store bilen min."}
+    ]
+  },
+  {
+    "id": "pronouns",
+    "title": "Pronouns: personal, possessive and reflexive",
+    "summary": "Norwegian pronouns change by case and possessives agree with the noun; reflexive sin/si/sitt/sine refers back to the subject.",
+    "blocks": [
+      {"type": "table", "caption": "Personal and reflexive pronouns", "head": ["Subject", "Object", "Reflexive", "English"], "rows": [
+        ["jeg", "meg", "meg", "I / me / myself"],
+        ["du", "deg", "deg", "you / yourself"],
+        ["han", "ham / han", "seg", "he / him / himself"],
+        ["hun", "henne", "seg", "she / her / herself"],
+        ["den / det", "den / det", "seg", "it / itself"],
+        ["vi", "oss", "oss", "we / us / ourselves"],
+        ["dere", "dere", "dere", "you (plural)"],
+        ["de", "dem", "seg", "they / them / themselves"]
+      ]},
+      {"type": "table", "caption": "Possessives (placed after a definite noun: bilen min)", "head": ["Owner", "en-noun", "ei-noun", "et-noun", "plural"], "rows": [
+        ["my", "min", "mi", "mitt", "mine"],
+        ["your (sg)", "din", "di", "ditt", "dine"],
+        ["his / her / its (not subject)", "hans / hennes / dens-dets", "hans / hennes", "hans / hennes", "hans / hennes"],
+        ["our", "vår", "vår", "vårt", "våre"],
+        ["your (pl)", "deres", "deres", "deres", "deres"],
+        ["their", "deres", "deres", "deres", "deres"],
+        ["his/her/its/their OWN (reflexive)", "sin", "si", "sitt", "sine"]
+      ]},
+      {"type": "p", "text": "Use **sin/si/sitt/sine** only when the owner is the **subject of the same clause** and is third person. Use **hans/hennes/deres** when the owner is someone else. Only the reflexive agrees with the thing owned; hans, hennes and deres never change."},
+      {"type": "table", "caption": "Reflexive vs non-reflexive possessive", "head": ["Sentence", "Whose is it?", "English"], "rows": [
+        ["Han tok bilen sin.", "his own car", "He took his (own) car."],
+        ["Han tok bilen hans.", "someone else's car", "He took his (another man's) car."],
+        ["Hun elsker mannen sin.", "her own husband", "She loves her husband."],
+        ["Hun elsker mannen hennes.", "another woman's husband", "She loves her (someone else's) husband."],
+        ["De selger husene sine.", "their own houses", "They are selling their (own) houses."],
+        ["Jeg vasker hendene mine.", "1st/2nd person uses min/din", "I wash my hands."]
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Hun ser på seg selv i speilet.", "en": "She looks at herself in the mirror."},
+        {"no": "Jeg ringte ham, men han svarte ikke.", "en": "I called him, but he didn't answer."},
+        {"no": "Vi gleder oss til ferien vår.", "en": "We are looking forward to our holiday."},
+        {"no": "Per og kona hans bor i Bergen.", "en": "Per and his wife live in Bergen."}
+      ]},
+      {"type": "tip", "text": "Sin/si/sitt/sine is never used for the subject itself and never for 1st/2nd person (you say min, din). 'Han og hans bror' is fine, but 'Han elsker hans bil' is wrong if the car is his own: say **sin bil**."}
+    ]
+  },
+  {
+    "id": "adjectives",
+    "title": "Adjectives: agreement and comparison",
+    "summary": "Adjectives change form for neuter and plural/definite nouns, and form comparatives and superlatives with -ere/-est or mer/mest.",
+    "blocks": [
+      {"type": "table", "caption": "Agreement patterns", "head": ["en / ei", "et", "plural and definite", "English"], "rows": [
+        ["stor", "stort", "store", "big"],
+        ["fin", "fint", "fine", "nice"],
+        ["ny", "nytt", "nye", "new"],
+        ["blå", "blått", "blå", "blue (no change in plural)"],
+        ["gammel", "gammelt", "gamle", "old (-el drops e)"],
+        ["åpen", "åpent", "åpne", "open (-en drops e)"],
+        ["vakker", "vakkert", "vakre", "beautiful (-er drops e)"],
+        ["norsk", "norsk", "norske", "Norwegian (-sk: no -t)"],
+        ["viktig", "viktig", "viktige", "important (-ig: no -t)"],
+        ["liten", "lite", "små", "small (irregular; the one: den lille)"]
+      ]},
+      {"type": "p", "text": "In a predicate the adjective agrees with the subject: Bilen er stor, Huset er stort, Husene er store. Before a noun it agrees with the noun and, with definite nouns, takes **-e** in all cases: den store bilen, det store huset."},
+      {"type": "table", "caption": "Comparison", "head": ["Positive", "Comparative", "Superlative", "English"], "rows": [
+        ["rask", "raskere", "raskest", "fast / quick"],
+        ["fin", "finere", "finest", "nice"],
+        ["interessant", "mer interessant", "mest interessant", "interesting (long adjectives and -sk, -ende)"],
+        ["god", "bedre", "best", "good (irregular)"],
+        ["dårlig", "verre", "verst", "bad"],
+        ["stor", "større", "størst", "big"],
+        ["lang", "lengre", "lengst", "long"],
+        ["gammel", "eldre", "eldst", "old"],
+        ["ung", "yngre", "yngst", "young"],
+        ["mange", "flere", "flest", "many"],
+        ["mye", "mer", "mest", "much"],
+        ["lite", "mindre", "minst", "little"],
+        ["få", "færre", "færrest", "few"]
+      ]},
+      {"type": "list", "items": [
+        "Comparison with **enn**: Hun er eldre enn meg. Equality with **like ... som**: Han er like høy som henne.",
+        "Superlatives take the definite form when used before a noun: den største byen, det beste huset.",
+        "The comparative never changes for gender or number: en større bil, et større hus, større biler."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Det er et stort og gammelt hus.", "en": "It is a big, old house."},
+        {"no": "Dette er den beste kaffen i byen.", "en": "This is the best coffee in town."},
+        {"no": "Bergen er mindre enn Oslo, men vakrere.", "en": "Bergen is smaller than Oslo, but more beautiful."},
+        {"no": "Jeg har flere venner enn før.", "en": "I have more friends than before."}
+      ]},
+      {"type": "tip", "text": "Remember **flere** (more of something countable), **mer** (more of something uncountable) and **mange** vs **mye**: mange venner, mye penger. 'Mer' also forms comparatives of longer adjectives."}
+    ]
+  },
+  {
+    "id": "verbs",
+    "title": "Verbs: present, past, perfect and infinitive",
+    "summary": "Norwegian verbs do not change with the subject; you only need the infinitive, present, past and perfect participle forms.",
+    "blocks": [
+      {"type": "p", "text": "The infinitive ends in a vowel (usually -e) and is preceded by **å**: å spise. The present adds **-r** (spiser), the past has an ending (-et, -te, -de, -dde) or a vowel change for strong verbs, and the perfect is **har** + the perfect participle (supine). The imperative is the bare stem: Spis! Kom!"},
+      {"type": "table", "caption": "Regular (weak) verbs by class", "head": ["Class", "Infinitive", "Present", "Past", "Perfect", "English"], "rows": [
+        ["1 (-et)", "å kaste", "kaster", "kastet", "har kastet", "throw"],
+        ["1 (-et)", "å snakke", "snakker", "snakket", "har snakket", "speak"],
+        ["2 (-te)", "å kjøpe", "kjøper", "kjøpte", "har kjøpt", "buy"],
+        ["2 (-te)", "å spise", "spiser", "spiste", "har spist", "eat"],
+        ["3 (-de)", "å leve", "lever", "levde", "har levd", "live"],
+        ["4 (-dde)", "å bo", "bor", "bodde", "har bodd", "live (reside)"],
+        ["4 (-dde)", "å tro", "tror", "trodde", "har trodd", "believe"]
+      ]},
+      {"type": "table", "caption": "Common irregular verbs", "head": ["Infinitive", "Present", "Past", "Perfect", "English"], "rows": [
+        ["å være", "er", "var", "har vært", "be"],
+        ["å ha", "har", "hadde", "har hatt", "have"],
+        ["å gjøre", "gjør", "gjorde", "har gjort", "do, make"],
+        ["å gå", "går", "gikk", "har gått", "go, walk"],
+        ["å komme", "kommer", "kom", "har kommet", "come"],
+        ["å se", "ser", "så", "har sett", "see"],
+        ["å ta", "tar", "tok", "har tatt", "take"],
+        ["å gi", "gir", "ga", "har gitt", "give"],
+        ["å få", "får", "fikk", "har fått", "get"],
+        ["å bli", "blir", "ble", "har blitt", "become, stay"],
+        ["å si", "sier", "sa", "har sagt", "say"],
+        ["å skrive", "skriver", "skrev", "har skrevet", "write"],
+        ["å drikke", "drikker", "drakk", "har drukket", "drink"],
+        ["å finne", "finner", "fant", "har funnet", "find"],
+        ["å stå", "står", "sto", "har stått", "stand"],
+        ["å sitte", "sitter", "satt", "har sittet", "sit"],
+        ["å ligge", "ligger", "lå", "har ligget", "lie (be located)"],
+        ["å vite", "vet", "visste", "har visst", "know (a fact)"],
+        ["å dra", "drar", "dro", "har dratt", "go, leave, pull"]
+      ]},
+      {"type": "list", "items": [
+        "Use the **past (preteritum)** for a finished time: Jeg var i Oslo i fjor.",
+        "Use the **perfect** for experience or relevance now: Jeg har vært i Oslo (at some point), Jeg har bodd her i to år (and still do).",
+        "Norwegian always uses **har** with the perfect, even for movement verbs: Jeg har gått hjem, not 'er gått'.",
+        "Future: Jeg skal reise i morgen (plan), Det kommer til å regne (prediction). Present tense also works for the future: Vi reiser i morgen.",
+        "No continuous tense: Jeg spiser = I eat / I am eating. Use **sitter og leser**, **holder på å** for ongoing actions."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Jeg bor i Oslo, men jeg vokste opp i Bergen.", "en": "I live in Oslo, but I grew up in Bergen."},
+        {"no": "Har du spist middag ennå?", "en": "Have you eaten dinner yet?"},
+        {"no": "I går kjøpte vi en ny bil.", "en": "Yesterday we bought a new car."},
+        {"no": "Hun har skrevet tre bøker.", "en": "She has written three books."},
+        {"no": "Vi holder på å lage mat.", "en": "We are in the middle of cooking."}
+      ]},
+      {"type": "tip", "text": "The verb never changes with the subject: jeg er, du er, de er. Don't confuse **bli** (become, stay: Jeg blir hjemme) with **være** (be)."}
+    ]
+  },
+  {
+    "id": "modal-verbs",
+    "title": "Modal verbs",
+    "summary": "Modals (kan, må, vil, skal, bør, får, tør) are followed by a bare infinitive without å and have a special present form.",
+    "blocks": [
+      {"type": "p", "text": "Modal verbs express ability, obligation, wish, plan or permission. The main verb that follows is in the **infinitive without å**, and the modal takes the second position in main clauses."},
+      {"type": "table", "caption": "Modal verbs", "head": ["Infinitive", "Present", "Past", "Perfect", "Meaning"], "rows": [
+        ["å kunne", "kan", "kunne", "har kunnet", "can, be able to, know how to"],
+        ["å måtte", "må", "måtte", "har måttet", "must, have to"],
+        ["å ville", "vil", "ville", "har villet", "want to (will, intend)"],
+        ["å skulle", "skal", "skulle", "har skullet", "shall, be going to, be supposed to"],
+        ["å burde", "bør", "burde", "har burdet", "should, ought to"],
+        ["å få", "får", "fikk", "har fått", "may, be allowed to"],
+        ["å tørre", "tør", "turte / torde", "har turt / tort", "dare"]
+      ]},
+      {"type": "table", "caption": "Meanings and usage hints", "head": ["Modal", "Typical use", "Example"], "rows": [
+        ["kan", "ability, possibility, skill", "Jeg kan snakke norsk."],
+        ["må", "necessity, obligation", "Du må komme nå."],
+        ["må ikke", "prohibition (must not)", "Du må ikke røyke her."],
+        ["trenger ikke å / behøver ikke å", "no need (don't have to)", "Du trenger ikke å komme."],
+        ["vil", "want, wish, will", "Jeg vil ha kaffe."],
+        ["skal", "plan, promise, instruction", "Jeg skal reise i morgen."],
+        ["bør", "advice (should)", "Du bør hvile."],
+        ["får", "permission", "Du får gå nå."],
+        ["tør", "dare (mostly in negatives)", "Jeg tør ikke å si det."]
+      ]},
+      {"type": "list", "items": [
+        "Same form in the present for all persons: jeg kan, du kan, de kan.",
+        "**Ikke** goes after the modal: Jeg kan ikke komme. Two verbs: Jeg har ikke villet gå.",
+        "Perfect with a modal: Jeg har villet gjøre det, Jeg har måttet jobbe. Motion verbs can be dropped: Jeg må hjem (må + dra).",
+        "**Kommer til å** + infinitive predicts the future: Det kommer til å regne."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Kan du hjelpe meg?", "en": "Can you help me?"},
+        {"no": "Jeg må jobbe i morgen.", "en": "I have to work tomorrow."},
+        {"no": "Vi skal på kino i kveld.", "en": "We are going to the cinema tonight."},
+        {"no": "Du bør ikke spise så mye sukker.", "en": "You shouldn't eat so much sugar."},
+        {"no": "Jeg vil gjerne ha en kopp te.", "en": "I would like a cup of tea."}
+      ]},
+      {"type": "tip", "text": "Don't use **å** after a modal: Jeg kan **å** snakke is wrong. And **må ikke** means 'must not', not 'don't have to' (that is trenger ikke)."}
+    ]
+  },
+  {
+    "id": "word-order-v2",
+    "title": "Word order: the V2 rule",
+    "summary": "In a main clause the finite verb is always in second position, so the subject goes after the verb when something else comes first.",
+    "blocks": [
+      {"type": "p", "text": "Main clauses follow the **V2 rule**: whatever stands first (subject, time, place, object, a subordinate clause), the conjugated verb comes second. When the first element is not the subject, the subject moves behind the verb. This is called **inversion**."},
+      {"type": "table", "caption": "V2 and inversion", "head": ["1st position", "Verb", "Subject", "Rest", "English"], "rows": [
+        ["Jeg", "spiser", "-", "frokost klokka åtte.", "I eat breakfast at eight."],
+        ["Klokka åtte", "spiser", "jeg", "frokost.", "At eight I eat breakfast."],
+        ["I morgen", "reiser", "vi", "til Bergen.", "Tomorrow we travel to Bergen."],
+        ["Kaffe", "drikker", "jeg", "aldri.", "Coffee I never drink."],
+        ["Fordi det regnet,", "ble", "vi", "hjemme.", "Because it rained, we stayed home."],
+        ["Jeg", "har", "-", "spist middag.", "I have eaten dinner (verb pair split)."],
+        ["Nå", "kan", "jeg", "gå hjem.", "Now I can go home."]
+      ]},
+      {"type": "list", "items": [
+        "With **two verbs** (modal, har + participle): the finite verb stays in position 2 and the other verb goes to the end: Vi har spist. I går **har** vi spist ute.",
+        "**Place before time** is the default when both appear after the verb: Jeg reiser til Oslo i morgen.",
+        "**Coordinating conjunctions** (og, men, eller, for, så) don't affect the order: Jeg er trøtt, så jeg går hjem. (As an adverb 'så' = then triggers inversion: Så gikk jeg hjem.)",
+        "**Yes/no questions** and **imperatives** start with the verb: Snakker du norsk? Kom hit!",
+        "Direct and indirect objects: Jeg ga henne boka. (pronoun objects can come before ikke: Jeg så ham ikke.)"
+      ]},
+      {"type": "examples", "items": [
+        {"no": "I dag har jeg vært på jobb.", "en": "Today I have been at work."},
+        {"no": "Etter filmen gikk vi hjem.", "en": "After the film we went home."},
+        {"no": "Hjemme snakker vi norsk.", "en": "At home we speak Norwegian."},
+        {"no": "Plutselig kom det en bil.", "en": "Suddenly a car came."}
+      ]},
+      {"type": "tip", "text": "A very common error for English speakers: 'I morgen jeg reiser'. After any fronted element, the verb comes before the subject: **I morgen reiser jeg**."}
+    ]
+  },
+  {
+    "id": "negation-adverbs",
+    "title": "Negation and adverb placement",
+    "summary": "Ikke and sentence adverbs come after the verb in main clauses but before the verb in subordinate clauses.",
+    "blocks": [
+      {"type": "p", "text": "The Norwegian word for 'not' is **ikke** ('inte' is Swedish). Sentence adverbs such as aldri, alltid, ofte, også, bare, nok, jo, vel and sikkert follow the same placement rule as ikke."},
+      {"type": "table", "caption": "Where ikke and adverbs go", "head": ["Clause type", "Position", "Example"], "rows": [
+        ["main clause, simple verb", "after the finite verb (and subject)", "Jeg liker ikke kaffe."],
+        ["main clause, inversion", "after the subject", "I dag kommer han ikke."],
+        ["main clause, two verbs", "after the finite verb/subject, before the second verb", "Jeg har ikke spist."],
+        ["subordinate clause", "BEFORE the finite verb", "Jeg vet at han ikke kommer."],
+        ["subordinate clause, adverb", "before the finite verb", "Jeg tror at hun alltid drikker te."],
+        ["main clause, adverb", "after the finite verb/subject", "Hun drikker alltid te."],
+        ["pronoun object (main clause)", "pronoun may stand before ikke", "Jeg kjenner ham ikke."]
+      ]},
+      {"type": "table", "caption": "Other negatives", "head": ["Word", "Meaning", "Example"], "rows": [
+        ["aldri", "never", "Jeg har aldri vært i Tromsø."],
+        ["ingen", "no, nobody (not any)", "Jeg har ingen bil."],
+        ["ingenting", "nothing", "Jeg gjør ingenting."],
+        ["ikke noe / ikke noen", "not any (same as ingen)", "Jeg har ikke noen bil."],
+        ["ikke lenger", "no longer", "Hun bor ikke her lenger."],
+        ["verken ... eller", "neither ... nor", "Verken du eller jeg vet svaret."],
+        ["heller ikke", "neither / not either", "Jeg liker det heller ikke."]
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Jeg snakker ikke fransk.", "en": "I don't speak French."},
+        {"no": "Han sa at han ikke hadde tid.", "en": "He said that he had no time."},
+        {"no": "Hvis du ikke kommer, blir jeg skuffet.", "en": "If you don't come, I will be disappointed."},
+        {"no": "Du kan ikke bare gå.", "en": "You can't just leave."}
+      ]},
+      {"type": "tip", "text": "Use **ikke**, not 'inte'. And no do-support: 'Jeg liker ikke' (not 'jeg gjør ikke like'). In a subordinate clause the adverb jumps in front of the verb: ... fordi jeg **ikke** har tid."}
+    ]
+  },
+  {
+    "id": "questions",
+    "title": "Questions and question words",
+    "summary": "Yes/no questions start with the verb; wh-questions start with a question word followed by the verb and then the subject.",
+    "blocks": [
+      {"type": "table", "caption": "Question words", "head": ["Question word", "Meaning", "Example"], "rows": [
+        ["hva", "what", "Hva heter du?"],
+        ["hvem", "who", "Hvem er det?"],
+        ["hvor", "where", "Hvor bor du?"],
+        ["hvorfor", "why", "Hvorfor gråter du?"],
+        ["når", "when", "Når kommer toget?"],
+        ["hvordan", "how", "Hvordan går det?"],
+        ["hvilken / hvilket / hvilke", "which (en / et / plural)", "Hvilken bil er din?"],
+        ["hvor mye / hvor mange", "how much / how many", "Hvor mange barn har du?"],
+        ["hvor lenge / hvor ofte", "how long / how often", "Hvor lenge har du bodd her?"],
+        ["hvem sin / hvis", "whose", "Hvem sin bok er dette?"],
+        ["hva slags", "what kind of", "Hva slags mat liker du?"]
+      ]},
+      {"type": "list", "items": [
+        "**Yes/no**: verb + subject: Snakker du norsk? Har du tid? Kan du hjelpe meg?",
+        "**Wh-question**: question word + verb + subject: Hva gjør du? When the question word is the subject, there is no extra subject: Hvem bor her?",
+        "**Prepositions** go at the end in spoken Norwegian: Hva venter du på? Hvem snakker du med?",
+        "**Answering negatives**: use **jo** for 'yes' to a negative question: Snakker du ikke norsk? — Jo, det gjør jeg. Use **nei** to confirm the negative.",
+        "**Tags**: add ikke sant? Du kommer i morgen, ikke sant?",
+        "**Indirect questions** use subordinate order: Jeg lurer på hvor han bor. Jeg vet ikke hva hun ikke liker."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Hva gjør du i helgen?", "en": "What are you doing this weekend?"},
+        {"no": "Hvorfor kom du ikke i går?", "en": "Why didn't you come yesterday?"},
+        {"no": "Hvilket hus bor du i?", "en": "Which house do you live in?"},
+        {"no": "Vet du hvor stasjonen er?", "en": "Do you know where the station is?"}
+      ]},
+      {"type": "tip", "text": "No 'do' in questions. Say **Snakker du norsk?**, not 'Gjør du snakke norsk?'. And **hva** is 'what', while **hvilken** means 'which' and agrees with the noun."}
+    ]
+  },
+  {
+    "id": "subordinate-clauses",
+    "title": "Subordinate clauses and conjunctions",
+    "summary": "Subordinators such as at, som, fordi, hvis, når and selv om introduce a clause in which adverbs go before the verb.",
+    "blocks": [
+      {"type": "table", "caption": "Common subordinating conjunctions", "head": ["Conjunction", "Meaning", "Example"], "rows": [
+        ["at", "that", "Jeg vet at han kommer."],
+        ["som", "who, which, that (relative)", "Mannen som bor her, er lærer."],
+        ["fordi", "because", "Jeg er hjemme fordi jeg er syk."],
+        ["siden", "since, because", "Siden det regner, blir vi inne."],
+        ["hvis", "if (condition)", "Hvis du vil, kan du komme."],
+        ["om", "whether, if (indirect question)", "Jeg lurer på om han kommer."],
+        ["når", "when (present, future, repeated past)", "Når jeg kommer hjem, spiser jeg."],
+        ["da", "when (a single past event)", "Da jeg var liten, bodde vi i Bergen."],
+        ["mens", "while", "Jeg leste mens hun lagde mat."],
+        ["før", "before", "Ring før du kommer."],
+        ["etter at", "after", "Etter at vi spiste, gikk vi tur."],
+        ["selv om", "even though, although", "Jeg går ut selv om det regner."],
+        ["slik at / så at", "so that", "Jeg snakker saktere slik at du forstår."],
+        ["til / helt til", "until", "Vent til jeg kommer."],
+        ["enn", "than", "Hun er eldre enn han er."]
+      ]},
+      {"type": "list", "items": [
+        "**Word order** inside the clause: conjunction + subject + adverb/ikke + verb: ... fordi jeg ikke har tid.",
+        "If the subordinate clause comes **first**, the main clause is inverted (V2): Fordi jeg er syk, er jeg hjemme.",
+        "**at** can be dropped after tro, tenke, synes, si, mene; if so, use main-clause order: Jeg tror han ikke kommer.",
+        "**som** is needed as a subject relative ('Jeg ser mannen som bor her'); it is often dropped as an object: Boka (som) jeg leste, var god.",
+        "**Hvis** for conditions, **om** for indirect yes/no questions: Hvis det regner ... / Jeg vet ikke om det regner."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Jeg vet ikke om hun kommer, fordi hun ikke har svart.", "en": "I don't know whether she is coming, because she hasn't answered."},
+        {"no": "Selv om jeg er trøtt, må jeg jobbe.", "en": "Even though I am tired, I have to work."},
+        {"no": "Når han kommer, spiser vi.", "en": "When he comes, we will eat."},
+        {"no": "Jeg liker bøker som er korte.", "en": "I like books that are short."}
+      ]},
+      {"type": "tip", "text": "Don't mix up **når** (future or habit) and **da** (single past event): 'Da jeg kom hjem, var det mørkt.' 'Når jeg kommer hjem, ringer jeg.' Also avoid inverting inside the clause: 'at han kommer ikke' is wrong; say **at han ikke kommer**."}
+    ]
+  },
+  {
+    "id": "prepositions",
+    "title": "Prepositions of place and time",
+    "summary": "Choosing between på, i, til, fra, med, av and om is mostly idiomatic, so learn them with set phrases.",
+    "blocks": [
+      {"type": "table", "caption": "Core prepositions", "head": ["Preposition", "Place use", "Time or other use", "Example"], "rows": [
+        ["i", "inside, in a country or city, a closed space", "months, years, durations: i juni, i år, i to timer", "Jeg bor i Oslo. Vi har ventet i en time."],
+        ["på", "on a surface; open places, islands, events, public transport", "weekdays: på mandag; languages: på norsk", "Boka ligger på bordet. Jeg er på jobb. Vi tok bussen på mandag."],
+        ["til", "direction (to), destination", "until: til fredag", "Jeg reiser til Bergen. Vi venter til fredag."],
+        ["fra", "from (origin)", "from (time): fra klokka åtte", "Hun er fra Norge. Jeg jobber fra åtte til fire."],
+        ["med", "with, by means of", "-", "Jeg reiser med tog. Jeg bor med kjæresten min."],
+        ["uten", "without", "-", "kaffe uten sukker"],
+        ["av", "of, made of, by (agent)", "-", "Boka er skrevet av henne. Bordet er laget av tre."],
+        ["om", "about (topic)", "in (future), in the morning/evening/summer: om morgenen, om to uker", "Vi snakket om været. Jeg kommer om en time."],
+        ["for", "for (benefit)", "ago: for to år siden", "Det er for deg. Jeg flyttet hit for to år siden."],
+        ["hos", "at someone's place", "-", "Jeg bor hos foreldrene mine."],
+        ["ved", "by, at, near", "-", "Vi satt ved bordet."],
+        ["over / under", "over, above / under, below", "-", "Lampen henger over bordet."],
+        ["mellom", "between", "-", "Banken ligger mellom skolen og kafeen."],
+        ["foran / bak / ved siden av", "in front of / behind / next to", "-", "Bilen står foran huset."]
+      ]},
+      {"type": "table", "caption": "Place: location vs direction", "head": ["Location (where?)", "Direction (where to?)", "English"], "rows": [
+        ["her", "hit", "here / to here"],
+        ["der", "dit", "there / to there"],
+        ["hjemme", "hjem", "at home / (to) home"],
+        ["ute", "ut", "outside / out"],
+        ["inne", "inn", "inside / in"],
+        ["oppe", "opp", "upstairs / up"],
+        ["nede", "ned", "downstairs / down"]
+      ]},
+      {"type": "list", "items": [
+        "**i** a country or city, **på** an island or at an institution/event: i Norge, på Island, på skolen, på kino, på jobb, på fest.",
+        "Public transport uses **på** (på bussen, på toget), and cars and taxis use **i**.",
+        "**Verb + preposition** combos to learn: vente på, tenke på, glede seg til, være redd for, snakke om, være gift med, være interessert i."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Jeg bor i Oslo, men jobber på sykehuset.", "en": "I live in Oslo, but I work at the hospital."},
+        {"no": "Vi drar til Spania i juli.", "en": "We are going to Spain in July."},
+        {"no": "Hun kommer fra Tyskland og snakker på norsk med meg.", "en": "She comes from Germany and speaks Norwegian with me."},
+        {"no": "Jeg ser deg om to dager.", "en": "I will see you in two days."}
+      ]},
+      {"type": "tip", "text": "Norwegian distinguishes location and direction: **Jeg er hjemme / Jeg går hjem**; **Han er ute / Han går ut**. Don't say 'Jeg går til hjem'."}
+    ]
+  },
+  {
+    "id": "passive-voice",
+    "title": "Passive voice",
+    "summary": "Norwegian forms the passive with an -s ending on the verb or with bli + the perfect participle.",
+    "blocks": [
+      {"type": "p", "text": "The passive moves the focus from the doer to the thing affected. Both forms are common. The **-s passive** is short and used for general statements, rules and the present tense. The **bli-passive** is used for specific events and often names the doer with **av**."},
+      {"type": "table", "caption": "The two passives", "head": ["Active", "-s passive", "bli passive"], "rows": [
+        ["Man snakker norsk her.", "Det snakkes norsk her.", "(not usual)"],
+        ["De bygger et nytt hus.", "Et nytt hus bygges.", "Et nytt hus blir bygget."],
+        ["Vi åpner døra klokka åtte.", "Døra åpnes klokka åtte.", "Døra blir åpnet klokka åtte."],
+        ["Politiet tok mannen.", "(not used)", "Mannen ble tatt av politiet."],
+        ["Han har skrevet boka.", "(not used)", "Boka har blitt skrevet av ham."],
+        ["Du kan kjøpe billetten her.", "Billetten kan kjøpes her.", "Billetten kan bli kjøpt her."],
+        ["Man må gjøre det nå.", "Det må gjøres nå.", "Det må bli gjort nå."]
+      ]},
+      {"type": "table", "caption": "How to form each", "head": ["Tense", "-s passive", "bli passive"], "rows": [
+        ["present", "-s on infinitive: åpnes, bygges", "blir + participle: blir åpnet"],
+        ["past", "(rare) -s form; mostly bli", "ble + participle: ble åpnet"],
+        ["perfect", "(not used)", "har blitt + participle: har blitt åpnet"],
+        ["infinitive / modal", "åpnes, bygges", "å bli åpnet, kan bli bygget"]
+      ]},
+      {"type": "list", "items": [
+        "Use **bli** when there is an agent or a one-time event: Huset ble solgt av naboen.",
+        "Use **-s** for rules, signs, instructions and generalisations: Her røykes det ikke. Brødet selges her.",
+        "Some verbs always end in -s (deponent): synes, trives, finnes, møtes, minnes. These are not passive: Jeg synes det er bra.",
+        "**Det** is often a dummy subject: Det spilles musikk."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Huset ble bygget i 1950.", "en": "The house was built in 1950."},
+        {"no": "Norsk snakkes av fem millioner mennesker.", "en": "Norwegian is spoken by five million people."},
+        {"no": "Brevet blir sendt i dag.", "en": "The letter will be sent today."},
+        {"no": "Vi trives godt her.", "en": "We like it here (deponent verb, not passive)."}
+      ]},
+      {"type": "tip", "text": "Don't use 'være' for the passive of events: 'Huset var bygget' describes a state (it was built/existed), while **Huset ble bygget** describes the action of building."}
+    ]
+  },
+  {
+    "id": "numbers-dates-time",
+    "title": "Numbers, dates and clock time",
+    "summary": "Learn the cardinals, ordinals, how to say dates and years, and the unusual 'halv' system for telling the time.",
+    "blocks": [
+      {"type": "table", "caption": "Cardinal numbers", "head": ["Nr", "Norwegian", "Nr", "Norwegian"], "rows": [
+        ["0", "null", "11", "elleve"],
+        ["1", "en / ei / ett", "12", "tolv"],
+        ["2", "to", "13", "tretten"],
+        ["3", "tre", "14", "fjorten"],
+        ["4", "fire", "15", "femten"],
+        ["5", "fem", "16", "seksten"],
+        ["6", "seks", "17", "sytten"],
+        ["7", "sju (syv)", "18", "atten"],
+        ["8", "åtte", "19", "nitten"],
+        ["9", "ni", "20", "tjue (tyve)"],
+        ["10", "ti", "30", "tretti (tredve)"],
+        ["40", "førti", "50", "femti"],
+        ["60", "seksti", "70", "sytti"],
+        ["80", "åtti", "90", "nitti"],
+        ["100", "hundre", "1000", "tusen"]
+      ]},
+      {"type": "p", "text": "Compound numbers are written as one word with the unit first: 21 = tjueen,34 = trettifire, 99 = nittini, 125 = hundre og tjuefem. The year 1984 is nitten åttifire; 2024 is tjuetjuefire or totusen og tjuefire. Use **en/ei/ett** depending on gender: en bil, ei jente, ett hus (the numeral ett is stressed)."},
+      {"type": "table", "caption": "Ordinals", "head": ["Number", "Ordinal", "Number", "Ordinal"], "rows": [
+        ["1.", "første", "8.", "åttende"],
+        ["2.", "andre", "9.", "niende"],
+        ["3.", "tredje", "10.", "tiende"],
+        ["4.", "fjerde", "11.", "ellevte"],
+        ["5.", "femte", "12.", "tolvte"],
+        ["6.", "sjette", "20.", "tjuende"],
+        ["7.", "sjuende (syvende)", "21.", "tjueførste"]
+      ]},
+      {"type": "list", "items": [
+        "**Dates**: write 17. mai, say syttende mai: Det er den første januar. Months and weekdays are written with a small letter: januar, mandag.",
+        "**Weekdays**: mandag, tirsdag, onsdag, torsdag, fredag, lørdag, søndag. **Months**: januar, februar, mars, april, mai, juni, juli, august, september, oktober, november, desember.",
+        "**Asking the time**: Hva er klokka? Hvor mye er klokka? Answer: Klokka er tre. At a time: Møtet er klokka tre / kl. 15.",
+        "**Halv** is **half to** the next hour: halv fire = 3:30 (not 4:30)."
+      ]},
+      {"type": "table", "caption": "Telling the time", "head": ["Time", "Norwegian", "Alternative / note"], "rows": [
+        ["3:00", "klokka tre", "kl. 15.00 = femten null null"],
+        ["3:05", "fem over tre", ""],
+        ["3:10", "ti over tre", ""],
+        ["3:15", "kvart over tre", ""],
+        ["3:20", "ti på halv fire", "tjue over tre is also used"],
+        ["3:25", "fem på halv fire", ""],
+        ["3:30", "halv fire", "half to four"],
+        ["3:35", "fem over halv fire", ""],
+        ["3:40", "ti over halv fire", "tjue på fire"],
+        ["3:45", "kvart på fire", ""],
+        ["3:50", "ti på fire", ""],
+        ["3:55", "fem på fire", ""]
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Klokka er halv åtte.", "en": "It is half past seven."},
+        {"no": "Vi møtes klokka kvart over ti.", "en": "We meet at a quarter past ten."},
+        {"no": "Jeg ble født den tolvte mars nitten nittifem.", "en": "I was born on 12 March 1995."},
+        {"no": "Toget går klokka fjorten tretti.", "en": "The train leaves at 14:30."}
+      ]},
+      {"type": "tip", "text": "'Halv fire' means 3:30, not 4:30. Think 'half **way to** four'. In written or official contexts (timetables) use the 24-hour clock: 15.30."}
+    ]
+  },
+  {
+    "id": "expressions-politeness",
+    "title": "Common expressions and politeness",
+    "summary": "Norwegians use du with everyone, so politeness comes from set phrases such as takk, vær så snill and unnskyld.",
+    "blocks": [
+      {"type": "p", "text": "Norwegian is informal: the formal pronoun De is obsolete, and you use **du** with everyone, including your boss and strangers. Politeness is expressed through words such as **takk**, **vær så snill** and **unnskyld**, and through softeners like **gjerne** and **kunne**."},
+      {"type": "table", "caption": "Greetings, thanks and apologies", "head": ["Situation", "Informal", "Formal / notes"], "rows": [
+        ["Hello", "Hei! / Hallo!", "God dag (formal, less common)"],
+        ["Good morning / evening", "God morgen / God kveld", "used all day"],
+        ["How are you?", "Hvordan går det? / Hvordan har du det?", "answer: Bra, takk. Og med deg?"],
+        ["Goodbye", "Ha det! / Hadet! / Hade!", "Ha det bra (more careful)"],
+        ["See you", "Vi ses! / Vi snakkes!", "Vi ses = 'we see each other'"],
+        ["Nice to meet you", "Hyggelig å møte deg", "Hyggelig! (short)"],
+        ["Thank you", "Takk! / Tusen takk!", "Mange takk (many thanks)"],
+        ["You're welcome", "Bare hyggelig! / Ingen årsak!", "Vær så god (also 'here you are')"],
+        ["Please", "Vær så snill", "Vær så god when offering"],
+        ["Excuse me / sorry", "Unnskyld!", "Beklager (I'm sorry, more formal)"],
+        ["Yes please / no thanks", "Ja takk / Nei takk", "-"],
+        ["Thanks for the meal", "Takk for maten", "reply: Vel bekomme"],
+        ["Thanks for last time", "Takk for sist", "said when meeting again"],
+        ["Cheers", "Skål!", "-"],
+        ["Good luck", "Lykke til!", "-"],
+        ["Do you speak English?", "Snakker du engelsk?", "Jeg forstår ikke. Kan du snakke saktere?"],
+        ["Congratulations", "Gratulerer! / Gratulerer med dagen!", "-"]
+      ]},
+      {"type": "list", "items": [
+        "**Polite requests**: Kan jeg få en kaffe? Jeg vil gjerne ha en kaffe, takk. Kan du hjelpe meg?",
+        "**Takk** is used very often, for example after a question is answered or when paying; Norwegians say takk for all kinds of things.",
+        "**Vær så god** is said when handing something over or inviting someone to start eating; **vær så snill** is 'please' in a request.",
+        "**Wishes**: God tur! God helg! God jul! Godt nytt år! God bedring! (get well)."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Unnskyld, hvor er toalettet?", "en": "Excuse me, where is the toilet?"},
+        {"no": "Kan jeg få regningen, takk?", "en": "Could I have the bill, please?"},
+        {"no": "Takk for hjelpen! – Bare hyggelig.", "en": "Thanks for your help! – My pleasure."},
+        {"no": "Hyggelig å treffe deg. Jeg heter Anna.", "en": "Nice to meet you. My name is Anna."}
+      ]},
+      {"type": "tip", "text": "Don't translate 'please' as **vær så snill** in every case. It is stronger than English 'please'; use **takk** or **gjerne** instead: 'En kaffe, takk.' 'Jeg vil gjerne ha ...'."}
+    ]
+  },
+  {
+    "id": "bokmal-nynorsk-pitfalls",
+    "title": "Bokmål vs Nynorsk and common pitfalls",
+    "summary": "Norway has two written standards, and English speakers regularly stumble on false friends and a handful of structural habits.",
+    "blocks": [
+      {"type": "p", "text": "Norway has two official written standards: **Bokmål** (used by roughly 85-90% of people, and the standard in this course) and **Nynorsk** (based on rural dialects). Both are taught in school and understood by all Norwegians. Spoken Norwegian is dialectal and there is no single spoken standard."},
+      {"type": "table", "caption": "Bokmål vs Nynorsk", "head": ["Bokmål", "Nynorsk", "English"], "rows": [
+        ["jeg", "eg", "I"],
+        ["ikke", "ikkje", "not"],
+        ["hva", "kva", "what"],
+        ["hvor", "kor", "where"],
+        ["hvordan", "korleis", "how"],
+        ["hvorfor", "kvifor", "why"],
+        ["en / ei / et", "ein / ei / eit", "a / an"],
+        ["noe", "noko", "something"],
+        ["mye", "mykje", "much"],
+        ["bare", "berre", "only"],
+        ["å kaste", "å kaste / å kasta", "to throw"],
+        ["nå", "no", "now"]
+      ]},
+      {"type": "table", "caption": "False friends", "head": ["Norwegian", "Looks like", "Actually means"], "rows": [
+        ["gift", "gift", "married (also poison)"],
+        ["rar", "rare", "strange, odd"],
+        ["snill", "snail / skill", "kind, good (of people)"],
+        ["flink", "flinch", "skilled, hardworking"],
+        ["pen", "pen", "nice, pretty (a pen is penn)"],
+        ["stygg", "stagger", "ugly, nasty"],
+        ["fart", "fart", "speed"],
+        ["hell", "hell", "luck"],
+        ["mett", "met", "full (after eating)"],
+        ["ledig", "ledge", "free, vacant, unoccupied"],
+        ["aktuell", "actual", "current, relevant"],
+        ["eventuelt", "eventually", "possibly, if applicable"],
+        ["bare", "bare", "only, just"],
+        ["slem", "slim", "nasty, bad"]
+      ]},
+      {"type": "list", "items": [
+        "**Capitalisation**: nationalities, languages, weekdays and months are lower case: norsk, mandag, juni. Jeg is lower case too.",
+        "**Posture verbs** are paired: sitte / sette (sit / put), ligge / legge (lie / lay), stå / stille (stand / place).",
+        "**Age**: Jeg er 30 år (gammel), not 'Jeg har 30 år'.",
+        "**Name**: Jeg heter Anna (not 'jeg er heter'). **Like**: Jeg liker å lese, Jeg liker kaffe.",
+        "**Perfect** takes **har**: Jeg har kommet, not 'jeg er kommet'.",
+        "**Use ikke**, not 'inte'; **hjemme/hjem**, **her/hit** show location vs direction.",
+        "**Word order**: verb second and before ikke only in main clauses; do not use 'do' in questions."
+      ]},
+      {"type": "examples", "items": [
+        {"no": "Han er gift og har to barn.", "en": "He is married and has two children."},
+        {"no": "Det var heldigvis ledig på toget.", "en": "Fortunately there was space free on the train."},
+        {"no": "Hun er veldig flink på skolen.", "en": "She is very good (diligent) at school."},
+        {"no": "Jeg har vært hjemme siden mandag.", "en": "I have been at home since Monday."}
+      ]},
+      {"type": "tip", "text": "When you meet Nynorsk, spot the pattern: eg, ikkje, kva, ein/eit, -a for infinitives and a few vowel differences. You can read both, but write Bokmål unless a course or school says otherwise."}
+    ]
+  }
+]

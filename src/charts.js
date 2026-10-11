@@ -22,3 +22,11 @@ export function barChart(canvas, labels, datasets, { horizontal = false, max } =
     scales: horizontal ? { x: valueAxis } : { y: valueAxis },
   })(canvas);
 }
+
+// Bars (how many reviews) with a line on top (share remembered, 0-100%).
+export function mixedChart(canvas, labels, barSet, lineSet) {
+  return base('bar', labels, [{ ...barSet, yAxisID: 'y' }, { ...lineSet, type: 'line', yAxisID: 'y1' }], {
+    scales: { y: { beginAtZero: true, title: { display: true, text: barSet.label }, ticks: { precision: 0 } }, y1: { position: 'right', min: 0, max: 100, grid: { drawOnChartArea: false }, title: { display: true, text: lineSet.label } } },
+    interaction: { mode: 'index', intersect: false },
+  })(canvas);
+}

@@ -1,3 +1,5 @@
+import { dueCards } from './srs.js';
+
 const DAY = 86400000;
 export const MATURE_DAYS = 21;
 
@@ -51,4 +53,26 @@ export function studyMinutes(reviews) {
 
 export function bandProfile(test) {
   return test ? (test.bands ?? []).map((b) => ({ band: b.band, known: b.pCorrected })) : [];
+}
+
+export function nextAction({ cards, tests }, now) {
+  if (tests.length === 0) return { kind: 'test', dueCount: 0 };
+  const dueCount = dueCards(cards, now).length;
+  return dueCount > 0 ? { kind: 'review', dueCount } : { kind: 'explore', dueCount: 0 };
+}
+
+export const gettingStarted = ({ cards, reviews, tests }) => ({
+  test: tests.length > 0,
+  deck: cards.length > 0,
+  review: reviews.length > 0,
+});
+
+// Recall rate over the last 7 days vs the 7 days before, for a plain "am I improving?" line.
+export function trend(reviews, now) {
+  const DAYS7 = 7 * DAY;
+  const rate = (from, to) => {
+    const rs = reviews.filter((r) => r.timestamp > from && r.timestamp <= to);
+    return rs.length ? { n: rs.length, accuracy: rs.filter((r) => r.grade !== 'again').length / rs.length } : null;
+  };
+  return { current: rate(now - DAYS7, now), previous: rate(now - 2 * DAYS7, now - DAYS7) };
 }

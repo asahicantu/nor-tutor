@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { BANDS, bandOf, bandSizes, sampleTest, scoreTest } from '../src/estimator.js';
+import { BANDS, bandOf, bandSizes, sampleTest, sampleWords, scoreTest } from '../src/estimator.js';
 import { mulberry32 } from '../src/rng.js';
 
 const near = (a, b, tol = 2) => assert.ok(Math.abs(a - b) <= tol, `${a} !~ ${b}`);
@@ -108,4 +108,21 @@ test('scoreTest: empty bands are skipped, missing responses for a real band thro
   const r = scoreTest(resp('b1', 10, 10), { b1: 50, b2: 0 });
   assert.equal(r.bands.length, 1);
   assert.throws(() => scoreTest(resp('b1', 10, 10), { b1: 50, b2: 50 }), /no responses for band b2/);
+});
+
+test('sampleWords: honours count, covers every band, no duplicates, no pseudo-words', () => {
+  const words = makeWords(30);
+  const items = sampleWords(words, mulberry32(4), 30);
+  assert.equal(items.length, 30);
+  assert.ok(items.every((i) => i.kind === 'word'));
+  assert.equal(new Set(items.map((i) => i.wordId)).size, 30);
+  for (const b of BANDS) assert.ok(items.some((i) => i.band === b.id), b.id);
+  assert.deepEqual(items, sampleWords(words, mulberry32(4), 30));
+});
+
+test('sampleWords: tiny counts still cover each band once; huge counts cap at the list', () => {
+  const words = makeWords(3);
+  assert.equal(sampleWords(words, mulberry32(1), 2).length, BANDS.length);
+  assert.equal(sampleWords(words, mulberry32(1), 500).length, words.length);
+  assert.throws(() => sampleWords([], mulberry32(1), 5), /no words to sample/);
 });

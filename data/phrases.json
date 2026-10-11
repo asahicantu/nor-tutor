@@ -1,0 +1,670 @@
+[
+ {
+  "id": "p1",
+  "no": "God morgen! Hvordan har du det?",
+  "en": "Good morning! How are you?",
+  "topic": "Greetings & politeness",
+  "level": "A2"
+ },
+ {
+  "id": "p2",
+  "no": "Ha det bra!",
+  "en": "Goodbye! (take care)",
+  "topic": "Greetings & politeness",
+  "level": "A2",
+  "hint": "Fixed expression for farewell; \"ha det\" alone is casual."
+ },
+ {
+  "id": "p3",
+  "no": "Takk for sist!",
+  "en": "Thanks for last time!",
+  "topic": "Greetings & politeness",
+  "level": "A2",
+  "hint": "Said when meeting again after a previous get-together."
+ },
+ {
+  "id": "p4",
+  "no": "Beklager, jeg forstår ikke.",
+  "en": "Sorry, I don't understand.",
+  "topic": "Greetings & politeness",
+  "level": "A2"
+ },
+ {
+  "id": "p5",
+  "no": "Kan du snakke litt saktere, takk?",
+  "en": "Could you speak a bit slower, please?",
+  "topic": "Greetings & politeness",
+  "level": "A2"
+ },
+ {
+  "id": "p6",
+  "no": "Hyggelig å møte deg.",
+  "en": "Nice to meet you.",
+  "topic": "Greetings & politeness",
+  "level": "A2"
+ },
+ {
+  "id": "p7",
+  "no": "Vær så snill å hjelpe meg.",
+  "en": "Please help me.",
+  "topic": "Greetings & politeness",
+  "level": "A2"
+ },
+ {
+  "id": "p8",
+  "no": "Unnskyld, kan jeg få komme forbi?",
+  "en": "Excuse me, may I get past?",
+  "topic": "Greetings & politeness",
+  "level": "B1",
+  "hint": "\"Få\" + infinitive = be allowed to."
+ },
+ {
+  "id": "p9",
+  "no": "Jeg setter stor pris på hjelpen din.",
+  "en": "I really appreciate your help.",
+  "topic": "Greetings & politeness",
+  "level": "B1"
+ },
+ {
+  "id": "p10",
+  "no": "Bare hyggelig! Det var ingenting.",
+  "en": "You're welcome! It was nothing.",
+  "topic": "Greetings & politeness",
+  "level": "B1"
+ },
+ {
+  "id": "p11",
+  "no": "Skal vi bruke du eller De med henne?",
+  "en": "Should we use the informal or the formal \"you\" with her?",
+  "topic": "Greetings & politeness",
+  "level": "B1",
+  "hint": "\"De\" is the very formal pronoun, rare today."
+ },
+ {
+  "id": "p12",
+  "no": "Gratulerer med dagen, og hjertelig velkommen!",
+  "en": "Happy birthday, and a warm welcome!",
+  "topic": "Greetings & politeness",
+  "level": "B1",
+  "hint": "\"Gratulerer med dagen\" is the standard birthday greeting."
+ },
+ {
+  "id": "p13",
+  "no": "Jeg ber om unnskyldning for forsinkelsen, den var helt uforskyldt fra min side.",
+  "en": "I apologise for the delay; it was entirely beyond my control.",
+  "topic": "Greetings & politeness",
+  "level": "B2"
+ },
+ {
+  "id": "p14",
+  "no": "Det var hyggelig at du kunne komme, selv om det var kort varsel.",
+  "en": "It was nice that you could come, even though it was short notice.",
+  "topic": "Greetings & politeness",
+  "level": "B2"
+ },
+ {
+  "id": "p15",
+  "no": "Jeg står opp klokka sju hver dag.",
+  "en": "I get up at seven o'clock every day.",
+  "topic": "Daily life",
+  "level": "A2",
+  "hint": "\"Klokka\" + number = at that time."
+ },
+ {
+  "id": "p16",
+  "no": "Vi spiser middag klokka seks.",
+  "en": "We eat dinner at six.",
+  "topic": "Daily life",
+  "level": "A2"
+ },
+ {
+  "id": "p17",
+  "no": "Jeg må vaske klærne i dag.",
+  "en": "I have to wash the clothes today.",
+  "topic": "Daily life",
+  "level": "A2",
+  "hint": "Modal verb \"må\" + infinitive without \"å\"."
+ },
+ {
+  "id": "p18",
+  "no": "Barna leker ute i hagen.",
+  "en": "The children are playing outside in the garden.",
+  "topic": "Daily life",
+  "level": "A2"
+ },
+ {
+  "id": "p19",
+  "no": "Hvor bor du nå?",
+  "en": "Where do you live now?",
+  "topic": "Daily life",
+  "level": "A2"
+ },
+ {
+  "id": "p20",
+  "no": "Jeg har ikke tid akkurat nå.",
+  "en": "I don't have time right now.",
+  "topic": "Daily life",
+  "level": "A2"
+ },
+ {
+  "id": "p21",
+  "no": "Har du husket å låse døra?",
+  "en": "Did you remember to lock the door?",
+  "topic": "Daily life",
+  "level": "B1",
+  "hint": "\"Husket å\" + infinitive."
+ },
+ {
+  "id": "p22",
+  "no": "Jeg pleier å gå en tur etter jobb.",
+  "en": "I usually go for a walk after work.",
+  "topic": "Daily life",
+  "level": "B1",
+  "hint": "\"Pleier å\" = usually/tend to."
+ },
+ {
+  "id": "p23",
+  "no": "Vi flyttet til en større leilighet i fjor.",
+  "en": "We moved to a bigger flat last year.",
+  "topic": "Daily life",
+  "level": "B1"
+ },
+ {
+  "id": "p24",
+  "no": "Hvis det blir for sent, tar jeg bussen hjem.",
+  "en": "If it gets too late, I'll take the bus home.",
+  "topic": "Daily life",
+  "level": "B1"
+ },
+ {
+  "id": "p25",
+  "no": "Jeg har holdt på med dette hele dagen.",
+  "en": "I've been working on this all day.",
+  "topic": "Daily life",
+  "level": "B1",
+  "hint": "\"Holde på med\" = be busy doing."
+ },
+ {
+  "id": "p26",
+  "no": "Selv om jeg er sliten, må jeg gjøre ferdig oppvasken før jeg legger meg.",
+  "en": "Even though I'm tired, I have to finish the dishes before I go to bed.",
+  "topic": "Daily life",
+  "level": "B2"
+ },
+ {
+  "id": "p27",
+  "no": "Det er lett å gå seg vill her hvis man ikke kjenner byen.",
+  "en": "It's easy to get lost here if you don't know the city.",
+  "topic": "Daily life",
+  "level": "B2"
+ },
+ {
+  "id": "p28",
+  "no": "Jeg rakk akkurat det siste toget.",
+  "en": "I only just made the last train.",
+  "topic": "Daily life",
+  "level": "B2",
+  "hint": "\"Rekke\" = to make it in time."
+ },
+ {
+  "id": "p29",
+  "no": "Unnskyld, hvor er togstasjonen?",
+  "en": "Excuse me, where is the train station?",
+  "topic": "Travel & directions",
+  "level": "A2"
+ },
+ {
+  "id": "p30",
+  "no": "Ta til venstre ved lyskrysset.",
+  "en": "Turn left at the traffic lights.",
+  "topic": "Travel & directions",
+  "level": "A2"
+ },
+ {
+  "id": "p31",
+  "no": "Hvor mye koster en billett til Bergen?",
+  "en": "How much is a ticket to Bergen?",
+  "topic": "Travel & directions",
+  "level": "A2"
+ },
+ {
+  "id": "p32",
+  "no": "Går denne bussen til sentrum?",
+  "en": "Does this bus go to the city centre?",
+  "topic": "Travel & directions",
+  "level": "A2"
+ },
+ {
+  "id": "p33",
+  "no": "Det er rett fram, så til høyre.",
+  "en": "It's straight ahead, then to the right.",
+  "topic": "Travel & directions",
+  "level": "A2"
+ },
+ {
+  "id": "p34",
+  "no": "Jeg vil gjerne bestille et rom for to netter.",
+  "en": "I'd like to book a room for two nights.",
+  "topic": "Travel & directions",
+  "level": "B1"
+ },
+ {
+  "id": "p35",
+  "no": "Toget har dessverre blitt forsinket med tjue minutter.",
+  "en": "The train has unfortunately been delayed by twenty minutes.",
+  "topic": "Travel & directions",
+  "level": "B1"
+ },
+ {
+  "id": "p36",
+  "no": "Vet du hvor jeg kan kjøpe en bybillett?",
+  "en": "Do you know where I can buy a city ticket?",
+  "topic": "Travel & directions",
+  "level": "B1",
+  "hint": "Subordinate clause: word order stays subject-verb after \"hvor\"."
+ },
+ {
+  "id": "p37",
+  "no": "Vi må bytte tog i Oslo.",
+  "en": "We have to change trains in Oslo.",
+  "topic": "Travel & directions",
+  "level": "B1"
+ },
+ {
+  "id": "p38",
+  "no": "Jeg skal på ferie til Lofoten i sommer.",
+  "en": "I'm going on holiday to Lofoten this summer.",
+  "topic": "Travel & directions",
+  "level": "B1"
+ },
+ {
+  "id": "p39",
+  "no": "Hvis du går forbi kirken, ser du museet på venstre hånd.",
+  "en": "If you walk past the church, you'll see the museum on your left.",
+  "topic": "Travel & directions",
+  "level": "B2"
+ },
+ {
+  "id": "p40",
+  "no": "Flyet ble innstilt på grunn av dårlig vær, så vi måtte overnatte på hotell.",
+  "en": "The flight was cancelled due to bad weather, so we had to stay overnight at a hotel.",
+  "topic": "Travel & directions",
+  "level": "B2",
+  "hint": "\"Bli\" + participle forms the passive."
+ },
+ {
+  "id": "p41",
+  "no": "Kunne du tenke deg å leie bil, eller foretrekker du å reise kollektivt?",
+  "en": "Would you like to rent a car, or do you prefer to use public transport?",
+  "topic": "Travel & directions",
+  "level": "B2"
+ },
+ {
+  "id": "p42",
+  "no": "Det tar omtrent to timer å kjøre dit hvis det ikke er kø.",
+  "en": "It takes about two hours to drive there if there's no traffic.",
+  "topic": "Travel & directions",
+  "level": "B2"
+ },
+ {
+  "id": "p43",
+  "no": "Jeg vil gjerne ha en kopp kaffe, takk.",
+  "en": "I'd like a cup of coffee, please.",
+  "topic": "Food & shopping",
+  "level": "A2"
+ },
+ {
+  "id": "p44",
+  "no": "Hva koster dette?",
+  "en": "How much is this?",
+  "topic": "Food & shopping",
+  "level": "A2"
+ },
+ {
+  "id": "p45",
+  "no": "Har dere et bord til to?",
+  "en": "Do you have a table for two?",
+  "topic": "Food & shopping",
+  "level": "A2"
+ },
+ {
+  "id": "p46",
+  "no": "Jeg er sulten og tørst.",
+  "en": "I'm hungry and thirsty.",
+  "topic": "Food & shopping",
+  "level": "A2"
+ },
+ {
+  "id": "p47",
+  "no": "Kan jeg betale med kort?",
+  "en": "Can I pay by card?",
+  "topic": "Food & shopping",
+  "level": "A2"
+ },
+ {
+  "id": "p48",
+  "no": "Regningen, takk. Vi skal betale hver for oss.",
+  "en": "The bill, please. We'll pay separately.",
+  "topic": "Food & shopping",
+  "level": "B1",
+  "hint": "\"Hver for seg\" = each for themselves."
+ },
+ {
+  "id": "p49",
+  "no": "Jeg er allergisk mot nøtter, så jeg kan ikke spise dette.",
+  "en": "I'm allergic to nuts, so I can't eat this.",
+  "topic": "Food & shopping",
+  "level": "B1"
+ },
+ {
+  "id": "p50",
+  "no": "Er det noe som er på tilbud i dag?",
+  "en": "Is anything on offer today?",
+  "topic": "Food & shopping",
+  "level": "B1",
+  "hint": "\"På tilbud\" = on sale."
+ },
+ {
+  "id": "p51",
+  "no": "Smaker maten godt? Ja, den er kjempegod!",
+  "en": "Does the food taste good? Yes, it's really delicious!",
+  "topic": "Food & shopping",
+  "level": "B1"
+ },
+ {
+  "id": "p52",
+  "no": "Vi trenger melk, brød og egg fra butikken.",
+  "en": "We need milk, bread and eggs from the shop.",
+  "topic": "Food & shopping",
+  "level": "B1"
+ },
+ {
+  "id": "p53",
+  "no": "Kan du anbefale noe som er typisk norsk?",
+  "en": "Can you recommend something typically Norwegian?",
+  "topic": "Food & shopping",
+  "level": "B2"
+ },
+ {
+  "id": "p54",
+  "no": "Jeg tar heller fisk enn kjøtt, hvis det er mulig.",
+  "en": "I'd rather have fish than meat, if possible.",
+  "topic": "Food & shopping",
+  "level": "B2",
+  "hint": "\"Heller ... enn\" = rather ... than."
+ },
+ {
+  "id": "p55",
+  "no": "Det var dyrere enn jeg hadde forventet, men kvaliteten er god.",
+  "en": "It was more expensive than I'd expected, but the quality is good.",
+  "topic": "Food & shopping",
+  "level": "B2"
+ },
+ {
+  "id": "p56",
+  "no": "Hvis jeg hadde visst at du kom, hadde jeg laget mer mat.",
+  "en": "If I'd known you were coming, I would have made more food.",
+  "topic": "Food & shopping",
+  "level": "B2"
+ },
+ {
+  "id": "p57",
+  "no": "Jeg jobber på kontor i Oslo.",
+  "en": "I work in an office in Oslo.",
+  "topic": "Work & study",
+  "level": "A2"
+ },
+ {
+  "id": "p58",
+  "no": "Jeg studerer norsk på universitetet.",
+  "en": "I study Norwegian at the university.",
+  "topic": "Work & study",
+  "level": "A2"
+ },
+ {
+  "id": "p59",
+  "no": "Når begynner møtet?",
+  "en": "When does the meeting start?",
+  "topic": "Work & study",
+  "level": "A2"
+ },
+ {
+  "id": "p60",
+  "no": "Jeg har en avtale klokka ti.",
+  "en": "I have an appointment at ten o'clock.",
+  "topic": "Work & study",
+  "level": "A2"
+ },
+ {
+  "id": "p61",
+  "no": "Kan du sende meg e-posten?",
+  "en": "Can you send me the email?",
+  "topic": "Work & study",
+  "level": "A2"
+ },
+ {
+  "id": "p62",
+  "no": "Jeg må dessverre melde meg syk i dag.",
+  "en": "Unfortunately I have to call in sick today.",
+  "topic": "Work & study",
+  "level": "B1",
+  "hint": "\"Melde seg syk\" is a reflexive fixed phrase."
+ },
+ {
+  "id": "p63",
+  "no": "Vi har en frist på fredag, så vi må jobbe fort.",
+  "en": "We have a deadline on Friday, so we have to work quickly.",
+  "topic": "Work & study",
+  "level": "B1"
+ },
+ {
+  "id": "p64",
+  "no": "Hun har søkt på en ny stilling i et stort firma.",
+  "en": "She has applied for a new position at a large company.",
+  "topic": "Work & study",
+  "level": "B1"
+ },
+ {
+  "id": "p65",
+  "no": "Jeg gleder meg til å begynne på kurset.",
+  "en": "I'm looking forward to starting the course.",
+  "topic": "Work & study",
+  "level": "B1",
+  "hint": "\"Glede seg til\" = look forward to."
+ },
+ {
+  "id": "p66",
+  "no": "Det er kaffepause nå, så vi tar en liten pause.",
+  "en": "It's coffee break now, so we'll take a short break.",
+  "topic": "Work & study",
+  "level": "B1"
+ },
+ {
+  "id": "p67",
+  "no": "Jeg har tenkt å si opp jobben og begynne å studere igjen.",
+  "en": "I'm planning to quit my job and start studying again.",
+  "topic": "Work & study",
+  "level": "B2"
+ },
+ {
+  "id": "p68",
+  "no": "Hvis vi samarbeider, kan vi bli ferdige før fristen.",
+  "en": "If we work together, we can finish before the deadline.",
+  "topic": "Work & study",
+  "level": "B2"
+ },
+ {
+  "id": "p69",
+  "no": "Det er viktig at alle kommer med innspill i møtet.",
+  "en": "It's important that everyone contributes input in the meeting.",
+  "topic": "Work & study",
+  "level": "B2"
+ },
+ {
+  "id": "p70",
+  "no": "Han fikk ikke jobben, fordi han manglet erfaring.",
+  "en": "He didn't get the job because he lacked experience.",
+  "topic": "Work & study",
+  "level": "B2"
+ },
+ {
+  "id": "p71",
+  "no": "Jeg liker å lese bøker.",
+  "en": "I like reading books.",
+  "topic": "Opinions & feelings",
+  "level": "A2"
+ },
+ {
+  "id": "p72",
+  "no": "Jeg er glad for at du er her.",
+  "en": "I'm glad you are here.",
+  "topic": "Opinions & feelings",
+  "level": "A2"
+ },
+ {
+  "id": "p73",
+  "no": "Det er ikke min kopp te.",
+  "en": "It's not my cup of tea.",
+  "topic": "Opinions & feelings",
+  "level": "A2",
+  "hint": "Same idiom as English."
+ },
+ {
+  "id": "p74",
+  "no": "Jeg er litt trøtt i dag.",
+  "en": "I'm a bit tired today.",
+  "topic": "Opinions & feelings",
+  "level": "A2"
+ },
+ {
+  "id": "p75",
+  "no": "Etter min mening er dette en god idé.",
+  "en": "In my opinion, this is a good idea.",
+  "topic": "Opinions & feelings",
+  "level": "B1"
+ },
+ {
+  "id": "p76",
+  "no": "Jeg er ikke enig med deg, men jeg forstår hva du mener.",
+  "en": "I don't agree with you, but I understand what you mean.",
+  "topic": "Opinions & feelings",
+  "level": "B1"
+ },
+ {
+  "id": "p77",
+  "no": "Det var synd at du ikke kunne komme.",
+  "en": "It was a pity you couldn't come.",
+  "topic": "Opinions & feelings",
+  "level": "B1"
+ },
+ {
+  "id": "p78",
+  "no": "Jeg gruer meg litt til eksamen.",
+  "en": "I'm a bit dreading the exam.",
+  "topic": "Opinions & feelings",
+  "level": "B1",
+  "hint": "\"Grue seg til\" = dread."
+ },
+ {
+  "id": "p79",
+  "no": "Det spiller ingen rolle for meg.",
+  "en": "It makes no difference to me.",
+  "topic": "Opinions & feelings",
+  "level": "B1"
+ },
+ {
+  "id": "p80",
+  "no": "Jeg har bare lyst til å ligge på sofaen og gjøre ingenting.",
+  "en": "I just feel like lying on the sofa and doing nothing.",
+  "topic": "Opinions & feelings",
+  "level": "B2",
+  "hint": "\"Ha lyst til å\" = feel like."
+ },
+ {
+  "id": "p81",
+  "no": "Det gikk ikke helt som planlagt, men jeg er fornøyd likevel.",
+  "en": "It didn't go quite as planned, but I'm satisfied anyway.",
+  "topic": "Opinions & feelings",
+  "level": "B2"
+ },
+ {
+  "id": "p82",
+  "no": "Hun tok det med knusende ro.",
+  "en": "She took it completely in stride.",
+  "topic": "Opinions & feelings",
+  "level": "B2",
+  "hint": "Idiom: \"med knusende ro\" = with total calm."
+ },
+ {
+  "id": "p83",
+  "no": "Jeg synes at man bør ta seg tid til å slappe av.",
+  "en": "I think one should take time to relax.",
+  "topic": "Opinions & feelings",
+  "level": "B2",
+  "hint": "\"Synes\" = think/feel (opinion), vs \"tro\" = believe."
+ },
+ {
+  "id": "p84",
+  "no": "Det er ikke verdt bryet, om du spør meg.",
+  "en": "It's not worth the trouble, if you ask me.",
+  "topic": "Opinions & feelings",
+  "level": "B2"
+ },
+ {
+  "id": "p85",
+  "no": "Jeg har vondt i hodet.",
+  "en": "I have a headache.",
+  "topic": "Health",
+  "level": "A2",
+  "hint": "\"Ha vondt i\" + body part."
+ },
+ {
+  "id": "p86",
+  "no": "Jeg trenger å bestille time hos legen.",
+  "en": "I need to book an appointment with the doctor.",
+  "topic": "Health",
+  "level": "B1"
+ },
+ {
+  "id": "p87",
+  "no": "Har du feber eller hoste?",
+  "en": "Do you have a fever or a cough?",
+  "topic": "Health",
+  "level": "B1"
+ },
+ {
+  "id": "p88",
+  "no": "Du bør hvile og drikke mye vann til du blir bedre.",
+  "en": "You should rest and drink lots of water until you get better.",
+  "topic": "Health",
+  "level": "B2"
+ },
+ {
+  "id": "p89",
+  "no": "Det regner i dag, så ta med paraply.",
+  "en": "It's raining today, so bring an umbrella.",
+  "topic": "Weather",
+  "level": "A2"
+ },
+ {
+  "id": "p90",
+  "no": "Det er veldig kaldt ute.",
+  "en": "It's very cold outside.",
+  "topic": "Weather",
+  "level": "A2"
+ },
+ {
+  "id": "p91",
+  "no": "Det ser ut til at det blir sol i morgen.",
+  "en": "It looks like it will be sunny tomorrow.",
+  "topic": "Weather",
+  "level": "B1"
+ },
+ {
+  "id": "p92",
+  "no": "Det regnet så mye at gatene ble oversvømt.",
+  "en": "It rained so much that the streets were flooded.",
+  "topic": "Weather",
+  "level": "B2"
+ }
+]

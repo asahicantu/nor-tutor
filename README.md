@@ -5,17 +5,19 @@ Local tutor for Norwegian Bokmål (B2 and beyond).
 - `npm start` serves the app at http://127.0.0.1:5173
 - `npm test` runs the unit tests (Node 20+)
 
-Your data lives in your browser (IndexedDB). Use the Data page to export a JSON backup.
+Your data lives in `data/nor-tutor.db` (SQLite, written by `npm start`, Node 22+). Use the Data page to export a JSON backup.
 
 ## Pages
 
-- **Dashboard** – estimated vocabulary, streak, retention, charts
-- **Vocabulary test** – frequency-band sample + nonsense words, guess-corrected estimate
-- **Review** – spaced repetition for words you added from **Words**
-- **Words** – search, meanings (English + Norwegian), forms, phrases, examples
+- **Home** – next step, counts, most-missed words, progress charts (a welcome guide the first time)
+- **Words** – cards with translation (green) and Norwegian definition (blue); toggle them for all words; per word: *I know this word*, *Review it*, *Explain context*
+- **Vocab test** – real words only, you choose 10-60 words; a missed word shows its translation and definition, is saved as unknown and its miss count goes up
+- **Phrases** – read or practise whole sentences (`data/phrases.json`), tap a word for its meaning, listen via the browser's voice
+- **Review** – spaced repetition with a chosen number of cards and an improvement chart
+- **Grammar** – sections with tables and examples (`data/grammar.json`)
 - **Data** – JSON export / import
 
-`data/words.json` is currently a 14-word sample; replace it with the full frequency list (same schema, see `src/wordsSchema.js`) once a licensed source is chosen.
+`data/words.json` holds 314 words. Their `rank` values are approximate tiers written by hand, not corpus frequencies: replace the file with a licensed frequency list (same schema) for a meaningful vocabulary estimate. Test results are expressed as "of the words in the list".
 
 ## Good to know
 

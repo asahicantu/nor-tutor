@@ -7,12 +7,19 @@ import * as review from './views/review.js';
 import * as explore from './views/explore.js';
 import * as dashboard from './views/dashboard.js';
 import * as data from './views/data.js';
-const routes = { '/dashboard': dashboard, '/test': test, '/review': review, '/explore': explore, '/data': data };
+import * as phrasesView from './views/phrases.js';
+import * as grammar from './views/grammar.js';
+const routes = { '/dashboard': dashboard, '/test': test, '/review': review, '/explore': explore, '/phrases': phrasesView, '/grammar': grammar, '/data': data };
+
+const loadJson = (path) => fetch(path).then((r) => {
+  if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`);
+  return r.json();
+});
 
 function home(root) {
   root.replaceChildren(
     h('h1', {}, 'Norsk Tutor'),
-    h('p', {}, 'Use the menu above to take the vocabulary test, review words, or explore the word list.'),
+    h('p', {}, h('a', { href: '#/dashboard' }, 'Go to the dashboard')),
   );
 }
 
@@ -22,24 +29,22 @@ function showError(e, target = document.getElementById('app')) {
 
 async function main() {
   try {
-    const [words, db] = await Promise.all([
-      fetch('data/words.json').then((r) => {
-        if (!r.ok) throw new Error(`data/words.json: HTTP ${r.status}`);
-        return r.json();
-      }),
-      openDb(),
-    ]);
+    const [words, phrases, db] = await Promise.all([loadJson('data/words.json'), loadJson('data/phrases.json'), openDb()]);
     const errors = validateWords(words);
     if (errors.length) throw new Error(`Invalid word list: ${errors.slice(0, 3).join('; ')}`);
-    const ctx = { words, db };
+    if (db.notice) document.body.insertBefore(h('p', { class: 'notice', role: 'status' }, db.notice), document.getElementById('app'));
+    const ctx = { words, phrases, db };
     const root = document.getElementById('app');
     const go = async () => {
       const path = location.hash.slice(1) || '/dashboard';
       for (const a of document.querySelectorAll('#nav a')) {
-        a.classList.toggle('active', a.getAttribute('href') === `#${path}`);
+        if (a.classList.contains('brand')) continue;
+        if (a.getAttribute('href') === `#${path}`) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
       }
       const stage = h('div');
       root.replaceChildren(stage);
+      window.scrollTo(0, 0);
       try {
         await (routes[path] ? routes[path].render(stage, ctx) : home(stage));
       } catch (e) {

@@ -2,7 +2,7 @@ import { h } from '../dom.js';
 import { loadState, replaceState } from '../db.js';
 import { serialize, parseBackup } from '../backup.js';
 
-const counts = (d) => `${d.cards.length} cards, ${d.reviews.length} reviews, ${d.tests.length} tests`;
+const counts = (d) => `${d.cards.length} cards, ${d.reviews.length} reviews, ${d.tests.length} tests, ${d.known.length} known and ${d.unknown.length} missed words`;
 
 export function render(root, { db }) {
   const status = h('p', { role: 'status' });
@@ -48,7 +48,7 @@ export function render(root, { db }) {
   root.replaceChildren(
     h('h1', {}, 'Your data'),
     h('div', { class: 'card' },
-      h('p', {}, 'Everything is stored in this browser only. Export a backup regularly.'),
+      h('p', {}, 'Everything is stored in the SQLite file data/nor-tutor.db. Export a backup now and then.'),
       h('div', { class: 'row' },
         h('button', { class: 'primary', onclick: exportBackup }, 'Export backup'),
         h('label', {}, h('span', { class: 'muted' }, 'Import backup: '), h('input', { type: 'file', accept: 'application/json,.json', onchange: importBackup })),

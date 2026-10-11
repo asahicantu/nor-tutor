@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { vocabSeries, dailyAccuracy, streakDays, retentionRate, studyMinutes, bandProfile } from '../src/stats.js';
+import { vocabSeries, dailyAccuracy, streakDays, retentionRate, studyMinutes, bandProfile, nextAction, gettingStarted } from '../src/stats.js';
 
 const H = 3600000;
 const at = (d, h = 12) => Date.UTC(2026, 9, d, h);
@@ -61,4 +61,43 @@ test('bandProfile maps the latest test, empty for none', () => {
   assert.deepEqual(bandProfile(undefined), []);
   assert.deepEqual(bandProfile({}), []);
   assert.deepEqual(bandProfile({ bands: [{ band: 'b1', pCorrected: 0.9, size: 10, sampled: 5, known: 4 }] }), [{ band: 'b1', known: 0.9 }]);
+});
+
+const NOW = Date.UTC(2026, 9, 10, 12);
+const card = (wordId, due) => ({ wordId, ease: 2.5, interval: 1, reps: 1, lapses: 0, due });
+const aTest = { timestamp: 1, estimate: 1000, ciLow: 900, ciHigh: 1100, bands: [] };
+
+test('nextAction: empty data points to the test', () => {
+  assert.deepEqual(nextAction({ cards: [], reviews: [], tests: [] }, NOW), { kind: 'test', dueCount: 0 });
+  assert.deepEqual(gettingStarted({ cards: [], reviews: [], tests: [] }), { test: false, deck: false, review: false });
+});
+
+test('nextAction: due cards beat exploring, and a card due exactly now counts', () => {
+  const state = { cards: [card(1, NOW), card(2, NOW + 1)], reviews: [], tests: [aTest] };
+  assert.deepEqual(nextAction(state, NOW), { kind: 'review', dueCount: 1 });
+});
+
+test('nextAction: tested but nothing due or no cards means explore', () => {
+  assert.deepEqual(nextAction({ cards: [], reviews: [], tests: [aTest] }, NOW), { kind: 'explore', dueCount: 0 });
+  assert.deepEqual(nextAction({ cards: [card(1, NOW + 1)], reviews: [], tests: [aTest] }, NOW), { kind: 'explore', dueCount: 0 });
+});
+
+test('nextAction: untested user is sent to the test even with due cards', () => {
+  assert.equal(nextAction({ cards: [card(1, NOW - 1)], reviews: [], tests: [] }, NOW).kind, 'test');
+});
+
+test('gettingStarted ticks each step from the data', () => {
+  assert.deepEqual(gettingStarted({ cards: [card(1, NOW)], reviews: [rv(NOW)], tests: [aTest] }), { test: true, deck: true, review: true });
+  assert.deepEqual(gettingStarted({ cards: [card(1, NOW)], reviews: [], tests: [] }), { test: false, deck: true, review: false });
+});
+
+test('trend compares the last 7 days with the 7 before', async () => {
+  const { trend } = await import('../src/stats.js');
+  const now = Date.UTC(2026, 9, 20);
+  const D = 86400000;
+  const rv = (days, grade) => ({ wordId: 1, timestamp: now - days * D, grade });
+  const t = trend([rv(1, 'good'), rv(2, 'again'), rv(9, 'again'), rv(10, 'again'), rv(11, 'good'), rv(30, 'good')], now);
+  assert.deepEqual(t.current, { n: 2, accuracy: 0.5 });
+  assert.equal(t.previous.n, 3);
+  assert.equal(trend([], now).current, null);
 });

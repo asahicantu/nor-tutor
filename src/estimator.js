@@ -14,6 +14,12 @@ export const BANDS = [
 const Z95 = 1.96;
 const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
 
+export const bandLabel = (id) => {
+  const b = BANDS.find((x) => x.id === id);
+  if (!b) return id;
+  return b.to === Infinity ? `Rarer than ${(b.from - 1).toLocaleString('en')}` : `Rank ${b.from.toLocaleString('en')}–${b.to.toLocaleString('en')}`;
+};
+
 export function bandOf(rank) {
   return BANDS.find((b) => rank >= b.from && rank <= b.to) ?? null;
 }
@@ -40,6 +46,18 @@ export function sampleTest(words, rng, { perBand = 20, pseudoRatio = 0.2 } = {})
   const pseudo = generatePseudoWords(nPseudo, rng, words.map((w) => w.lemma));
   for (const text of pseudo) items.push({ kind: 'pseudo', band: null, text });
   return shuffle(items, rng);
+}
+
+// Real words only (no invented foils): about `count` words spread evenly over the non-empty bands,
+// at least one per band so scoreTest has a response in every band. Fills spare slots from the rest.
+export function sampleWords(words, rng, count) {
+  if (words.length === 0) throw new Error('no words to sample');
+  const pools = BANDS.map((b) => shuffle(words.filter((w) => bandOf(w.rank)?.id === b.id), rng)).filter((p) => p.length);
+  const per = Math.max(1, Math.floor(count / pools.length));
+  const picked = pools.flatMap((p) => p.slice(0, per));
+  const rest = shuffle(pools.flatMap((p) => p.slice(per)), rng);
+  const chosen = picked.length < count ? [...picked, ...rest.slice(0, count - picked.length)] : picked;
+  return shuffle(chosen, rng).map((w) => ({ kind: 'word', band: bandOf(w.rank).id, wordId: w.id, text: w.lemma }));
 }
 
 export function scoreTest(responses, sizes) {
