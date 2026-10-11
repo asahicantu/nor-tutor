@@ -43,6 +43,14 @@ export async function render(root, { words, phrases, db }) {
   let keys = {};
   onKeys(root, new Proxy({}, { get: (_, k) => keys[k] }));
   const page = (...kids) => root.replaceChildren(h('h1', {}, ...withIcon('💬', 'Phrases')), ...kids.filter(Boolean));
+  // A session screen: the way out sits at the top left, above the title, on every card.
+  const sessionPage = (...kids) => {
+    const entering = !root.querySelector('.backbar'); // slide in once per session, not on every card
+    page(...kids);
+    root.prepend(h('div', { class: entering ? 'backbar enter' : 'backbar' },
+      h('button', { type: 'button', class: 'backbtn', title: 'Stop this session and go back to the phrase menu', onclick: menu },
+        h('span', { class: 'backarrow', 'aria-hidden': 'true' }, '←'), h('span', {}, 'Stop'))));
+  };
   const pool = () => phrases.filter((p) => !topic || p.topic === topic);
   const understood = (p) => stats.get(p.id)?.got > 0;
   // Sentences you have not got right yet come first.
@@ -175,14 +183,13 @@ export async function render(root, { words, phrases, db }) {
         show();
       }
       keys = { ' ': reveal, enter: reveal };
-      page(
+      sessionPage(
         progressHead(i, queue.length, 'Sentence'),
         h('div', { class: 'card testcard' },
           h('p', { class: 'chip' }, `${TOPIC_EMOJI[p.topic] ?? '💬'} ${p.topic}`),
           sentence(p, 'sentence big-s'),
           h('div', { class: 'row center' }, listenBtn(p.no), showBtn),
-          tr),
-        h('p', {}, h('button', { type: 'button', class: 'quiet', onclick: menu }, ...withIcon('←', 'Stop'))));
+          tr));
     }
 
     function finish() {
@@ -295,14 +302,13 @@ export async function render(root, { words, phrases, db }) {
           h('p', { class: 'trans' }, p.en),
           h('div', { class: 'row between' }, panel.keys, panel.button));
       keys = {};
-      page(
+      sessionPage(
         progressHead(i, items.length, 'Sentence'),
         h('div', { class: 'card testcard' },
           h('p', { class: 'chip' }, `${TOPIC_EMOJI[p.topic] ?? '💬'} ${p.topic} · ${p.level}`),
           prompt, nudge,
           h('div', { class: 'row' }, hintBtn, giveBtn), hint,
-          live, feedback),
-        h('p', {}, h('button', { type: 'button', class: 'quiet', onclick: menu }, ...withIcon('←', 'Stop'))));
+          live, feedback));
       panel.focus();
     }
 

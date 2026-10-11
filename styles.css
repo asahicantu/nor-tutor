@@ -561,3 +561,17 @@ details.gcard:has(+ .rstats) { margin-bottom: var(--s3); }
 .wc-stage { width: 100%; }
 .wc-canvas { display: block; width: 100%; height: auto; border-radius: 12px; background: radial-gradient(ellipse at center, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%); }
 .wc-info { min-height: 1.5em; margin: var(--s2) 0; }
+
+/* phrases: Stop button at the top left of a session */
+.backbar { margin: 0 0 var(--s2); }
+.backbtn { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s4) 0 var(--s3); border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--accent); font-weight: 600; cursor: pointer; }
+.backbtn:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
+.backarrow { display: inline-block; font-size: 1.15em; line-height: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .backbar.enter { animation: backin .35s ease-out; }
+  .backarrow { transition: transform .2s ease; }
+  .backbtn:hover .backarrow, .backbtn:focus-visible .backarrow { animation: backnudge .7s ease-in-out infinite; }
+  .backbtn:active { transform: scale(.96); }
+  @keyframes backin { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+  @keyframes backnudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
+}
