@@ -17,7 +17,8 @@ const FILTERS = [
 export async function render(root, { words, db }) {
   const [known, unknown, cards] = await Promise.all(['known', 'unknown', 'cards'].map((s) => getAll(db, s)));
   const status = buildStatus({ known, unknown, cards });
-  let filter = 'all';
+  const saved = pref('wordsFilter', 'all'); // the pill picked last time; ignore anything that is not a known filter
+  let filter = FILTERS.some(([key]) => key === saved) ? saved : 'all';
   let pos = '';
   let shown = PAGE;
 
@@ -48,7 +49,7 @@ export async function render(root, { words, db }) {
   const chips = FILTERS.map(([key, label]) =>
     h('button', {
       class: 'chipbtn', 'aria-pressed': String(key === filter),
-      onclick: () => { filter = key; shown = PAGE; chips.forEach((b, i) => b.setAttribute('aria-pressed', String(FILTERS[i][0] === key))); draw(); },
+      onclick: () => { filter = key; setPref('wordsFilter', key); shown = PAGE; chips.forEach((b, i) => b.setAttribute('aria-pressed', String(FILTERS[i][0] === key))); draw(); },
     }, label));
 
   // Pill labels carry the size of their category over the whole list (search and type don't change them).
