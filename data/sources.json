@@ -4,6 +4,7 @@
     "name": "NRK Nyheter",
     "url": "https://www.nrk.no/nyheter/",
     "group": "News",
+    "emoji": "📰",
     "description": "Norway's public broadcaster: current news at natural speed, free to read.",
     "levels": [
       "B1",
@@ -11,13 +12,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-nyheter.png"
   },
   {
     "id": "nrk-urix",
     "name": "NRK Urix",
     "url": "https://www.nrk.no/urix/",
     "group": "News",
+    "emoji": "🌍",
     "description": "NRK's foreign news and explainers, a good place for world vocabulary.",
     "levels": [
       "B2",
@@ -25,13 +28,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-urix.png"
   },
   {
     "id": "nrk-ytring",
     "name": "NRK Ytring",
     "url": "https://www.nrk.no/ytring/",
     "group": "News",
+    "emoji": "💬",
     "description": "Opinion pieces and columns in varied, demanding Norwegian.",
     "levels": [
       "C1",
@@ -39,13 +44,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-ytring.png"
   },
   {
     "id": "klar-tale",
     "name": "Klar Tale",
     "url": "https://www.klartale.no/",
     "group": "News",
+    "emoji": "🗞️",
     "description": "Norway's easy-to-read newspaper, with news written in simple language; some articles need a subscription.",
     "levels": [
       "A2",
@@ -53,13 +60,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Partly free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/klar-tale.svg"
   },
   {
     "id": "vg",
     "name": "VG",
     "url": "https://www.vg.no/",
     "group": "News",
+    "emoji": "📱",
     "description": "A large tabloid news site with news, sport and entertainment; premium articles need a subscription.",
     "levels": [
       "B1",
@@ -67,13 +76,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Partly free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/vg.png"
   },
   {
     "id": "dagbladet",
     "name": "Dagbladet",
     "url": "https://www.dagbladet.no/",
     "group": "News",
+    "emoji": "📰",
     "description": "News, sport and culture; articles marked Pluss need a subscription.",
     "levels": [
       "B1",
@@ -81,13 +92,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Partly free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/dagbladet.png"
   },
   {
     "id": "aftenposten",
     "name": "Aftenposten",
     "url": "https://www.aftenposten.no/",
     "group": "News",
+    "emoji": "🗞️",
     "description": "A major newspaper with news, debate and culture; most reading needs a subscription.",
     "levels": [
       "B2",
@@ -95,13 +108,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Paywall",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/aftenposten.png"
   },
   {
     "id": "laer-norsk-naa",
     "name": "Lær norsk nå",
     "url": "https://laernorsknaa.com",
     "group": "Listening",
+    "emoji": "🎙️",
     "description": "A podcast for intermediate learners on culture, politics and history, spoken clearly and slowly with dialect variety; a book and Patreon are optional extras.",
     "levels": [
       "B1",
@@ -109,13 +124,15 @@
     ],
     "siteLanguage": "Norwegian and English",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/laer-norsk-naa.png"
   },
   {
     "id": "klar-tale-audio",
     "name": "Klar Tale audio edition",
     "url": "https://lydavis.klartale.no/ukens/_nettleserbok.html",
     "group": "Listening",
+    "emoji": "🎧",
     "description": "The weekly Klar Tale news read aloud in simple Norwegian, playable in the browser.",
     "levels": [
       "A2",
@@ -130,6 +147,7 @@
     "name": "NRK Radio",
     "url": "https://radio.nrk.no/",
     "group": "Listening",
+    "emoji": "📻",
     "description": "Live radio, podcasts and audiobooks from NRK for listening to real Norwegian.",
     "levels": [
       "B1",
@@ -137,55 +155,95 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-radio.png"
   },
   {
-    "id": "ordbokene",
-    "name": "Ordbøkene",
-    "url": "https://ordbokene.no/",
-    "group": "Dictionaries and grammar",
-    "description": "The official Bokmål and Nynorsk dictionaries from Språkrådet and the University of Bergen, with spelling, forms and examples.",
+    "id": "norwegianclass101-youtube",
+    "name": "NorwegianClass101 on YouTube",
+    "url": "https://www.youtube.com/@NorwegianClass101",
+    "group": "Listening",
+    "emoji": "📺",
+    "description": "The YouTube channel of NorwegianClass101 for learning Norwegian through video lessons.",
     "levels": [
       "A1",
-      "C2"
+      "B1"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/norwegianclass101-youtube.png"
+  },
+  {
+    "id": "one-minute-norwegian",
+    "name": "One Minute Norwegian",
+    "url": "https://coffeebreaklanguages.com/category/oml-norwegian/",
+    "group": "Listening",
+    "emoji": "🎧",
+    "description": "Coffee Break Languages' free podcast of one-minute lessons on greetings, introductions, numbers and basic phrases.",
+    "levels": [
+      "A1",
+      "A2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/one-minute-norwegian.png"
+  },
+  {
+    "id": "practice-norwegian",
+    "name": "Practice Norwegian",
+    "url": "https://www.patreon.com/practicenorwegian",
+    "group": "Listening",
+    "emoji": "🎧",
+    "description": "A podcast creator page with episodes for beginner to advanced learners; joining is free and paid membership adds exclusive posts.",
+    "levels": [
+      "A1",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/practice-norwegian.png"
+  },
+  {
+    "id": "nrk-kjapt-oppdatert",
+    "name": "Kjapt oppdatert",
+    "url": "https://radio.nrk.no/podkast/kjapt_oppdatert",
+    "group": "Listening",
+    "emoji": "📻",
+    "description": "A five to seven minute weekday news podcast from NRK giving a quick overview of the day's news in Norwegian.",
+    "levels": [
+      "B1",
+      "B2"
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-kjapt-oppdatert.png"
   },
   {
-    "id": "sprakradet",
-    "name": "Språkrådet",
-    "url": "https://www.sprakradet.no/",
-    "group": "Dictionaries and grammar",
-    "description": "The Language Council's site on writing rules, usage questions, clear language and Norwegian language news.",
+    "id": "nrk-hele-historien",
+    "name": "Hele historien",
+    "url": "https://radio.nrk.no/podkast/hele_historien",
+    "group": "Listening",
+    "emoji": "🎧",
+    "description": "An NRK documentary podcast where people tell true stories of events that shaped Norway, in natural spoken Norwegian.",
     "levels": [
       "B2",
       "C2"
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
-  },
-  {
-    "id": "no-wiktionary",
-    "name": "Wiktionary (Bokmål)",
-    "url": "https://no.wiktionary.org/",
-    "group": "Dictionaries and grammar",
-    "description": "A free community dictionary with Norwegian definitions and word forms.",
-    "levels": [
-      "B1",
-      "C2"
-    ],
-    "siteLanguage": "Norwegian",
-    "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-hele-historien.png"
   },
   {
     "id": "snl",
     "name": "Store norske leksikon",
     "url": "https://snl.no/",
     "group": "Watch and read",
+    "emoji": "📚",
     "description": "Norway's free expert-written encyclopedia, good for clear reference reading on any topic.",
     "levels": [
       "B2",
@@ -193,69 +251,47 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
-  },
-  {
-    "id": "learnnow",
-    "name": "LearnNoW (Norwegian on the Web)",
-    "url": "https://www.ntnu.edu/learnnow",
-    "group": "Courses",
-    "description": "A free beginner course from NTNU with 12 chapters of stories, audio, grammar, pronunciation and exercises.",
-    "levels": [
-      "A1",
-      "B1"
-    ],
-    "siteLanguage": "Norwegian and English",
-    "access": "Free",
-    "checked": "2026-10-11"
-  },
-  {
-    "id": "ndla",
-    "name": "NDLA",
-    "url": "https://ndla.no/",
-    "group": "Courses",
-    "description": "Free school learning resources for upper secondary subjects, with texts, films and podcasts in Norwegian.",
-    "levels": [
-      "B2",
-      "C2"
-    ],
-    "siteLanguage": "Norwegian",
-    "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/snl.svg"
   },
   {
     "id": "nrk-super",
     "name": "NRK Super",
     "url": "https://tv.nrk.no/nrksuper",
     "group": "Watch and read",
+    "emoji": "📺",
     "description": "Children's programmes with clear speech; NRK says it needs a child profile on NRK TV.",
     "levels": [
       "A2",
       "B1"
     ],
     "siteLanguage": "Norwegian",
-    "access": "Free",
-    "checked": "2026-10-11"
+    "access": "Check the site",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-super.png"
   },
   {
     "id": "nrk-skole",
     "name": "NRK Skole",
     "url": "https://tv.nrk.no/programmer/nrk-skole",
     "group": "Watch and read",
+    "emoji": "🎒",
     "description": "NRK's school programmes and documentaries on many subjects, in clear Norwegian.",
     "levels": [
       "B1",
       "B2"
     ],
     "siteLanguage": "Norwegian",
-    "access": "Free",
-    "checked": "2026-10-11"
+    "access": "Check the site",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-skole.png"
   },
   {
     "id": "no-wikipedia",
     "name": "Wikipedia (Bokmål)",
     "url": "https://no.wikipedia.org/",
     "group": "Watch and read",
+    "emoji": "🌐",
     "description": "The Norwegian-language Wikipedia, with over 690,000 articles to read on topics you already like.",
     "levels": [
       "B1",
@@ -263,13 +299,15 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Free",
-    "checked": "2026-10-11"
+    "checked": "2026-10-11",
+    "logo": "assets/logos/no-wikipedia.png"
   },
   {
     "id": "nasjonalbiblioteket",
     "name": "Nasjonalbiblioteket",
     "url": "https://www.nb.no/",
     "group": "Watch and read",
+    "emoji": "🏛️",
     "description": "The National Library's online collection of Norwegian books, newspapers and magazines; some items have access limits.",
     "levels": [
       "B2",
@@ -277,6 +315,659 @@
     ],
     "siteLanguage": "Norwegian",
     "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nasjonalbiblioteket.png"
+  },
+  {
+    "id": "gutenberg-norwegian",
+    "name": "Project Gutenberg (Norwegian)",
+    "url": "https://www.gutenberg.org/browse/languages/no",
+    "group": "Watch and read",
+    "emoji": "📚",
+    "description": "A list of free e-books in Norwegian, including works by Hamsun, Ibsen and Undset.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/gutenberg-norwegian.png"
+  },
+  {
+    "id": "wikikilden",
+    "name": "Wikikilden",
+    "url": "https://no.wikisource.org/",
+    "group": "Watch and read",
+    "emoji": "📚",
+    "description": "The Norwegian Wikisource, a free library of about 15,000 public-domain texts such as novels, poetry and plays.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/wikikilden.ico"
+  },
+  {
+    "id": "nrk-skam",
+    "name": "SKAM on NRK TV",
+    "url": "https://tv.nrk.no/serie/skam",
+    "group": "Watch and read",
+    "emoji": "📺",
+    "description": "The NRK TV page for the Norwegian teen drama SKAM, four seasons about life in upper secondary school.",
+    "levels": [
+      "B1",
+      "B2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Check the site",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nrk-skam.png"
+  },
+  {
+    "id": "learnnow",
+    "name": "LearnNoW (Norwegian on the Web)",
+    "url": "https://www.ntnu.edu/learnnow",
+    "group": "Courses",
+    "emoji": "🎓",
+    "description": "A free beginner course from NTNU with 12 chapters of stories, audio, grammar, pronunciation and exercises.",
+    "levels": [
+      "A1",
+      "B1"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/learnnow.png"
+  },
+  {
+    "id": "ndla",
+    "name": "NDLA",
+    "url": "https://ndla.no/",
+    "group": "Courses",
+    "emoji": "🏫",
+    "description": "Free school learning resources for upper secondary subjects, with texts, films and podcasts in Norwegian.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/ndla.png"
+  },
+  {
+    "id": "prove-hkdir",
+    "name": "Norskprøven (HK-dir)",
+    "url": "https://prove.hkdir.no/norskprove-a1-b2/les-om-proven-norsk-A1-B2",
+    "group": "Courses",
+    "emoji": "🎓",
+    "description": "The official page on the Norskprøven test of reading, listening, writing and speaking, with preparation sections for each part.",
+    "levels": [
+      "A1",
+      "B2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/prove-hkdir.png"
+  },
+  {
+    "id": "norwegianclass101",
+    "name": "NorwegianClass101",
+    "url": "https://www.norwegianclass101.com/",
+    "group": "Courses",
+    "emoji": "🎓",
+    "description": "Short audio and video Norwegian lessons with word lists and flashcards; free sign-up, with paid Premium tiers and optional tutoring.",
+    "levels": [
+      "A1",
+      "B1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/norwegianclass101.ico"
+  },
+  {
+    "id": "babbel-norwegian",
+    "name": "Babbel Norwegian",
+    "url": "https://www.babbel.com/norwegian",
+    "group": "Courses",
+    "emoji": "📚",
+    "description": "A Norwegian course with native audio and review; the first lesson at every course level is free.",
+    "levels": [
+      "A1",
+      "B1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/babbel-norwegian.png"
+  },
+  {
+    "id": "memrise-norwegian",
+    "name": "Memrise Norwegian",
+    "url": "https://www.memrise.com/en/learn-norwegian/norwegian-course",
+    "group": "Courses",
+    "emoji": "📚",
+    "description": "A scenario-based Norwegian course with native-speaker videos and AI conversations; free to start, with a paid Pro tier.",
+    "levels": [
+      "A1",
+      "A2"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/memrise-norwegian.png"
+  },
+  {
+    "id": "uib-norwegian-courses",
+    "name": "University of Bergen Norwegian courses",
+    "url": "https://www4.uib.no/en/studies/norwegian-language-courses",
+    "group": "Courses",
+    "emoji": "🎓",
+    "description": "Norwegian courses at several levels for UiB students, employees, and immigrants or refugees with a residence permit; a placement test finds your level, and courses are free for UiB employees and their partners (prices for other groups are not stated).",
+    "levels": [
+      "A1",
+      "B2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Check the site",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/uib-norwegian-courses.ico"
+  },
+  {
+    "id": "lingu",
+    "name": "Lingu",
+    "url": "https://lingu.no/",
+    "group": "Courses",
+    "emoji": "🎓",
+    "description": "An accredited Norwegian school with online and classroom courses at A1 to C1, plus a free podcast (Norskpodden) and a free two-week trial of live lessons for A1, A2 and B1 learners.",
+    "levels": [
+      "A1",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/lingu.png"
+  },
+  {
+    "id": "ntnu-now3",
+    "name": "NoW3 (Norwegian on the Web, level 3)",
+    "url": "https://www.ntnu.edu/isl/now",
+    "group": "Courses",
+    "emoji": "🎓",
+    "description": "NTNU online course material for university-level learners (level 3 of Norwegian courses), with media texts, videos, grammar teaching and exercises; the page says it is still being developed.",
+    "levels": [
+      "B1",
+      "B2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Check the site",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/ntnu-now3.png"
+  },
+  {
+    "id": "ordbokene",
+    "name": "Ordbøkene",
+    "url": "https://ordbokene.no/",
+    "group": "Dictionaries",
+    "emoji": "📖",
+    "description": "The official Bokmål and Nynorsk dictionaries from Språkrådet and the University of Bergen, with spelling, forms and examples.",
+    "levels": [
+      "A1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/ordbokene.ico"
+  },
+  {
+    "id": "no-wiktionary",
+    "name": "Wiktionary (Bokmål)",
+    "url": "https://no.wiktionary.org/",
+    "group": "Dictionaries",
+    "emoji": "📓",
+    "description": "A free community dictionary with Norwegian definitions and word forms.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/no-wiktionary.png"
+  },
+  {
+    "id": "lexin",
+    "name": "Lexin",
+    "url": "https://lexin.oslomet.no/",
+    "group": "Dictionaries",
+    "emoji": "📕",
+    "description": "Free Bokmål and Nynorsk dictionaries made for minority-language pupils, translating Norwegian into many languages.",
+    "levels": [
+      "A1",
+      "B1"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/lexin.ico"
+  },
+  {
+    "id": "naob",
+    "name": "Det Norske Akademis ordbok (NAOB)",
+    "url": "https://naob.no/",
+    "group": "Dictionaries",
+    "emoji": "📖",
+    "description": "The Norwegian Academy's large Norwegian-language dictionary, searchable online and free to use, funded partly by donations.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/naob.png"
+  },
+  {
+    "id": "glosbe-no-en",
+    "name": "Glosbe Norwegian-English",
+    "url": "https://www.glosbe.com/no/en",
+    "group": "Dictionaries",
+    "emoji": "🔎",
+    "description": "A free community dictionary with Norwegian-English translations, example sentences from parallel texts and audio pronunciation.",
+    "levels": [
+      "A1",
+      "B2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/glosbe-no-en.png"
+  },
+  {
+    "id": "lexilogos-norwegian",
+    "name": "Lexilogos: Norwegian dictionaries",
+    "url": "https://www.lexilogos.com/english/norwegian_dictionary.htm",
+    "group": "Dictionaries",
+    "emoji": "🧭",
+    "description": "A free portal that links to Norwegian dictionaries, translation tools, grammar guides and historical word references.",
+    "levels": [
+      "A1",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/lexilogos-norwegian.ico"
+  },
+  {
+    "id": "wiktionary-en-bokmal",
+    "name": "English Wiktionary: Norwegian Bokmål",
+    "url": "https://en.wiktionary.org/wiki/Category:Norwegian_Bokm%C3%A5l_language",
+    "group": "Dictionaries",
+    "emoji": "📓",
+    "description": "The main category of Norwegian Bokmål entries in the free English Wiktionary, with sub-categories for lemmas, phrases and etymology.",
+    "levels": [
+      "A1",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/wiktionary-en-bokmal.png"
+  },
+  {
+    "id": "sprakradet",
+    "name": "Språkrådet",
+    "url": "https://www.sprakradet.no/",
+    "group": "Grammar and reference",
+    "emoji": "🏛️",
+    "description": "The Language Council's site on writing rules, usage questions, clear language and Norwegian language news.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/sprakradet.png"
+  },
+  {
+    "id": "sprakradet-skriveregler",
+    "name": "Språkrådet: Skriveregler",
+    "url": "https://www.sprakradet.no/sprakhjelp/Skriveregler/",
+    "group": "Grammar and reference",
+    "emoji": "✏️",
+    "description": "Official guidance on commas, capital letters, compounds, numbers, punctuation and grammar terms.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/sprakradet-skriveregler.png"
+  },
+  {
+    "id": "sprakradet-sprakhjelp",
+    "name": "Språkrådet: Språkhjelp",
+    "url": "https://www.sprakradet.no/sprakhjelp/",
+    "group": "Grammar and reference",
+    "emoji": "📖",
+    "description": "The Language Council's help pages on spelling, grammar, punctuation and usage, with links to Bokmålsordboka and Nynorskordboka.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/sprakradet-sprakhjelp.png"
+  },
+  {
+    "id": "grammatikk-com",
+    "name": "grammatikk.com",
+    "url": "https://www.grammatikk.com/",
+    "group": "Grammar and reference",
+    "emoji": "🧩",
+    "description": "A free Norwegian grammar site covering nouns, verbs, pronouns, adjectives, sentences and pronunciation, with some material in English.",
+    "levels": [
+      "A2",
+      "C1"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/grammatikk-com.png"
+  },
+  {
+    "id": "riksmalsforbundet-grammatikk",
+    "name": "Riksmålsforbundet: Grammatikk, en innføring",
+    "url": "https://www.riksmalsforbundet.no/grammatikk/",
+    "group": "Grammar and reference",
+    "emoji": "📚",
+    "description": "A free introduction to Norwegian grammar covering word classes, sentence structure and sentence analysis, written from the Riksmål standard, which differs in places from official Bokmål.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/riksmalsforbundet-grammatikk.ico"
+  },
+  {
+    "id": "stolaf-norwegian-resources",
+    "name": "St. Olaf: Learning Norwegian online",
+    "url": "https://wp.stolaf.edu/norwegian/?p=5590",
+    "group": "Grammar and reference",
+    "emoji": "🔗",
+    "description": "A college Norwegian department's list of learning links, mostly free, including web exercises, grammar tutorials and pronunciation tools (it also lists some paid schools and programmes).",
+    "levels": [
+      "A1",
+      "B2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/stolaf-norwegian-resources.ico"
+  },
+  {
+    "id": "wikipedia-norwegian-language",
+    "name": "Wikipedia: Norwegian language",
+    "url": "https://en.wikipedia.org/wiki/Norwegian_language",
+    "group": "Grammar and reference",
+    "emoji": "🌐",
+    "description": "An English-language overview of Norwegian, its history, Bokmål and Nynorsk standards, sounds, dialects and grammar of nouns, adjectives, verbs and pronouns.",
+    "levels": [
+      "B1",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/wikipedia-norwegian-language.png"
+  },
+  {
+    "id": "sprakbanken",
+    "name": "Språkbanken (National Library of Norway)",
+    "url": "https://www.nb.no/sprakbanken/",
+    "group": "Corpora and data",
+    "emoji": "🗃️",
+    "description": "The National Library's language bank, a free catalogue of Norwegian datasets, corpora, lexicons and language tools.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/sprakbanken.ico"
+  },
+  {
+    "id": "norsk-aviskorpus",
+    "name": "Norsk aviskorpus",
+    "url": "https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-4/",
+    "group": "Corpora and data",
+    "emoji": "📰",
+    "description": "A download of Norwegian online newspaper text from 1998 to 2019, about 1.68 billion Bokmål words, free for non-commercial use.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/norsk-aviskorpus.ico"
+  },
+  {
+    "id": "nb-n-gram",
+    "name": "N-gram (Norwegian Bokmål)",
+    "url": "https://www.nb.no/sprakbanken/ressurskatalog/oai-nb-no-sbr-12/",
+    "group": "Corpora and data",
+    "emoji": "📊",
+    "description": "Word-sequence counts of 1 to 6 words from about 1.175 billion words of news text, with unigram frequency lists, released as public domain.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/nb-n-gram.ico"
+  },
+  {
+    "id": "ncc-huggingface",
+    "name": "Norwegian Colossal Corpus (NCC)",
+    "url": "https://huggingface.co/datasets/NbAiLab/NCC",
+    "group": "Corpora and data",
+    "emoji": "🗃️",
+    "description": "A downloadable corpus of about 4.6 billion words (about 2.9 billion Bokmål and 181 million Nynorsk, plus Danish and English) from parliament records, books, government documents and newspapers; licences vary by source.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
     "checked": "2026-10-11"
+  },
+  {
+    "id": "nb-ailab",
+    "name": "NB AI-Lab on Hugging Face",
+    "url": "https://huggingface.co/NbAiLab",
+    "group": "Corpora and data",
+    "emoji": "🤖",
+    "description": "The National Library's AI lab shares Norwegian language models, speech models and datasets, plus demo apps.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "ud-norwegian-bokmaal",
+    "name": "Universal Dependencies: Norwegian Bokmål",
+    "url": "https://universaldependencies.org/treebanks/no_bokmaal/index.html",
+    "group": "Corpora and data",
+    "emoji": "🌳",
+    "description": "A treebank of about 20,000 Bokmål sentences from news, blogs and nonfiction, annotated with word forms and grammatical structure.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/ud-norwegian-bokmaal.png"
+  },
+  {
+    "id": "tatoeba-norwegian",
+    "name": "Tatoeba: Norwegian Bokmål sentences",
+    "url": "https://tatoeba.org/en/sentences/show_all_in/nob/none",
+    "group": "Corpora and data",
+    "emoji": "💬",
+    "description": "Over 18,000 community-written Bokmål example sentences with translations, readable without logging in.",
+    "levels": [
+      "A2",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/tatoeba-norwegian.ico"
+  },
+  {
+    "id": "wiktionary-frequency-norwegian",
+    "name": "Wiktionary: Norwegian frequency lists",
+    "url": "https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Norwegian",
+    "group": "Corpora and data",
+    "emoji": "🔢",
+    "description": "A hub for Norwegian frequency lists, including the top 5,000 Bokmål words counted from subtitles, plus links to larger corpora.",
+    "levels": [
+      "A1",
+      "B2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/wiktionary-frequency-norwegian.png"
+  },
+  {
+    "id": "nota-oslo",
+    "name": "NoTa-Oslo spoken corpus",
+    "url": "https://www.tekstlab.uio.no/nota/oslo/",
+    "group": "Corpora and data",
+    "emoji": "🎙️",
+    "description": "A spoken Norwegian corpus of about 957,000 transcribed words from 166 Oslo speakers; searching needs a Feide or CLARIN login, while transcriptions are on GitHub.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "Norwegian and English",
+    "access": "Partly free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "wikimedia-nowiki-dumps",
+    "name": "Norwegian Wikipedia dumps",
+    "url": "https://dumps.wikimedia.org/nowiki/latest/",
+    "group": "Corpora and data",
+    "emoji": "📦",
+    "description": "A file index of downloadable database and article-text dumps of the Norwegian (Bokmål) Wikipedia, updated regularly.",
+    "levels": [
+      "B2",
+      "C2"
+    ],
+    "siteLanguage": "English",
+    "access": "Free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/wikimedia-nowiki-dumps.ico"
+  },
+  {
+    "id": "hellotalk-norwegian",
+    "name": "HelloTalk (Norwegian)",
+    "url": "https://www.hellotalk.com/learn/norwegian",
+    "group": "Practice and community",
+    "emoji": "💬",
+    "description": "A language-exchange app where you chat, use voice rooms and practise Norwegian with native speakers; free exchange, with premium features offered.",
+    "levels": [
+      "A2",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/hellotalk-norwegian.png"
+  },
+  {
+    "id": "italki-norwegian",
+    "name": "italki Norwegian tutors",
+    "url": "https://www.italki.com/en/teachers/norwegian",
+    "group": "Practice and community",
+    "emoji": "🗣️",
+    "description": "A marketplace of Norwegian tutors for one-to-one online lessons, with trial lesson and hourly prices shown per tutor.",
+    "levels": [
+      "A1",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Paywall",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/italki-norwegian.png"
+  },
+  {
+    "id": "lingq-norwegian",
+    "name": "LingQ (Norwegian)",
+    "url": "https://www.lingq.com/en/learn-norwegian-online/",
+    "group": "Practice and community",
+    "emoji": "🎧",
+    "description": "A reading and listening library of Norwegian audio lessons with transcripts, spaced repetition and a community forum; free sign-up with paid tiers.",
+    "levels": [
+      "A2",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11"
+  },
+  {
+    "id": "clozemaster-norwegian",
+    "name": "Clozemaster",
+    "url": "https://www.clozemaster.com/",
+    "group": "Practice and community",
+    "emoji": "🎓",
+    "description": "A language-learning site that lists Norwegian Bokmål among its languages; it says the main features are free, with a Pro tier for power users.",
+    "levels": [
+      "A2",
+      "C1"
+    ],
+    "siteLanguage": "English",
+    "access": "Partly free",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/clozemaster-norwegian.png"
+  },
+  {
+    "id": "rodekors-norsktrening",
+    "name": "Red Cross Norsktrening (Oslo)",
+    "url": "https://www.rodekors.no/en/lokalforeninger/oslo/pages-in-englishx/norwegian-practice-in-oslo/",
+    "group": "Practice and community",
+    "emoji": "🗣️",
+    "description": "Volunteer-led Norwegian conversation groups in Oslo, grouped by level, open to anyone 18 or older without registration.",
+    "levels": [
+      "A1",
+      "B2"
+    ],
+    "siteLanguage": "English",
+    "access": "Check the site",
+    "checked": "2026-10-11",
+    "logo": "assets/logos/rodekors-norsktrening.png"
   }
 ]

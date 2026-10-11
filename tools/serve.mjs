@@ -13,6 +13,11 @@ const types = {
   '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml', // fetch-logos.mjs refuses SVG that could run code; nosniff below stops type guessing
 };
 const api = createApi(openStore(join(root, 'data', 'nor-tutor.db')), `http://${HOST}:${PORT}`);
 
@@ -43,7 +48,9 @@ createServer(async (req, res) => {
   }
   try {
     const body = await readFile(file);
-    res.writeHead(200, { 'content-type': type }).end(body);
+    // An SVG opened directly would run as a document on this origin (next to /api/): sandbox it, it is only meant for <img>.
+    const svg = type === 'image/svg+xml' ? { 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; img-src data:; sandbox" } : {};
+    res.writeHead(200, { 'content-type': type, 'x-content-type-options': 'nosniff', ...svg }).end(body);
   } catch {
     res.writeHead(404).end('Not found');
   }
