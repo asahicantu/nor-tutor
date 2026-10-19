@@ -1,4 +1,5 @@
 import { parseBackup, validRow, STORES } from '../src/backup.js';
+import { randomBytes } from 'node:crypto';
 import { KEYED, ConflictError } from './store.mjs';
 
 const MAX_BODY = 5 * 1024 * 1024;
@@ -40,8 +41,12 @@ function parseKey(segment) {
 }
 
 // Host check stops DNS rebinding; Origin + JSON content type stop other websites from writing.
-export function createApi(store, origin) {
+const USERNAME = /^[A-Za-z0-9_.-]{3,30}$/;
+const cookieOf = (req) => /(?:^|;\s*)sid=([0-9a-f]+)/.exec(req.headers.cookie ?? '')?.[1];
+
+export function createApi(root, origin) {
   const host = new URL(origin).host;
+  const sessions = new Map(); // token -> user id; in memory, so a server restart logs everyone out
   return async function handleApi(req, res, rawPath) {
     const send = (status, body) => {
       res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' });
@@ -52,6 +57,46 @@ export function createApi(store, origin) {
       if (req.method !== 'GET' && req.headers.origin !== origin) throw new HttpError(403, 'Request from another site refused');
       const [name, keySegment, ...rest] = rawPath.slice('/api/'.length).split('/');
       if (rest.length) throw new HttpError(404, 'Not found');
+
+      if (name === 'login' || name === 'signup') {
+        if (keySegment !== undefined) throw new HttpError(404, 'Not found');
+        if (req.method !== 'POST') throw new HttpError(405, 'Method not allowed');
+        const { username, password } = await readJson(req);
+        if (typeof username !== 'string' || typeof password !== 'string') throw new HttpError(400, 'Username and password are required');
+        let user;
+        if (name === 'signup') {
+          if (!USERNAME.test(username)) throw new HttpError(400, 'Username must be 3-30 letters, digits, . _ or -');
+          if (password.length < 6 || password.length > 200) throw new HttpError(400, 'Password must be 6-200 characters');
+          user = { id: root.createUser(username, password), username };
+        } else {
+          user = root.verifyUser(username, password);
+          if (!user) throw new HttpError(401, 'Wrong username or password');
+        }
+        const token = randomBytes(32).toString('hex');
+        sessions.set(token, user.id);
+        res.setHeader('set-cookie', `sid=${token}; HttpOnly; SameSite=Strict; Path=/`);
+        return send(200, { username: user.username });
+      }
+
+      const uid = sessions.get(cookieOf(req));
+      if (name === 'logout') {
+        if (req.method !== 'POST') throw new HttpError(405, 'Method not allowed');
+        sessions.delete(cookieOf(req));
+        res.setHeader('set-cookie', 'sid=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0');
+        return send(204);
+      }
+      if (uid === undefined) throw new HttpError(401, 'Not logged in');
+      const store = root.as(uid);
+      if (name === 'password' && keySegment === undefined) {
+        if (req.method !== 'POST') throw new HttpError(405, 'Method not allowed');
+        const { current, next } = await readJson(req);
+        if (typeof current !== 'string' || typeof next !== 'string') throw new HttpError(400, 'Current and new password are required');
+        if (next.length < 6 || next.length > 200) throw new HttpError(400, 'Password must be 6-200 characters');
+        if (!root.changePassword(uid, current, next)) throw new HttpError(403, 'Current password is wrong');
+        for (const [t, id] of sessions) if (id === uid && t !== cookieOf(req)) sessions.delete(t); // log out other devices
+        return send(204);
+      }
+      if (name === 'me' && keySegment === undefined) return send(200, { username: root.getUser(uid).username });
 
       if (name === 'state' && keySegment === undefined) {
         if (req.method === 'GET') return send(200, store.loadState());

@@ -1,6 +1,6 @@
 // Profile popover opened from the nav chip. Browser-only; numbers come from profile.js.
 import { h } from './dom.js';
-import { loadState, put } from './db.js';
+import { loadState, put, logout, changePassword } from './db.js';
 import { profileSummary, MAX_NAME } from './profile.js';
 import { xpBar, tzOffset } from './gamui.js';
 
@@ -89,6 +89,24 @@ export function initProfilePanel({ db, words }) {
     const level = p.estimatedLevel;
     const stat = (label, value) => h('div', { class: 'pp-stat' }, h('span', { class: 'muted' }, label), h('strong', {}, value));
 
+    const cur = h('input', { id: 'pp-pw-cur', type: 'password', autocomplete: 'current-password', maxlength: '200' });
+    const nxt = h('input', { id: 'pp-pw-new', type: 'password', autocomplete: 'new-password', maxlength: '200' });
+    const pwStatus = h('p', { class: 'pp-status muted', role: 'status' });
+    const pwBtn = h('button', { type: 'button', onclick: async () => {
+      pwStatus.classList.remove('pp-err');
+      pwBtn.disabled = true;
+      try {
+        await changePassword(cur.value, nxt.value);
+        cur.value = nxt.value = '';
+        pwStatus.textContent = 'Password changed';
+      } catch (e) {
+        pwStatus.classList.add('pp-err');
+        pwStatus.textContent = e?.message || 'Could not change password';
+      } finally {
+        pwBtn.disabled = false;
+      }
+    } }, 'Change password');
+
     panel.replaceChildren(
       h('div', { class: 'pp-head' }, avatar, heading),
       h('div', { class: 'pp-namerow' },
@@ -126,7 +144,12 @@ export function initProfilePanel({ db, words }) {
         stat('Retention last 7 days', p.retention7 == null || !Number.isFinite(p.retention7) ? '—' : `${Math.round(p.retention7 * 100)}%`),
         stat('Minutes studied', num(p.minutes)),
         stat('Tests taken', num(p.tests))),
-      h('p', {}, h('a', { href: '#/dashboard', class: 'pp-link' }, 'Open dashboard')));
+      h('p', {}, h('a', { href: '#/dashboard', class: 'pp-link' }, 'Open dashboard')),
+      h('details', {}, h('summary', {}, 'Change password'),
+        h('label', { for: 'pp-pw-cur' }, 'Current password'), cur,
+        h('label', { for: 'pp-pw-new' }, 'New password (at least 6 characters)'), nxt,
+        pwBtn, pwStatus),
+      h('p', {}, h('button', { type: 'button', onclick: () => logout().then(() => location.reload()).catch((e) => (status.textContent = `Could not log out (${e.message})`)) }, 'Log out')));
     return heading;
   }
 

@@ -8,6 +8,7 @@ async function api(method, path, body) {
     throw new Error('Cannot reach the local server. Start it with npm start and open http://127.0.0.1:5173');
   });
   if (res.ok) return res.status === 204 ? undefined : res.json();
+  if (res.status === 401 && !/^\/api\/(me|login|signup)$/.test(path)) location.reload(); // session ended (server restarted): back to the login screen
   const err = new Error((await res.json().catch(() => null))?.error ?? `HTTP ${res.status}`);
   if (res.status === 409) err.name = 'ConstraintError'; // the name IndexedDB used; views rely on it
   throw err;
@@ -17,14 +18,19 @@ export const getAll = (db, store) => api('GET', `/api/${store}`);
 export const add = (db, store, obj) => api('POST', `/api/${store}`, obj);
 export const put = (db, store, obj) => api('PUT', `/api/${store}`, obj);
 export const del = (db, store, wordId) => api('DELETE', `/api/${store}/${encodeURIComponent(JSON.stringify(wordId))}`);
+export const me = () => api('GET', '/api/me');
+export const login = (username, password) => api('POST', '/api/login', { username, password });
+export const signup = (username, password) => api('POST', '/api/signup', { username, password });
+export const changePassword = (current, next) => api('POST', '/api/password', { current, next });
+export const logout = () => api('POST', '/api/logout');
 export const loadState = (db) => api('GET', '/api/state');
 export const replaceState = (db, state) => api('PUT', '/api/state', { version: BACKUP_VERSION, ...state });
 
 // On first run after the switch, copy the old IndexedDB data into SQLite once. The old data is left in place.
-export async function openDb() {
+export async function openDb(user) {
   const db = { notice: null };
   const state = await loadState(db);
-  if (STORES.some((s) => state[s].length > 0)) return db;
+  if (user !== 'default' || STORES.some((s) => state[s].length > 0)) return db; // only the default user (owner of the pre-accounts data) adopts old browser data
   const dbs = (await indexedDB.databases?.()) ?? [];
   if (!dbs.some((d) => d.name === OLD_DB)) return db;
   try {

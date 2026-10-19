@@ -1,4 +1,5 @@
 import { openDb } from './db.js';
+import { ensureLogin } from './login.js';
 import { h } from './dom.js';
 import { validateWords } from './wordsSchema.js';
 import { renderChip } from './gamui.js';
@@ -32,7 +33,8 @@ function showError(e, target = document.getElementById('app')) {
 
 async function main() {
   try {
-    const [words, phrases, db] = await Promise.all([loadJson('data/words.json'), loadJson('data/phrases.json'), openDb()]);
+    const user = await ensureLogin();
+    const [words, phrases, db] = await Promise.all([loadJson('data/words.json'), loadJson('data/phrases.json'), openDb(user.username)]);
     const errors = validateWords(words);
     if (errors.length) throw new Error(`Invalid word list: ${errors.slice(0, 3).join('; ')}`);
     if (db.notice) document.body.insertBefore(h('p', { class: 'notice', role: 'status' }, db.notice), document.getElementById('app'));

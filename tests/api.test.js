@@ -5,7 +5,7 @@ import { once } from 'node:events';
 import { openStore } from '../tools/store.mjs';
 import { createApi } from '../tools/api.mjs';
 
-let server, port, origin;
+let server, port, origin, cookie;
 
 before(async () => {
   let api;
@@ -15,10 +15,12 @@ before(async () => {
   port = server.address().port;
   origin = `http://127.0.0.1:${port}`;
   api = createApi(openStore(':memory:'), origin);
+  const res = await rawCall('POST', '/api/signup', { username: 'tester', password: 'secret1' });
+  cookie = res.headers['set-cookie'][0].split(';')[0];
 });
 after(() => server.close());
 
-function call(method, path, { body, headers = {} } = {}) {
+function rawCall(method, path, body, headers = {}) {
   return new Promise((resolve, reject) => {
     const data = body === undefined ? undefined : typeof body === 'string' ? body : JSON.stringify(body);
     const req = request(
@@ -27,13 +29,18 @@ function call(method, path, { body, headers = {} } = {}) {
         let text = '';
         res.setEncoding('utf8');
         res.on('data', (c) => (text += c));
-        res.on('end', () => resolve({ status: res.statusCode, body: text ? JSON.parse(text) : undefined }));
+        res.on('end', () => resolve({ status: res.statusCode, headers: res.headers, body: text ? JSON.parse(text) : undefined }));
       },
     );
     req.on('error', reject);
     req.end(data);
   });
 }
+
+const call = async (method, path, { body, headers = {} } = {}) => {
+  const { status, body: out } = await rawCall(method, path, body, { cookie, ...headers });
+  return { status, body: out };
+};
 
 const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] };
 const reset = () => call('PUT', '/api/state', { body: { version: 2, ...empty } });
@@ -112,4 +119,29 @@ test('settings: PUT upserts by key, GET returns it, bad rows are 400', async () 
   assert.equal((await call('PUT', '/api/settings', { body: { key: 'profileName', value: 7 } })).status, 400);
   assert.equal((await call('PUT', '/api/settings', { body: { key: '', value: 'x' } })).status, 400);
   assert.equal((await call('PUT', '/api/settings', { body: { key: 'k'.repeat(41), value: 'x' } })).status, 400);
+});
+
+test('data routes need a login and users are separated', async () => {
+  assert.equal((await rawCall('GET', '/api/state')).status, 401);
+  assert.equal((await rawCall('POST', '/api/login', { username: 'tester', password: 'nope' })).status, 401);
+  assert.equal((await rawCall('POST', '/api/signup', { username: 'TESTER', password: 'secret1' })).status, 409);
+  assert.equal((await rawCall('POST', '/api/signup', { username: 'ab', password: 'secret1' })).status, 400);
+  await reset();
+  await call('POST', '/api/known', { body: { wordId: 1, timestamp: 1 } });
+  const other = await rawCall('POST', '/api/signup', { username: 'other', password: 'secret2' });
+  const res = await rawCall('GET', '/api/state', undefined, { cookie: other.headers['set-cookie'][0].split(';')[0] });
+  assert.deepEqual(res.body, empty);
+  assert.equal((await call('GET', '/api/me')).body.username, 'tester');
+  assert.equal((await call('POST', '/api/logout')).status, 204);
+  assert.equal((await call('GET', '/api/me')).status, 401);
+});
+
+test('change password needs the current password and keeps the session', async () => {
+  cookie = (await rawCall('POST', '/api/login', { username: 'tester', password: 'secret1' })).headers['set-cookie'][0].split(';')[0];
+  assert.equal((await call('POST', '/api/password', { body: { current: 'wrong', next: 'newsecret' } })).status, 403);
+  assert.equal((await call('POST', '/api/password', { body: { current: 'secret1', next: 'abc' } })).status, 400);
+  assert.equal((await call('POST', '/api/password', { body: { current: 'secret1', next: 'newsecret' } })).status, 204);
+  assert.equal((await call('GET', '/api/me')).status, 200);
+  assert.equal((await rawCall('POST', '/api/login', { username: 'tester', password: 'secret1' })).status, 401);
+  assert.equal((await rawCall('POST', '/api/login', { username: 'tester', password: 'newsecret' })).status, 200);
 });
