@@ -186,6 +186,8 @@ a.card.step:hover { border-color: var(--accent); }
 
 /* grammar */
 .tablewrap { overflow-x: auto; margin: var(--s3) 0; }
+.sortbtn { min-height: 0; padding: 0; border: 0; background: none; font-weight: 600; }
+.dict td, .dict th { vertical-align: top; }
 caption { text-align: left; font-weight: 600; padding-bottom: var(--s2); }
 th[scope=row] { font-weight: 600; }
 thead th { background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
@@ -579,3 +581,30 @@ details.gcard:has(+ .rstats) { margin-bottom: var(--s3); }
 .login { max-width: 360px; margin: var(--s6) auto; display: flex; flex-direction: column; gap: var(--s2); }
 .login input { font: inherit; min-height: 44px; padding: 0 var(--s3); border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--fg); }
 .login .row { display: flex; gap: var(--s2); margin-top: var(--s2); }
+
+/* practice drills: multiple choice */
+.qopts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--s2); margin: var(--s3) 0; }
+.qopt { justify-content: flex-start; gap: var(--s3); min-height: 52px; text-align: left; border-width: 2px; }
+.qopt:disabled { cursor: default; opacity: 1; }
+.qopt.ok { border-color: var(--known); background: color-mix(in srgb, var(--known) 12%, var(--card)); }
+.qopt.bad { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--card)); }
+.qkey { display: inline-grid; place-items: center; flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
+.qmark { font-size: .85rem; font-weight: 600; }
+.qopt.ok .qmark { color: var(--known); } .qopt.bad .qmark { color: var(--bad); }
+
+/* Home progress: plain bars and the study calendar */
+.hbars { list-style: none; margin: var(--s3) 0; padding: 0; display: grid; gap: var(--s2); }
+.hbars li { display: grid; grid-template-columns: minmax(7rem, 14rem) 1fr auto; gap: var(--s3); align-items: center; }
+.hb-t { height: 12px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.hb-t span { display: block; height: 100%; border-radius: inherit; background: var(--g, var(--accent)); }
+.hb-v { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9rem; white-space: nowrap; }
+@media (max-width: 560px) { .hbars li { grid-template-columns: 1fr auto; } .hb-t { grid-column: 1 / -1; grid-row: 2; } }
+.heatwrap { overflow-x: auto; padding-bottom: var(--s1); }
+.heat { display: grid; grid-template-rows: repeat(7, 14px); grid-auto-flow: column; grid-auto-columns: 14px; gap: 3px; width: max-content; }
+.hc { display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: var(--line); }
+.hc.pad { background: transparent; }
+.hc.l1 { background: color-mix(in srgb, var(--g, var(--accent)) 30%, var(--card)); }
+.hc.l2 { background: color-mix(in srgb, var(--g, var(--accent)) 55%, var(--card)); }
+.hc.l3 { background: color-mix(in srgb, var(--g, var(--accent)) 78%, var(--card)); }
+.hc.l4 { background: var(--g, var(--accent)); }
+.heatkey { display: flex; align-items: center; gap: 3px; }

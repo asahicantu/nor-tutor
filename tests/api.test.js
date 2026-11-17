@@ -42,7 +42,7 @@ const call = async (method, path, { body, headers = {} } = {}) => {
   return { status, body: out };
 };
 
-const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] };
+const empty = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [], practice: [] };
 const reset = () => call('PUT', '/api/state', { body: { version: 2, ...empty } });
 const card = (wordId, reps = 0) => ({ wordId, ease: 2.5, interval: 0, reps, lapses: 0, due: 1 });
 const keyPath = (store, id) => `/api/${store}/${encodeURIComponent(JSON.stringify(id))}`;

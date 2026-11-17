@@ -6,7 +6,7 @@ const DAY = 86400000;
 const NOW = Date.UTC(2026, 9, 11, 12);
 const row = (day, learned) => ({ day, learned, level: null, lapses: 0 });
 const w = (id, rank, pos = 'noun (en)') => ({ id, rank, pos, lemma: `ord${id}` });
-const none = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] };
+const none = { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [], practice: [] };
 
 test('gainsPerDay counts newly learned words per day and never goes negative after a lapse', () => {
   const g = gainsPerDay([row('2026-10-09', 3), row('2026-10-10', 7), row('2026-10-11', 5)]);

@@ -103,3 +103,14 @@ export function pickBlank(text, lookup, rng = Math.random) {
 
 // "God morgen!" -> "G__ m_____!": the first letter of every word, the rest hidden.
 export const hintLetters = (text) => text.replace(/\p{L}+/gu, (w) => w[0] + '_'.repeat(w.length - 1));
+
+// The { forms, isWord } options for compareSentence, built from the word list: forms(w) lists every spelling of the word
+// w belongs to (lemma and forms, lower case), isWord(w) says whether w is any word or form in the list.
+export function checkOptions(words) {
+  const family = new Map();
+  for (const w of words) {
+    const all = [w.lemma, ...w.forms].map((f) => f.toLocaleLowerCase('nb'));
+    for (const f of all) family.set(f, new Set([...(family.get(f) ?? []), ...all]));
+  }
+  return { forms: (w) => [...(family.get(w) ?? [])], isWord: (w) => family.has(w) };
+}

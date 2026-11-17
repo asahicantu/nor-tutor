@@ -11,11 +11,12 @@ const state = {
   phrases: [{ phraseId: 'p1', seen: 4, got: 3, lastAt: 970 }],
   awards: [{ awardId: 'first-test', timestamp: 990 }],
   settings: [{ key: 'profileName', value: 'Asahi' }],
+  practice: [{ timestamp: 995, mode: 'spell', wordId: 1, ok: true, mistakes: ['letters'] }],
 };
 
 test('v1 backups still import, with the newer stores empty', () => {
-  const { known, unknown, phrases, awards, settings, ...v1 } = state;
-  assert.deepEqual(parseBackup(JSON.stringify({ version: 1, ...v1 })), { ...v1, known: [], unknown: [], phrases: [], awards: [], settings: [] });
+  const { known, unknown, phrases, awards, settings, practice, ...v1 } = state;
+  assert.deepEqual(parseBackup(JSON.stringify({ version: 1, ...v1 })), { ...v1, known: [], unknown: [], phrases: [], awards: [], settings: [], practice: [] });
 });
 
 test('v3 backups import with awards empty; v4 validates awards', () => {
@@ -52,8 +53,21 @@ test('v4 backups import with settings empty; v5 validates settings', () => {
   assert.throws(() => parseBackup(v5([{ key: 'a', value: 'x' }, { key: 'a', value: 'y' }])), /Duplicate setting a/);
 });
 
+test('v5 backups import with practice empty; v6 validates practice answers', () => {
+  const { practice, ...v5 } = state;
+  assert.deepEqual(parseBackup(JSON.stringify({ version: 5, ...v5 })).practice, []);
+  const v6 = (p) => JSON.stringify({ version: 6, ...state, practice: p });
+  const row = { timestamp: 1, mode: 'gender', wordId: 2, ok: false, mistakes: ['gender'] };
+  assert.deepEqual(parseBackup(v6([row, { timestamp: 2, mode: 'dictation', phraseId: 'p1', ok: true }])).practice.length, 2);
+  assert.throws(() => parseBackup(v6(undefined)), /"practice" must be an array/);
+  for (const bad of [{ ...row, mode: 'nap' }, { ...row, ok: 1 }, { ...row, mistakes: ['nope'] }, { ...row, mistakes: 'gender' },
+    { ...row, mistakes: Array(6).fill('typo') }, { ...row, wordId: null }, { ...row, timestamp: 'x' }]) {
+    assert.throws(() => parseBackup(v6([bad])), /Invalid practice answer at index 0/, JSON.stringify(bad));
+  }
+});
+
 test('validRow checks one row of a named store', () => {
-  assert.deepEqual(STORES, ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards', 'settings']);
+  assert.deepEqual(STORES, ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards', 'settings', 'practice']);
   assert.equal(validRow('unknown', state.unknown[0]), true);
   assert.equal(validRow('unknown', { ...state.unknown[0], count: 0 }), false);
   assert.equal(validRow('phrases', state.phrases[0]), true);

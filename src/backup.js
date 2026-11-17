@@ -1,9 +1,10 @@
 import { GRADES } from './srs.js';
+import { MODES, MISTAKES } from './practice.js';
 
-export const BACKUP_VERSION = 5;
-export const STORES = ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards', 'settings'];
+export const BACKUP_VERSION = 6;
+export const STORES = ['cards', 'reviews', 'tests', 'known', 'unknown', 'phrases', 'awards', 'settings', 'practice'];
 // Stores that older backups predate: the version that introduced each one.
-const ADDED_IN = { known: 2, unknown: 3, phrases: 3, awards: 4, settings: 5 };
+const ADDED_IN = { known: 2, unknown: 3, phrases: 3, awards: 4, settings: 5, practice: 6 };
 // Field that identifies a row in the stores that hold one row per word/phrase.
 export const KEY_FIELD = { cards: 'wordId', known: 'wordId', unknown: 'wordId', phrases: 'phraseId', awards: 'awardId', settings: 'key' };
 
@@ -33,9 +34,18 @@ const ROW_CHECKS = {
   unknown: (u) => isObj(u) && isId(u.wordId) && num(u.count) && u.count >= 1 && num(u.firstAt) && num(u.lastAt),
   phrases: (p) => isObj(p) && isId(p.phraseId) && num(p.seen) && num(p.got) && num(p.lastAt),
   awards: (a) => isObj(a) && typeof a.awardId === 'string' && a.awardId !== '' && num(a.timestamp),
+  // One answer in a practice drill: about a word (wordId) or a sentence (phraseId), right or not, with the kinds of slips made.
+  practice: (p) =>
+    isObj(p) &&
+    num(p.timestamp) &&
+    MODES.includes(p.mode) &&
+    typeof p.ok === 'boolean' &&
+    (p.wordId === undefined || isId(p.wordId)) &&
+    (p.phraseId === undefined || isId(p.phraseId)) &&
+    (p.mistakes === undefined || (Array.isArray(p.mistakes) && p.mistakes.length <= MISTAKES.length && p.mistakes.every((m) => MISTAKES.includes(m)))),
   settings: (s) => isObj(s) && typeof s.key === 'string' && s.key !== '' && s.key.length <= 40 && typeof s.value === 'string' && s.value.length <= 200,
 };
-const LABELS = { cards: 'card', reviews: 'review', tests: 'test', known: 'known word', unknown: 'unknown word', phrases: 'phrase', awards: 'award', settings: 'setting' };
+const LABELS = { cards: 'card', reviews: 'review', tests: 'test', known: 'known word', unknown: 'unknown word', phrases: 'phrase', awards: 'award', settings: 'setting', practice: 'practice answer' };
 const DUPLICATE = {
   cards: (id) => `Duplicate card for word ${id}`,
   known: (id) => `Duplicate known word ${id}`,

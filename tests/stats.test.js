@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { vocabSeries, dailyAccuracy, streakDays, retentionRate, studyMinutes, bandProfile, nextAction, gettingStarted } from '../src/stats.js';
+import { vocabSeries, dailyAccuracy, streakDays, retentionRate, studyMinutes, bandProfile, nextAction, gettingStarted, textCoverage, activityByDay, dueForecast } from '../src/stats.js';
 
 const H = 3600000;
 const at = (d, h = 12) => Date.UTC(2026, 9, d, h);
@@ -100,4 +100,26 @@ test('trend compares the last 7 days with the 7 before', async () => {
   assert.deepEqual(t.current, { n: 2, accuracy: 0.5 });
   assert.equal(t.previous.n, 3);
   assert.equal(trend([], now).current, null);
+});
+
+test('textCoverage weighs known words by 1/rank, so common words count far more', () => {
+  const words = [{ id: 1, rank: 1 }, { id: 2, rank: 2 }, { id: 3, rank: 4 }];
+  const all = 1 + 1 / 2 + 1 / 3 + 1 / 4; // ranks up to the rarest one in the list
+  assert.equal(textCoverage(words, new Set()), 0);
+  assert.ok(Math.abs(textCoverage(words, new Set([1])) - 1 / all) < 1e-12);
+  assert.ok(textCoverage(words, new Set([1])) > textCoverage(words, new Set([2, 3])));
+  assert.equal(textCoverage([], new Set()), 0);
+});
+
+test('activityByDay counts events per local day over the window, today last', () => {
+  const out = activityByDay([at(10), at(10, 8), at(8), at(1), at(11)], at(10), 0, 3);
+  assert.deepEqual(out, [{ day: '2026-10-08', n: 1 }, { day: '2026-10-09', n: 0 }, { day: '2026-10-10', n: 2 }]);
+  // late evening UTC is already the next day two hours east
+  assert.deepEqual(activityByDay([at(9, 23)], at(10), 2 * H, 2).map((d) => d.n), [0, 1]);
+});
+
+test('dueForecast puts overdue cards on today and drops cards beyond the window', () => {
+  const card = (due) => ({ wordId: 1, due });
+  const out = dueForecast([card(at(1)), card(at(10, 20)), card(at(12)), card(at(30))], at(10), 0, 3);
+  assert.deepEqual(out, [{ day: '2026-10-10', n: 2 }, { day: '2026-10-11', n: 0 }, { day: '2026-10-12', n: 1 }]);
 });

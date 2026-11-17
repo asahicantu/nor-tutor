@@ -9,7 +9,7 @@ import { openStore, ConflictError } from '../tools/store.mjs';
 const card = (wordId, reps = 0) => ({ wordId, ease: 2.5, interval: 0, reps, lapses: 0, due: 1 });
 
 test('starts empty', () => {
-  assert.deepEqual(openStore(':memory:').as(1).loadState(), { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] });
+  assert.deepEqual(openStore(':memory:').as(1).loadState(), { cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [], practice: [] });
 });
 
 test('unkeyed stores keep insertion order', () => {
@@ -54,7 +54,7 @@ test('put/del need a keyed store; unknown store names are refused', () => {
 test('replaceState swaps all stores', () => {
   const s = openStore(':memory:').as(1);
   s.add('known', { wordId: 9, timestamp: 1 });
-  const next = { cards: [card(1)], reviews: [], tests: [], known: [{ wordId: 2, timestamp: 5 }], unknown: [], phrases: [], awards: [], settings: [] };
+  const next = { cards: [card(1)], reviews: [], tests: [], known: [{ wordId: 2, timestamp: 5 }], unknown: [], phrases: [], awards: [], settings: [], practice: [] };
   s.replaceState(next);
   assert.deepEqual(s.loadState(), next);
 });
@@ -62,8 +62,8 @@ test('replaceState swaps all stores', () => {
 test('replaceState rolls back on failure, keeping old data', () => {
   const s = openStore(':memory:').as(1);
   s.add('known', { wordId: 9, timestamp: 1 });
-  assert.throws(() => s.replaceState({ cards: [card(1), card(1)], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] }), ConflictError);
-  assert.deepEqual(s.loadState(), { cards: [], reviews: [], tests: [], known: [{ wordId: 9, timestamp: 1 }], unknown: [], phrases: [], awards: [], settings: [] });
+  assert.throws(() => s.replaceState({ cards: [card(1), card(1)], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [], practice: [] }), ConflictError);
+  assert.deepEqual(s.loadState(), { cards: [], reviews: [], tests: [], known: [{ wordId: 9, timestamp: 1 }], unknown: [], phrases: [], awards: [], settings: [], practice: [] });
 });
 
 test('data survives closing and reopening the file', () => {
@@ -126,7 +126,7 @@ test('users have separate data, even for the same word id', () => {
   assert.equal(a.getAll('cards')[0].reps, 5);
   assert.equal(b.getAll('cards')[0].reps, 9);
   assert.equal(b.getAll('reviews').length, 0);
-  b.replaceState({ cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [] });
+  b.replaceState({ cards: [], reviews: [], tests: [], known: [], unknown: [], phrases: [], awards: [], settings: [], practice: [] });
   assert.equal(a.getAll('cards').length, 1);
   assert.equal(a.getAll('reviews').length, 1);
 });

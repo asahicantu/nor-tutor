@@ -43,3 +43,15 @@ export function typingPanel({ multiline = false, label, placeholder = 'Skriv på
     focus: () => input.focus(),
   };
 }
+
+// How each word of a typed sentence compares with the right one (icon + colour + words, never colour alone).
+const DIFF = { ok: ['✔', 'ok'], diacritic: ['≈', 'near'], typo: ['≈', 'near'], form: ['✖', 'bad'], wrong: ['✖', 'bad'], missing: ['✖', 'bad'], extra: ['✖', 'extra'] };
+
+// A compareSentence() result word by word, each marked with an icon and a note, so colour is never the only signal.
+export function diffView(items) {
+  return h('p', { class: 'pdiff', lang: 'nb' }, items.map((it) => {
+    const [icon, cls] = DIFF[it.status];
+    const detail = it.status === 'ok' ? null : it.status === 'missing' ? 'missing' : it.status === 'extra' ? 'not needed' : it.status === 'form' ? `you wrote “${it.typed}”, another form of the word` : `you wrote “${it.typed}”`;
+    return h('span', { class: `pw ${cls}` }, h('span', { 'aria-hidden': 'true' }, icon), ' ', it.target ?? it.typed, detail ? h('small', {}, ` (${detail})`) : null);
+  }));
+}

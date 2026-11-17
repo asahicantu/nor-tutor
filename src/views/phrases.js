@@ -1,10 +1,11 @@
 import { h, no, pref, setPref, onKeys, segmented } from '../dom.js';
-import { getAll, put } from '../db.js';
+import { getAll, put, add } from '../db.js';
+import { mistakesOf } from '../practice.js';
 import { shuffle } from '../rng.js';
 import { speak, speechSupported } from '../speech.js';
 import { isSlow, slowSwitch, audioNotice } from './speakui.js';
-import { compareSentence, checkWord, pickBlank, hintLetters, tokenize } from '../typing.js';
-import { typingPanel, letterKeys } from './typingui.js';
+import { compareSentence, checkWord, pickBlank, hintLetters, tokenize, checkOptions } from '../typing.js';
+import { typingPanel, letterKeys, diffView } from './typingui.js';
 
 const COUNTS = [[5, '5'], [10, '10'], [20, '20'], [0, 'All']];
 const canSpeak = speechSupported(); // the shared speech module picks a Norwegian voice and honours the slow-speech setting
@@ -15,8 +16,6 @@ const TOPIC_EMOJI = {
 const ic = (emoji) => h('span', { class: 'icon', 'aria-hidden': 'true' }, emoji); // decoration: the words carry the meaning
 const withIcon = (emoji, text) => [ic(emoji), ' ', text];
 
-// How each word of a typed sentence compares with the right one (icon + colour + words, never colour alone).
-const DIFF = { ok: ['✔', 'ok'], diacritic: ['≈', 'near'], typo: ['≈', 'near'], form: ['✖', 'bad'], wrong: ['✖', 'bad'], missing: ['✖', 'bad'], extra: ['✖', 'extra'] };
 const BANNER = { correct: ['🎉', 'Correct!'], almost: ['👍', 'Almost right'], wrong: ['❌', 'Not quite'], gaveUp: ['👁️', 'Here is the answer'] };
 
 export async function render(root, { words, phrases, db }) {
@@ -29,13 +28,7 @@ export async function render(root, { words, phrases, db }) {
   const lemmas = new Set();
   for (const w of words) { const k = w.lemma.toLocaleLowerCase('nb'); if (!lemmas.has(k)) { lemmas.add(k); index.set(k, w); } }
   const lookup = (token) => index.get(token.toLocaleLowerCase('nb'));
-  // Every spelling of the same word (lemma and forms), under each of its spellings: used to tell "another form" from a typo.
-  const family = new Map();
-  for (const w of words) {
-    const all = [w.lemma, ...w.forms].map((f) => f.toLocaleLowerCase('nb'));
-    for (const f of all) family.set(f, new Set([...(family.get(f) ?? []), ...all]));
-  }
-  const checkOpts = { forms: (w) => [...(family.get(w) ?? [])], isWord: (w) => index.has(w) };
+  const checkOpts = checkOptions(words); // tells "another form of the word" from a typo
 
   let topic = pref('phraseTopic', '');
   let count = pref('phraseCount', 10);
@@ -84,6 +77,9 @@ export async function render(root, { words, phrases, db }) {
     await put(db, 'phrases', row);
     stats.set(p.id, row);
   };
+  // One answer for the practice statistics (skills and common mistakes). A failed save only loses that statistic.
+  const log = (mode, p, ok, mistakes = []) =>
+    add(db, 'practice', { timestamp: Date.now(), mode, phraseId: p.id, ok, ...(mistakes.length ? { mistakes } : {}) }).catch(() => {});
   const record = async (p, got) => {
     const prev = stats.get(p.id);
     const row = { phraseId: p.id, seen: (prev?.seen ?? 0) + 1, got: (prev?.got ?? 0) + (got ? 1 : 0), lastAt: Date.now() };
@@ -178,6 +174,7 @@ export async function render(root, { words, phrases, db }) {
         if (answered) return;
         answered = true;
         if (ok) got++; else missed.push(p);
+        log('understand', p, ok);
         try { await record(p, ok); } catch { /* progress still counts for this session */ }
         i++;
         show();
@@ -246,7 +243,7 @@ export async function render(root, { words, phrases, db }) {
           panel.focus();
           return;
         }
-        settle(kind === 'write' ? compareSentence(typed, p.no, checkOpts) : checkWord(typed, blank.answer, [...(family.get(blank.answer.toLocaleLowerCase('nb')) ?? [])]), typed);
+        settle(kind === 'write' ? compareSentence(typed, p.no, checkOpts) : checkWord(typed, blank.answer, checkOpts.forms(blank.answer.toLocaleLowerCase('nb'))), typed);
       }
 
       function settle(res, typed) {
@@ -257,6 +254,9 @@ export async function render(root, { words, phrases, db }) {
         nudge.hidden = true;
         const got = res.result === 'correct' || res.result === 'almost';
         const saved = record(p, got).catch(() => { /* progress still counts for this session */ });
+        // shortcut: "My answer is also correct" fixes the phrase score but not this logged answer; log a correction if skill numbers feel low.
+        const slips = typed.trim() ? mistakesOf(compareSentence(typed, kind === 'write' ? p.no : blank.answer, checkOpts).items) : [];
+        log(kind, p, got, slips);
         const entry = { p, got, typed, answer: kind === 'write' ? p.no : blank.answer };
         results.push(entry);
         const [bIcon, bText] = BANNER[res.result];
@@ -328,15 +328,6 @@ export async function render(root, { words, phrases, db }) {
         h('div', { class: 'row' }, h('button', { type: 'button', class: 'primary', onclick: () => typingSession(kind) }, ...withIcon('🔁', 'Practise again')), h('button', { type: 'button', onclick: menu }, ...withIcon('🗂️', 'Change topic'))));
     }
     show();
-  }
-
-  // The typed sentence word by word, each marked with an icon and a note, so colour is never the only signal.
-  function diffView(items) {
-    return h('p', { class: 'pdiff', lang: 'nb' }, items.map((it) => {
-      const [icon, cls] = DIFF[it.status];
-      const detail = it.status === 'ok' ? null : it.status === 'missing' ? 'missing' : it.status === 'extra' ? 'not needed' : it.status === 'form' ? `you wrote “${it.typed}”, another form of the word` : `you wrote “${it.typed}”`;
-      return h('span', { class: `pw ${cls}` }, h('span', { 'aria-hidden': 'true' }, icon), ' ', it.target ?? it.typed, detail ? h('small', {}, ` (${detail})`) : null);
-    }));
   }
 
   // The sentence with the blank filled in with the right word (what was typed stays visible in the locked field above).

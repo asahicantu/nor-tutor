@@ -6,6 +6,7 @@ import { buildStatus, mostMissed } from '../wordstatus.js';
 import { lineChart, barChart, accent, softAccent } from '../charts.js';
 import { xpTotal, levelInfo, streak, dailyQuest, badges } from '../gamify.js';
 import { collapsible, expandControls } from './collapse.js';
+import { insightCards } from './insights.js';
 import { ring, xpBar, badgeTile, claimBadges, toast, tzOffset } from '../gamui.js';
 
 const fmt = (n) => Math.round(n).toLocaleString('en');
@@ -30,7 +31,7 @@ export async function render(root, { words, phrases, db }) {
   const byId = new Map(words.map((w) => [w.id, w]));
   const due = dueCards(cards, now).length;
   const learning = [...status.missed.keys()].filter((id) => !status.known.has(id)).length;
-  const fresh = known.length + cards.length + reviews.length + tests.length + unknown.length + phraseRows.length === 0;
+  const fresh = known.length + cards.length + reviews.length + tests.length + unknown.length + phraseRows.length + state.practice.length === 0;
 
   if (fresh) {
     root.replaceChildren(
@@ -121,6 +122,7 @@ export async function render(root, { words, phrases, db }) {
         wtile('🎯 Last test estimate', latest ? fmt(latest.estimate) : '–', latest ? 'words, about' : 'take the test'),
         wtile('🔁 Reviews, last 7 days', fmt(recent), 'cards answered'),
         wtile('💪 Remembered', recentPct === null ? '–' : `${recentPct}%`, 'last 7 days'))),
+    ...insightCards({ words, state, now, offset }),
     ...charts,
     collapsible({ emoji: '💡', title: 'What do these numbers mean?', color: 'usage', open: false },
       h('p', {}, 'The estimate is how many words of the list you likely know, with a range because a test samples only some words. "Remembered" is the share of review answers that were not "Again". XP and levels only count real study: reviews, tests, words marked known, cards added and sentences you got right.')));

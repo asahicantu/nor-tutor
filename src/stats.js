@@ -76,3 +76,39 @@ export function trend(reviews, now) {
   };
   return { current: rate(now - DAYS7, now), previous: rate(now - 2 * DAYS7, now - DAYS7) };
 }
+
+// Estimated share of the words in a typical Norwegian text that you know. Word frequency roughly follows Zipf's law (the
+// word of rank r makes up about 1/r of the total, scaled), so each known word adds 1/rank out of the sum over all ranks.
+// shortcut: assumes the ranks reach the size of the language (the rarest rank in the list); swap in real corpus counts if they get added to words.json.
+export function textCoverage(words, knownIds) {
+  const maxRank = Math.max(0, ...words.map((w) => w.rank));
+  let all = 0;
+  for (let r = 1; r <= maxRank; r++) all += 1 / r;
+  const known = words.reduce((sum, w) => sum + (knownIds.has(w.id) ? 1 / w.rank : 0), 0);
+  return all ? known / all : 0;
+}
+
+// How many things you did on each of the last `days` local days, today last: [{ day, n }] with day as YYYY-MM-DD.
+export function activityByDay(timestamps, now, tzOffsetMs = 0, days = 182) {
+  const today = dayKey(now, tzOffsetMs);
+  const counts = new Map();
+  for (const t of timestamps) {
+    const k = dayKey(t, tzOffsetMs);
+    if (k > today - days && k <= today) counts.set(k, (counts.get(k) ?? 0) + 1);
+  }
+  return Array.from({ length: days }, (_, i) => {
+    const k = today - days + 1 + i;
+    return { day: new Date(k * DAY).toISOString().slice(0, 10), n: counts.get(k) ?? 0 };
+  });
+}
+
+// Cards coming due on each of the next `days` local days, starting today; cards already overdue count for today.
+export function dueForecast(cards, now, tzOffsetMs = 0, days = 14) {
+  const today = dayKey(now, tzOffsetMs);
+  const out = Array.from({ length: days }, (_, i) => ({ day: new Date((today + i) * DAY).toISOString().slice(0, 10), n: 0 }));
+  for (const c of cards) {
+    const i = Math.max(0, dayKey(c.due, tzOffsetMs) - today);
+    if (i < days) out[i].n++;
+  }
+  return out;
+}

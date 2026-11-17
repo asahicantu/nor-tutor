@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { tokenize, normalizeWords, fold, editDistance, compareSentence, checkWord, pickBlank, hintLetters } from '../src/typing.js';
+import { tokenize, normalizeWords, fold, editDistance, compareSentence, checkWord, pickBlank, hintLetters, checkOptions } from '../src/typing.js';
 
 test('normalizeWords ignores case, punctuation, quotes and extra spaces but keeps æ ø å and inner hyphens', () => {
   assert.deepEqual(normalizeWords('God morgen! Hvordan har du det?'), ['god', 'morgen', 'hvordan', 'har', 'du', 'det']);
@@ -135,4 +135,13 @@ test('hintLetters keeps the first letter of each word and the punctuation', () =
   assert.equal(hintLetters('God morgen! Hvordan har du det?'), 'G__ m_____! H______ h__ d_ d__?');
   assert.equal(hintLetters('å'), 'å');
   assert.equal(hintLetters(''), '');
+});
+
+test('checkOptions links every spelling of a word to its family and knows which spellings are words', () => {
+  const { forms, isWord } = checkOptions([{ lemma: 'gå', forms: ['gå', 'går', 'gikk', 'gått'] }, { lemma: 'Hus', forms: ['huset'] }]);
+  assert.deepEqual(forms('gikk').sort(), ['gikk', 'gå', 'gått', 'går'].sort());
+  assert.deepEqual(forms('hus').sort(), ['hus', 'huset']);
+  assert.deepEqual(forms('bil'), []);
+  assert.equal(isWord('går'), true);
+  assert.equal(isWord('gaar'), false);
 });
